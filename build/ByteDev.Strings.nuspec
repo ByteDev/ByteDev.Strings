@@ -8,8 +8,8 @@
     <owners>Paul Stanley</owners>
     <copyright>Copyright 2020</copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Some description</description>
-    <tags>some tags</tags>
+    <description>Set of string extension methods.</description>
+    <tags>string strings extension methods helper</tags>
     <iconUrl>https://raw.githubusercontent.com/bytedev/ByteDev.Strings/master/images/icon.png</iconUrl>
     <dependencies>
       <group targetFramework=".NETStandard2.0" />
