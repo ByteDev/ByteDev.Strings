@@ -25,21 +25,6 @@ namespace ByteDev.Strings
         }
         
         /// <summary>
-        /// Replace all the tokens in the <paramref name="source" /> with <paramref name="value" />.
-        /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
-        /// <param name="tokenName">The token to search and replace on.</param>
-        /// <param name="value">The value to replace with.</param>
-        /// <returns>String with all the instances of the token replaced.</returns>
-        public static string ReplaceToken(this string source, string tokenName, object value)
-        {
-            if (source == null)
-                throw new ArgumentNullException(nameof(source));
-
-            return source.Replace($"{{{tokenName}}}", value.ToString());
-        }
-
-        /// <summary>
         /// Retrieves a substring from this instance taking <paramref name="length" /> characters from the left.
         /// </summary>
         /// <param name="source">The string to perform the operation on.</param>
@@ -132,23 +117,6 @@ namespace ByteDev.Strings
         }
 
         /// <summary>
-        /// Replaces the last occurence of <paramref name="oldString" /> with <paramref name="newString" />.
-        /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
-        /// <param name="oldString">The string to search for and replace.</param>
-        /// <param name="newString">The string to replace with.</param>
-        /// <returns>String with <paramref name="oldString" /> replaced with <paramref name="newString" />.</returns>
-        public static string ReplaceLastOccurrence(this string source, string oldString, string newString)
-        {
-            if (string.IsNullOrEmpty(source))
-                return source;
-            
-            var pos = source.LastIndexOf(oldString, StringComparison.InvariantCulture);
-
-            return pos <= 0 ? source : source.Remove(pos, oldString.Length).Insert(pos, newString);
-        }
-
-        /// <summary>
         /// Returns a string with additional plural suffix. 
         /// </summary>
         /// <param name="source">The string to perform the operation on.</param>
@@ -180,28 +148,28 @@ namespace ByteDev.Strings
 
         
         /// <summary>
-        /// Returns an obscured string.
+        /// Returns a masked string.
         /// </summary>
         /// <param name="source">The string to perform the operation on.</param>
         /// <param name="beginCharsToShow">Chars to show from the left.</param>
         /// <param name="endCharsToShow">Chars to show from the right.</param>
-        /// <returns>String with obscured characters.</returns>
+        /// <returns>String with masked characters.</returns>
         /// <exception cref="T:System.ArgumentNullException"><paramref name="source" /> is null.</exception>
-        public static string Obscure(this string source, int beginCharsToShow, int endCharsToShow)
+        public static string Mask(this string source, int beginCharsToShow, int endCharsToShow)
         {
-            return Obscure(source, beginCharsToShow, endCharsToShow, '*');
+            return Mask(source, beginCharsToShow, endCharsToShow, '*');
         }
 
         /// <summary>
-        /// Returns an obscured string.
+        /// Returns a masked string.
         /// </summary>
         /// <param name="source">The string to perform the operation on.</param>
         /// <param name="beginCharsToShow">Chars to show from the left.</param>
         /// <param name="endCharsToShow">Chars to show from the right.</param>
-        /// <param name="obscureChar">Obscure character.</param>
-        /// <returns>String with obscured characters.</returns>
+        /// <param name="maskChar">Mask character.</param>
+        /// <returns>String with masked characters.</returns>
         /// <exception cref="T:System.ArgumentNullException"><paramref name="source" /> is null.</exception>
-        public static string Obscure(this string source, int beginCharsToShow, int endCharsToShow, char obscureChar)
+        public static string Mask(this string source, int beginCharsToShow, int endCharsToShow, char maskChar)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -211,40 +179,42 @@ namespace ByteDev.Strings
 
             for (var pos = 0; pos < len; pos++)
             {
-                sb.Append(pos < beginCharsToShow || len - pos <= endCharsToShow ? source[pos] : obscureChar);
+                sb.Append(pos < beginCharsToShow || len - pos <= endCharsToShow ? source[pos] : maskChar);
             }
 
             return sb.ToString();
         }
 
         /// <summary>
-        /// Returns a string with a forward slash suffix appended if one does not currently exist.
+        /// Returns a string with a prefix appended if the prefix does not already exist.
         /// </summary>
         /// <param name="source">The string to perform the operation on.</param>
-        /// <returns>String with an appended forward slash.</returns>
-        public static string AddSlashSuffix(this string source)
+        /// <param name="prefix">Prefix to check for and add if not present.</param>
+        /// <returns>String with the prefix.</returns>
+        public static string AddPrefix(this string source, string prefix)
         {
             if (source == null)
-                return "/";
+                return prefix;
 
-            if (!source.EndsWith("/"))
-                source += "/";
+            if (!source.StartsWith(prefix))
+                source = prefix + source;
             
             return source;
         }
 
         /// <summary>
-        /// Returns a string with a forward slash prefix removed if one currently exists.
+        /// Returns a string with a suffix appended if the suffix does not already exist.
         /// </summary>
         /// <param name="source">The string to perform the operation on.</param>
-        /// <returns>String with any forward slash prefix removed.</returns>
-        public static string RemoveSlashPrefix(this string source)
+        /// <param name="suffix">Suffix to check for and add if not present.</param>
+        /// <returns>String with the suffix.</returns>
+        public static string AddSuffix(this string source, string suffix)
         {
             if (source == null)
-                return null;
+                return suffix;
 
-            if (source.StartsWith("/"))
-                source = source.Substring(1);
+            if (!source.EndsWith(suffix))
+                source += suffix;
             
             return source;
         }
@@ -263,6 +233,21 @@ namespace ByteDev.Strings
             Array.Reverse(charArray);
             return new string(charArray);
         } 
+
+        /// <summary>
+        /// Returns a value indicating whether a specified substring occurs within this string
+        /// ignoring the case of the string.
+        /// </summary>
+        /// <param name="source">The string to perform the operation on.</param>
+        /// <param name="value">The string to seek.</param>
+        /// <returns>True if <paramref name="value" /> occurs; otherwise false.</returns>
+        public static bool ContainsIgnoreCase(this string source, string value)
+        {
+            if (source == null)
+                return false;
+
+            return source.IndexOf(value, StringComparison.InvariantCultureIgnoreCase) != -1;
+        }
     }
 }
 

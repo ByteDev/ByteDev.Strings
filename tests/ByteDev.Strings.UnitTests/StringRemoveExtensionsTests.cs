@@ -211,5 +211,57 @@ namespace ByteDev.Strings.UnitTests
                 Assert.That(result, Is.Null);
             }
         }
+
+        [TestFixture]
+        public class Remove
+        {
+            [Test]
+            public void WhenSourceIsNull_ThenReturnSource()
+            {
+                var result = StringRemoveExtensions.Remove(null, "ABC");
+
+                Assert.That(result, Is.Null);
+            }
+
+            [Test]
+            public void WhenSourceIsEmpty_ThenReturnSource()
+            {
+                var result = string.Empty.Remove("ABC");
+
+                Assert.That(result, Is.Empty);
+            }
+
+            [Test]
+            public void WhenValueExists_ThenReturnRemoved()
+            {
+                var result = "some ABC thing".Remove("ABC");
+
+                Assert.That(result, Is.EqualTo("some  thing"));
+            }
+
+            [Test]
+            public void WhenValueExists_AndCaseInsensitive_ThenReturnRemoved()
+            {
+                var result = "some abc thing".Remove("ABC", true);
+
+                Assert.That(result, Is.EqualTo("some  thing"));
+            }
+
+            [Test]
+            public void WhenValuesExists_ThenReturnRemoved()
+            {
+                var result = "some ABC thing 123".Remove(new []{ "ABC", "123" });
+
+                Assert.That(result, Is.EqualTo("some  thing "));
+            }
+
+            [Test]
+            public void WhenValuesExists_AndCaseInsensitive_ThenReturnRemoved()
+            {
+                var result = "some abc thing 123".Remove(new []{ "ABC", "123" }, true);
+
+                Assert.That(result, Is.EqualTo("some  thing "));
+            }
+        }
     }
 }

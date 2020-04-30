@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace ByteDev.Strings
@@ -9,7 +11,7 @@ namespace ByteDev.Strings
     public static class StringRemoveExtensions
     {
         /// <summary>
-        /// Removes starting string <paramref name="value" /> if <paramref name="source" /> starts with it.
+        /// Removes starting string <paramref name="value" /> if this string starts with it.
         /// </summary>
         /// <param name="source">The string to perform the operation on.</param>
         /// <param name="value">The starting string.</param>
@@ -34,7 +36,7 @@ namespace ByteDev.Strings
         }
 
         /// <summary>
-        /// Removes ending string <paramref name="value" /> if <paramref name="source" /> starts with it.
+        /// Removes ending string <paramref name="value" /> if this string ends with it.
         /// </summary>
         /// <param name="source">The string to perform the operation on.</param>
         /// <param name="value">The ending string.</param>
@@ -101,7 +103,44 @@ namespace ByteDev.Strings
             if (string.IsNullOrEmpty(source))
                 return source;
 
-            return Regex.Replace(source, @"\s+", "");
+            return Regex.Replace(source, @"\s+", string.Empty);
+        }
+
+        /// <summary>
+        /// Removes all <paramref name="removeValue" /> from this string.
+        /// </summary>
+        /// <param name="source">The string to perform the operation on.</param>
+        /// <param name="removeValue">Value to remove.</param>
+        /// <param name="ignoreCase">True will ignore case; otherwise not ignore case.</param>
+        /// <returns>String with <paramref name="removeValue" /> removed.</returns>
+        public static string Remove(this string source, string removeValue, bool ignoreCase = false)
+        {
+            if (string.IsNullOrEmpty(source))
+                return source;
+
+            return ignoreCase ? 
+                Regex.Replace(source, Regex.Escape(removeValue), string.Empty, RegexOptions.IgnoreCase) : 
+                source.Replace(removeValue, string.Empty);
+        }
+
+        /// <summary>
+        /// Removes all <paramref name="removeValues" /> from this string.
+        /// </summary>
+        /// <param name="source">The string to perform the operation on.</param>
+        /// <param name="removeValues">Values to remove.</param>
+        /// <param name="ignoreCase">True will ignore case; otherwise not ignore case.</param>
+        /// <returns>String with <paramref name="removeValues" /> removed.</returns>
+        public static string Remove(this string source, IEnumerable<string> removeValues, bool ignoreCase = false)
+        {
+            if (removeValues == null)
+                throw new ArgumentNullException(nameof(removeValues));
+
+            foreach (var removeString in removeValues)
+            {
+                source = Remove(source, removeString, ignoreCase);
+            }
+
+            return source;
         }
     }
 }

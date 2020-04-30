@@ -7,88 +7,6 @@ namespace ByteDev.Strings.UnitTests
     public class StringExtensionsTests
     {
         [TestFixture]
-        public class ReplaceToken : StringExtensionsTests
-        {
-            [Test]
-            public void WhenStringIsNull_ThenThrowException()
-            {
-                const string sut = null;
-
-                Assert.Throws<ArgumentNullException>(() => sut.ReplaceToken("customerId", 123));
-            }
-
-            [Test]
-            public void WhenStringIsEmpty_ThenReturnEmpty()
-            {
-                string sut = string.Empty;
-
-                var result = sut.ReplaceToken("customerId", 123);
-
-                Assert.That(result, Is.Empty);
-            }
-
-            [Test]
-            public void WhenOneTokenPresent_ThenReplaceToken()
-            {
-                const string sut = "/customer/{customerId}/activate";
-
-                var result = sut.ReplaceToken("customerId", 123);
-
-                Assert.That(result, Is.EqualTo("/customer/123/activate"));
-            }
-
-            [Test]
-            public void WhenTwoTokensPresent_ThenReplaceBothTokens()
-            {
-                const string sut = "/customer/{customerId}/activate/{customerId}";
-
-                var result = sut.ReplaceToken("customerId", 123);
-
-                Assert.That(result, Is.EqualTo("/customer/123/activate/123"));
-            }
-
-            [Test]
-            public void WhenTokenIsNull_ThenReturnEqualString()
-            {
-                const string sut = "/customer/{customerId}/activate";
-
-                var result = sut.ReplaceToken(null, 123);
-
-                Assert.That(result, Is.EqualTo("/customer/{customerId}/activate"));
-            }
-
-            [Test]
-            public void WhenTokenIsEmpty_ThenReturnEqualString()
-            {
-                const string sut = "/customer/{customerId}/activate";
-
-                var result = sut.ReplaceToken(string.Empty, 123);
-
-                Assert.That(result, Is.EqualTo("/customer/{customerId}/activate"));
-            }
-
-            [Test]
-            public void WhenStringHasNoTokens_ThenReturnEqualString()
-            {
-                const string sut = "/customer/activate";
-
-                var result = sut.ReplaceToken("customerId", 123);
-
-                Assert.That(result, Is.EqualTo("/customer/activate"));
-            }
-
-            [Test]
-            public void WhenStringDoesNotHaveMatchingToken_ThenReturnEqualString()
-            {
-                const string sut = "/customer/{customerId}/activate";
-
-                var result = sut.ReplaceToken("customerID", 123);
-
-                Assert.That(result, Is.EqualTo("/customer/{customerId}/activate"));
-            }
-        }
-
-        [TestFixture]
         public class FormatWith
         {
             [Test]
@@ -301,14 +219,14 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class Obscure
+        public class Mask
         {
             [Test]
             public void WhenSourceIsNull_ThenThrowException()
             {
                 string sut = null;
 
-                Assert.Throws<ArgumentNullException>(() => sut.Obscure(1, 1));
+                Assert.Throws<ArgumentNullException>(() => sut.Mask(1, 1));
             }
 
             [Test]
@@ -316,7 +234,7 @@ namespace ByteDev.Strings.UnitTests
             {
                 var sut = string.Empty;
 
-                var result = sut.Obscure(1, 1);
+                var result = sut.Mask(1, 1);
 
                 Assert.That(result, Is.EqualTo(string.Empty));
             }
@@ -332,7 +250,7 @@ namespace ByteDev.Strings.UnitTests
             {
                 const string sut = "12345";
 
-                var result = sut.Obscure(numBeginCharsToShow, 0);
+                var result = sut.Mask(numBeginCharsToShow, 0);
 
                 Assert.That(result, Is.EqualTo(expected));
             }
@@ -348,7 +266,7 @@ namespace ByteDev.Strings.UnitTests
             {
                 const string sut = "12345";
 
-                var result = sut.Obscure(0, numEndCharsToShow);
+                var result = sut.Mask(0, numEndCharsToShow);
 
                 Assert.That(result, Is.EqualTo(expected));
             }
@@ -365,7 +283,7 @@ namespace ByteDev.Strings.UnitTests
             {
                 const string sut = "12345";
 
-                var result = sut.Obscure(numBeginCharsToShow, numEndCharsToShow);
+                var result = sut.Mask(numBeginCharsToShow, numEndCharsToShow);
 
                 Assert.That(result, Is.EqualTo(expected));
             }
@@ -454,48 +372,6 @@ namespace ByteDev.Strings.UnitTests
                 var result = _sut.LeftWithInnerEllipsis(_sut.Length - 1);
 
                 Assert.That(result, Is.EqualTo("This string has too many...racters for its own good"));
-            }
-        }
-
-        [TestFixture]
-        public class ReplaceLastOccurrence
-        {
-            [Test]
-            public void WhenIsNull_ThenReturnNull()
-            {
-                var result = StringExtensions.ReplaceLastOccurrence(null, "John", "Peter");
-
-                Assert.That(result, Is.Null);
-            }
-
-            [Test]
-            public void WhenIsEmpty_ThenReturnEmpty()
-            {
-                var sut = string.Empty;
-
-                var result = sut.ReplaceLastOccurrence("John", "Peter");
-
-                Assert.That(result, Is.Empty);
-            }
-
-            [Test]
-            public void WhenFindStringDoesNotExist_ThenReturnOriginalString()
-            {
-                const string sut = "John Smith";
-
-                var result = sut.ReplaceLastOccurrence("Luke", "Peter");
-
-                Assert.That(result, Is.EqualTo(sut));
-            }
-
-            [Test]
-            public void WhenFindStringExists_ThenReplaceLastOccurance()
-            {
-                const string sut = "John Smith and John Jones";
-
-                var result = sut.ReplaceLastOccurrence("John", "Peter");
-
-                Assert.That(result, Is.EqualTo("John Smith and Peter Jones"));
             }
         }
 
@@ -620,34 +496,126 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class AddSlashSuffix
+        public class AddSuffix
         {
-            [TestCase(null, "/")]
-            [TestCase("", "/")]
-            [TestCase("path", "path/")]
-            [TestCase("path/", "path/")]
-            [TestCase("/path/", "/path/")]
-            public void WhenProvided_ThenReturnExpected(string sut, string expected)
+            [Test]
+            public void WhenIsNull_ThenReturnSuffix()
             {
-                var result = sut.AddSlashSuffix();
+                var result = StringExtensions.AddSuffix(null, "thing");
 
-                Assert.That(result, Is.EqualTo(expected));
+                Assert.That(result, Is.EqualTo("thing"));
+            }
+
+            [Test]
+            public void WhenIsEmpty_ThenReturnSuffix()
+            {
+                var result = string.Empty.AddSuffix("thing");
+
+                Assert.That(result, Is.EqualTo("thing"));
+            }
+
+            [Test]
+            public void WhenSuffixExists_ThenReturnUnchanged()
+            {
+                const string sut = "Something";
+
+                var result = sut.AddSuffix("thing");
+
+                Assert.That(result, Is.EqualTo(sut));
+            }
+
+            [Test]
+            public void WhenSuffixDoesNotExists_ThenReturnWithSuffix()
+            {
+                const string sut = "Some";
+
+                var result = sut.AddSuffix("thing");
+
+                Assert.That(result, Is.EqualTo(sut + "thing"));
             }
         }
 
         [TestFixture]
-        public class RemoveSlashPrefix
+        public class AddPrefix
         {
-            [TestCase(null, null)]
-            [TestCase("", "")]
-            [TestCase("path", "path")]
-            [TestCase("/path", "path")]
-            [TestCase("/path/", "path/")]
-            public void WhenProvided_ThenReturnExpected(string sut, string expected)
+            [Test]
+            public void WhenIsNull_ThenReturnPrefix()
             {
-                var result = sut.RemoveSlashPrefix();
+                var result = StringExtensions.AddPrefix(null, "thing");
 
-                Assert.That(result, Is.EqualTo(expected));
+                Assert.That(result, Is.EqualTo("thing"));
+            }
+
+            [Test]
+            public void WhenIsEmpty_ThenReturnPrefix()
+            {
+                var result = string.Empty.AddPrefix("thing");
+
+                Assert.That(result, Is.EqualTo("thing"));
+            }
+
+            [Test]
+            public void WhenPrefixExists_ThenReturnUnchanged()
+            {
+                const string sut = "Something";
+
+                var result = sut.AddPrefix("Some");
+
+                Assert.That(result, Is.EqualTo(sut));
+            }
+
+            [Test]
+            public void WhenPrefixDoesNotExists_ThenReturnWithSuffix()
+            {
+                const string sut = "thing";
+
+                var result = sut.AddPrefix("Some");
+
+                Assert.That(result, Is.EqualTo("Some" + sut));
+            }
+        }
+
+        [TestFixture]
+        public class ContainsIgnoreCase
+        {
+            [Test]
+            public void WhenSourceIsNull_ThenReturnsFalse()
+            {
+                var result = StringExtensions.ContainsIgnoreCase(null, "A");
+
+                Assert.That(result, Is.False);
+            }
+
+            [Test]
+            public void WhenSourceIsEmpty_ThenReturnsFalse()
+            {
+                var result = string.Empty.ContainsIgnoreCase("A");
+
+                Assert.That(result, Is.False);
+            }
+
+            [Test]
+            public void WhenDoesNotContain_ThenReturnFalse()
+            {
+                var result = "ABC".ContainsIgnoreCase("D");
+
+                Assert.That(result, Is.False);
+            }
+
+            [Test]
+            public void WhenDoesContainWithSameCase_ThenReturnTrue()
+            {
+                var result = "ABC".ContainsIgnoreCase("B");
+
+                Assert.That(result, Is.True);
+            }
+
+            [Test]
+            public void WhenDoesContainWithDifferentCase_ThenReturnTrue()
+            {
+                var result = "ABC".ContainsIgnoreCase("b");
+
+                Assert.That(result, Is.True);
             }
         }
     }

@@ -279,5 +279,60 @@ namespace ByteDev.Strings.UnitTests
                 Assert.That(result, Is.False);
             }
         }
+
+        [TestFixture]
+        public class IsDigit
+        {
+            [TestCase("0")]
+            [TestCase("1")]            
+            [TestCase("2")]            
+            [TestCase("3")]            
+            [TestCase("4")]            
+            [TestCase("5")]            
+            [TestCase("6")]            
+            [TestCase("7")]            
+            [TestCase("8")]            
+            [TestCase("9")]            
+            public void WhenIsDigits_ThenReturnTrue(string sut)
+            {
+                var result = sut.IsDigit();
+
+                Assert.That(result, Is.True);
+            }
+
+            [TestCase(null)]
+            [TestCase("")]
+            [TestCase("00")]
+            [TestCase("A")]
+            public void WhenIsNotDigits_ThenReturnFalse(string sut)
+            {
+                var result = sut.IsDigit();
+
+                Assert.That(result, Is.False);
+            }
+        }
+
+        [TestFixture]
+        public class IsLetters
+        {
+            [TestCase("A")]
+            [TestCase("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")]            
+            public void WhenIsLettersOnly_ThenReturnTrue(string sut)
+            {
+                var result = sut.IsLetters();
+
+                Assert.That(result, Is.True);
+            }
+
+            [TestCase(null)]
+            [TestCase("")]
+            [TestCase("A0")]
+            public void WhenIsNotAllLetters_ThenReturnFalse(string sut)
+            {
+                var result = sut.IsLetters();
+
+                Assert.That(result, Is.False);
+            }
+        }
     }
 }

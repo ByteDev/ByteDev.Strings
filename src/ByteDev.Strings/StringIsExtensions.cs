@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Schema;
@@ -86,7 +87,7 @@ namespace ByteDev.Strings
         }
 
         /// <summary>
-        /// Indicates whether this string is an IP address.
+        /// Indicates whether this string is an IP address (v4).
         /// </summary>
         /// <param name="source">The string to perform this operation on.</param>
         /// <returns>True if is an IP address; otherwise returns false.</returns>
@@ -191,11 +192,39 @@ namespace ByteDev.Strings
 
             foreach (char c in source)
             {
-                if (c < '0' || c > '9')
+                if (!char.IsDigit(c))
                     return false;
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Indicates whether string is a single digit.
+        /// </summary>
+        /// <param name="source">The string to perform this operation on.</param>
+        /// <returns>True if is a single digit only; otherwise returns false.</returns>
+        public static bool IsDigit(this string source)
+        {
+            if (source == null)
+                return false;
+
+            var array = source.ToCharArray();
+
+            return array.Length == 1 && char.IsDigit(array[0]);
+        }
+
+        /// <summary>
+        /// Indicates whether string is only letters.
+        /// </summary>
+        /// <param name="source">The string to perform this operation on.</param>
+        /// <returns>True if is letters only; otherwise returns false.</returns>
+        public static bool IsLetters(this string source)
+        {
+            if (string.IsNullOrEmpty(source))
+                return false;
+
+            return source.All(char.IsLetter);
         }
     }
 }
