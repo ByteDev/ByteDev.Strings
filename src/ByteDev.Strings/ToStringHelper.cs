@@ -22,7 +22,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Initializes a new instance of the <see cref="T:ByteDev.Strings.ToStringHelper" /> class.
         /// </summary>
-        /// <param name="nullValue">Value to use when string value is null.</param>
+        /// <param name="nullValue">Value to use when any param value is null.</param>
         public ToStringHelper(string nullValue)
         {
             _nullValue = nullValue;
@@ -43,6 +43,18 @@ namespace ByteDev.Strings
             }
 
             return value == null ? FormatNull(name) : Format(name, value.ToString());
+        }
+
+        /// <summary>
+        /// Returns a string representation of <paramref name="value" />.
+        /// </summary>
+        /// <param name="name">Name of <paramref name="value" />.</param>
+        /// <param name="value">The object value.</param>
+        /// <returns>A string representation.</returns>
+        /// <exception cref="T:System.ArgumentException"><paramref name="name" /> is null or empty.</exception>
+        public string ToString(string name, string value)
+        {
+            return ToString(name, value as object);
         }
 
         /// <summary>

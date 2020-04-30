@@ -59,7 +59,7 @@ namespace ByteDev.Strings
         /// <param name="source">The string to perform this operation on.</param>
         /// <param name="encoding">Byte array encoding.</param>
         /// <returns>The current string as an array of bytes.</returns>
-        public static byte[] ToByteArray(this string source, System.Text.Encoding encoding)
+        public static byte[] ToByteArray(this string source, Encoding encoding)
         {
             if (string.IsNullOrEmpty(source))
                 return new byte[0];

@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace ByteDev.Strings.UnitTests
 {
     [TestFixture]
-    public class StringToExtensionsTest
+    public class StringToExtensionsTests
     {
         [TestFixture]
         public class ToTitleCase

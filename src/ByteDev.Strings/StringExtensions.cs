@@ -10,65 +10,20 @@ namespace ByteDev.Strings
     public static class StringExtensions
     {
         /// <summary>
-        /// Returns the length of a string or zero if it is null.
+        /// Replaces the format item in a specified string with the string representation of a corresponding object in a specified array.
         /// </summary>
-        /// <param name="source">The string to return the length on.</param>
-        /// <returns>Length of the string. Zero if the string is null.</returns>
-        public static int SafeLength(this string source)
-        {
-            return source?.Length ?? 0;
-        }
-
-        /// <summary>
-        /// Removes starting string <paramref name="value" /> if <paramref name="source" /> starts with it.
-        /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
-        /// <param name="value">The starting string.</param>
-        /// <returns>String with the starting string <paramref name="value" /> removed if it starts with it.</returns>
+        /// <param name="source">String to format.</param>
+        /// <param name="args">Arguments to format the string with.</param>
+        /// <returns>A copy of <paramref name="source">format</paramref> in which the format items have been replaced by the string representation of the corresponding objects in <paramref name="args">args</paramref>.</returns>
         /// <exception cref="T:System.ArgumentNullException"><paramref name="source" /> is null.</exception>
-        /// <exception cref="T:System.ArgumentNullException"><paramref name="value" /> is null.</exception>
-        public static string RemoveStartsWith(this string source, string value)
+        public static string FormatWith(this string source, params object[] args)
         {
             if(source == null)
                 throw new ArgumentNullException(nameof(source));
-
-            if(value == null)
-                throw new ArgumentNullException(nameof(value));
-
-            if (value == string.Empty)
-                return source;
-
-            if (source.StartsWith(value))
-                return source.Substring(value.Length);
-
-            return source;
+            
+            return string.Format(source, args);
         }
         
-        /// <summary>
-        /// Removes ending string <paramref name="value" /> if <paramref name="source" /> starts with it.
-        /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
-        /// <param name="value">The ending string.</param>
-        /// <returns>String with the ending string <paramref name="value" /> removed if it ends with it.</returns>
-        /// <exception cref="T:System.ArgumentNullException"><paramref name="source" /> is null.</exception>
-        /// <exception cref="T:System.ArgumentNullException"><paramref name="value" /> is null.</exception>
-        public static string RemoveEndsWith(this string source, string value)
-        {
-            if(source == null)
-                throw new ArgumentNullException(nameof(source));
-
-            if (value == null)
-                throw new ArgumentNullException(nameof(value));
-
-            if (value == string.Empty)
-                return source;
-
-            if (source.EndsWith(value))
-                return source.Substring(0, source.Length - value.Length);
-
-            return source;
-        }
-
         /// <summary>
         /// Replace all the tokens in the <paramref name="source" /> with <paramref name="value" />.
         /// </summary>
@@ -85,45 +40,6 @@ namespace ByteDev.Strings
         }
 
         /// <summary>
-        /// Replaces the format item in a specified string with the string representation of a corresponding object in a specified array.
-        /// </summary>
-        /// <param name="source">String to format.</param>
-        /// <param name="args">Arguments to format the string with.</param>
-        /// <returns>A copy of <paramref name="source">format</paramref> in which the format items have been replaced by the string representation of the corresponding objects in <paramref name="args">args</paramref>.</returns>
-        /// <exception cref="T:System.ArgumentNullException"><paramref name="source" /> is null.</exception>
-        public static string FormatWith(this string source, params object[] args)
-        {
-            if(source == null)
-                throw new ArgumentNullException(nameof(source));
-            
-            return string.Format(source, args);
-        }
-
-        /// <summary>
-        /// Safely retrieves a substring from this instance. No exceptions will be thrown.
-        /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
-        /// <param name="startIndex">The zero-based starting character position of a substring in this instance.</param>
-        /// <param name="length">The number of characters in the substring.</param>
-        /// <returns>A string that is equivalent to the substring of length <paramref name="length" /> that begins at <paramref name="startIndex" />.</returns>
-        public static string SafeSubstring(this string source, int startIndex, int length)
-        {
-            if (string.IsNullOrEmpty(source))
-                return string.Empty;
-
-            if (length < 1)
-                return string.Empty;
-
-            if (source.Length <= startIndex) 
-                return string.Empty;
-
-            if (source.Length - startIndex <= length) 
-                return source.Substring(startIndex);
-
-            return source.Substring(startIndex, length);
-        }
-
-        /// <summary>
         /// Retrieves a substring from this instance taking <paramref name="length" /> characters from the left.
         /// </summary>
         /// <param name="source">The string to perform the operation on.</param>
@@ -132,20 +48,6 @@ namespace ByteDev.Strings
         public static string Left(this string source, int length)
         {
             return source.SafeSubstring(0, length);
-        }
-
-        /// <summary>
-        /// Retrieves a substring from this instance taking <paramref name="length" /> characters from the right.
-        /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
-        /// <param name="length">The number of characters to take starting on the right.</param>
-        /// <returns>A string that is equivalent to the substring of length <paramref name="length" /> taking characters from the right.</returns>
-        public static string Right(this string source, int length)
-        {
-            if (length > source.Length)
-                return source;
-
-            return source.SafeSubstring(source.Length - length, length);
         }
 
         /// <summary>
@@ -201,49 +103,32 @@ namespace ByteDev.Strings
         }
 
         /// <summary>
-        /// Removes all text between any brackets (and the brackets themselves).
+        /// Retrieves a substring from this instance taking <paramref name="length" /> characters from the right.
         /// </summary>
-        /// <example>
-        /// "(Something) in (brackets) again" becomes " in  again".
-        /// </example>
         /// <param name="source">The string to perform the operation on.</param>
-        /// <returns>String without bracketed text.</returns>
-        public static string RemoveBracketedText(this string source)
+        /// <param name="length">The number of characters to take starting on the right.</param>
+        /// <returns>A string that is equivalent to the substring of length <paramref name="length" /> taking characters from the right.</returns>
+        public static string Right(this string source, int length)
         {
-            if (string.IsNullOrEmpty(source))
+            if (length > source.Length)
                 return source;
 
-            int posOpenBracket;
-
-            while ((posOpenBracket = source.IndexOf("(", StringComparison.Ordinal)) >= 0)
-            {
-                var posCloseBracket = source.IndexOf(")", posOpenBracket, StringComparison.Ordinal);
-
-                if (posCloseBracket > 0)
-                {
-                    source = source.Substring(0, posOpenBracket) + source.Substring(posCloseBracket + 1);
-                }
-                else
-                {
-                    source = source.Substring(0, posOpenBracket);
-                    break;
-                }
-            }
-
-            return source;
+            return source.SafeSubstring(source.Length - length, length);
         }
 
         /// <summary>
-        /// Removes all white space characters from the string.
+        /// Returns <paramref name="source" /> repeated <paramref name="count" /> times.
         /// </summary>
         /// <param name="source">The string to perform the operation on.</param>
-        /// <returns>String without white space characters.</returns>
-        public static string RemoveWhiteSpace(this string source)
+        /// <param name="count">The count of instances to return.</param>
+        /// <returns>String repeated.</returns>
+        /// <exception cref="T:System.ArgumentNullException"><paramref name="source" /> is null.</exception>
+        public static string Repeat(this string source, int count)
         {
-            if (string.IsNullOrEmpty(source))
-                return source;
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
 
-            return Regex.Replace(source, @"\s+", "");
+            return new StringBuilder().Insert(0, source, count).ToString();
         }
 
         /// <summary>
@@ -330,21 +215,6 @@ namespace ByteDev.Strings
             }
 
             return sb.ToString();
-        }
-
-        /// <summary>
-        /// Returns <paramref name="source" /> repeated <paramref name="count" /> times.
-        /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
-        /// <param name="count">The count of instances to return.</param>
-        /// <returns>String repeated.</returns>
-        /// <exception cref="T:System.ArgumentNullException"><paramref name="source" /> is null.</exception>
-        public static string Repeat(this string source, int count)
-        {
-            if (source == null)
-                throw new ArgumentNullException(nameof(source));
-
-            return new StringBuilder().Insert(0, source, count).ToString();
         }
 
         /// <summary>

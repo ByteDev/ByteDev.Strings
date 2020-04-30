@@ -40,11 +40,19 @@ namespace ByteDev.Strings.UnitTests
             }
 
             [Test]
-            public void WhenValueIsNotNull_ThenReturnString()
+            public void WhenValueIsInt_ThenReturnString()
             {
                 var result = new ToStringHelper().ToString("Id", 10);
 
                 Assert.That(result, Is.EqualTo("Id: 10"));
+            }
+
+            [Test]
+            public void WhenValueIsString_ThenReturnString()
+            {
+                var result = new ToStringHelper().ToString("Id", "John Smith");
+
+                Assert.That(result, Is.EqualTo("Id: John Smith"));
             }
         }
 
@@ -54,15 +62,23 @@ namespace ByteDev.Strings.UnitTests
             [Test]
             public void WhenEnumerableIsNull_ThenReturnString()
             {
-                var result = Act(null);
+                var result = new ToStringHelper().ToString("Ids", null);
 
                 Assert.That(result, Is.EqualTo("Ids: "));
             }
 
             [Test]
+            public void WhenEnumerableIsNull_AndNullValueGiven_ThenReturnString()
+            {
+                var result = new ToStringHelper("<null>").ToString("Ids", null);
+
+                Assert.That(result, Is.EqualTo("Ids: <null>"));
+            }
+
+            [Test]
             public void WhenEnumerableIsEmpty_ThenReturnString()
             {
-                var result = Act(Enumerable.Empty<int>());
+                var result = new ToStringHelper().ToString("Ids", Enumerable.Empty<int>());
 
                 Assert.That(result, Is.EqualTo("Ids: { }"));
             }
@@ -70,7 +86,7 @@ namespace ByteDev.Strings.UnitTests
             [Test]
             public void WhenEnumerableHasOneItem_ThenReturnString()
             {
-                var result = Act(new[] { 3 });
+                var result = new ToStringHelper().ToString("Ids", new[] { 3 });
 
                 Assert.That(result, Is.EqualTo("Ids: { 3 }"));
             }
@@ -78,15 +94,41 @@ namespace ByteDev.Strings.UnitTests
             [Test]
             public void WhenEnumerableHasTwoItems_ThenReturnString()
             {
-                var result = Act(new[] { 3, 15 });
+                var result = new ToStringHelper().ToString("Ids", new[] { 3, 15 });
 
                 Assert.That(result, Is.EqualTo("Ids: { 3, 15 }"));
             }
+        }
 
-            private static string Act(IEnumerable<int> values)
-            {
-                return new ToStringHelper().ToString("Ids", values);
-            }
+        [Test]
+        public void WhenUsedFromType_ThenReturnString()
+        {
+            var result = new MyClass().ToString();
+
+            Assert.That(result, Is.EqualTo("Name: John, Age: <null>, Address: { 123 Highstreet, London, UK }"));
+        }
+    }
+
+    public class MyClass
+    {
+        public string Name => "John";
+
+        public string Age => null;
+
+        public IEnumerable<string> Address => new List<string>
+        {
+            "123 Highstreet",
+            "London",
+            "UK"
+        };
+
+        public override string ToString()
+        {
+            var helper = new ToStringHelper("<null>");
+
+            return helper.ToString(nameof(Name), Name) + ", " +
+                   helper.ToString(nameof(Age), Age) + ", " +
+                   helper.ToString(nameof(Address), Address);
         }
     }
 }

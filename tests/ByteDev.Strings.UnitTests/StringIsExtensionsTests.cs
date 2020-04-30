@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace ByteDev.Strings.UnitTests
 {
     [TestFixture]
-    public class StringIsExtensionsTest
+    public class StringIsExtensionsTests
     {
         [TestFixture]
         public class IsEmpty
@@ -79,7 +79,7 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class IsNullOrWhitespaceOnly
+        public class IsNullOrWhitespace
         {
             [TestCase(null, true)]
             [TestCase("", true)]
@@ -88,7 +88,7 @@ namespace ByteDev.Strings.UnitTests
             [TestCase(" a", false)]
             public void WhenProvided_ThenReturnExpected(string sut, bool expected)
             {
-                var result = sut.IsNullOrWhitespaceOnly();
+                var result = sut.IsNullOrWhitespace();
 
                 Assert.That(result, Is.EqualTo(expected));
             }

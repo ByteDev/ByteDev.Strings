@@ -34,6 +34,16 @@ namespace ByteDev.Strings
         }
 
         /// <summary>
+        /// Indicates whether this string is null or contains only white space characters.
+        /// </summary>
+        /// <param name="source">The string to perform this operation on.</param>
+        /// <returns>True if null or only contains white space characters; otherwise returns false.</returns>
+        public static bool IsNullOrWhitespace(this string source)
+        {
+            return string.IsNullOrEmpty(source) || string.IsNullOrEmpty(source.Trim());
+        }
+
+        /// <summary>
         /// Indicates whether this string is not null or empty.
         /// </summary>
         /// <param name="source">The string to perform this operation on.</param>
@@ -41,16 +51,6 @@ namespace ByteDev.Strings
         public static bool IsNotNullOrEmpty(this string source)
         {
             return !string.IsNullOrEmpty(source);
-        }
-
-        /// <summary>
-        /// Indicates whether this string is null or contains only white space characters.
-        /// </summary>
-        /// <param name="source">The string to perform this operation on.</param>
-        /// <returns>True if null or only contains white space characters; otherwise returns false.</returns>
-        public static bool IsNullOrWhitespaceOnly(this string source)
-        {
-            return string.IsNullOrEmpty(source) || string.IsNullOrEmpty(source.Trim());
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace ByteDev.Strings
         }
 
         /// <summary>
-        /// Indicates whether this string is a URL.
+        /// Indicates whether this string is a URL (HTTP URI).
         /// </summary>
         /// <param name="source">The string to perform this operation on.</param>
         /// <returns>True if is a URL; otherwise returns false.</returns>
