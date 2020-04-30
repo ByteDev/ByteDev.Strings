@@ -105,10 +105,11 @@ namespace ByteDev.Strings
         /// </summary>
         /// <typeparam name="TEnum">Enum type to return.</typeparam>
         /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="ignoreCase">True to ignore the string's case; false to regard case.</param>
         /// <returns>The current string as a <typeparamref name="TEnum" />.</returns>
-        public static TEnum ToEnum<TEnum>(this string source) where TEnum : struct
+        public static TEnum ToEnum<TEnum>(this string source, bool ignoreCase = false) where TEnum : struct
         {
-            return (TEnum)Enum.Parse(typeof(TEnum), source, true);
+            return (TEnum)Enum.Parse(typeof(TEnum), source, ignoreCase);
         }
     }
 }

@@ -224,37 +224,47 @@ namespace ByteDev.Strings.UnitTests
         [TestFixture]
         public class ToEnum
         {
-            private enum TestType
+            private enum TestEnum
             {
                 Test1
             }
 
-            [Test]
-            public void WhenIsEnumValue_ThenReturnEnum()
+            public struct NotEnum
             {
-                const string sut = "Test1";
-
-                var result = sut.ToEnum<TestType>();
-
-                Assert.That(result, Is.EqualTo(TestType.Test1));
             }
 
             [Test]
-            public void WhenIsEnumValueButDiffCase_ThenReturnEnum()
+            public void WhenTypeIsNotEnum_ThenThrowException()
             {
-                const string sut = "test1";
-
-                var result = sut.ToEnum<TestType>();
-
-                Assert.That(result, Is.EqualTo(TestType.Test1));
+                Assert.Throws<ArgumentException>(() => "Test1".ToEnum<NotEnum>());
             }
 
             [Test]
             public void WhenIsNotEnumValue_ThenThrowException()
             {
-                const string sut = "Test2";
+                Assert.Throws<ArgumentException>(() => "Test2".ToEnum<TestEnum>());
+            }
 
-                Assert.Throws<ArgumentException>(() => sut.ToEnum<TestType>());
+            [Test]
+            public void WhenIsEnumValue_ThenReturnEnum()
+            {
+                var result = "Test1".ToEnum<TestEnum>();
+
+                Assert.That(result, Is.EqualTo(TestEnum.Test1));
+            }
+
+            [Test]
+            public void WhenIgnoreCase_AndIsEnumValueButDiffCase_ThenReturnEnum()
+            {
+                var result = "test1".ToEnum<TestEnum>(true);
+
+                Assert.That(result, Is.EqualTo(TestEnum.Test1));
+            }
+
+            [Test]
+            public void WhenRegardCase_AndIsEnumValueButDiffCase_ThenThrowException()
+            {
+                Assert.Throws<ArgumentException>(() => "test1".ToEnum<TestEnum>());
             }
         }
     }
