@@ -346,6 +346,9 @@ namespace ByteDev.Strings.UnitTests
             [TestCase(null)]
             [TestCase("")]
             [TestCase(" ")]
+            [TestCase(".")]
+            [TestCase(".1")]
+            [TestCase("A.1")]
             [TestCase("A1")]
             [TestCase("1.0.1")]
             public void WhenIsNotNumeric_ThenReturnFalse(string sut)
