@@ -78,7 +78,7 @@ namespace ByteDev.Strings
         /// </summary>
         /// <param name="source">The string to perform this operation on.</param>
         /// <returns>True if is a URL; otherwise returns false.</returns>
-        public static bool IsUrl(this string source)
+        public static bool IsHttpUrl(this string source)
         {
             if (string.IsNullOrEmpty(source))
                 return false;
@@ -115,10 +115,7 @@ namespace ByteDev.Strings
                                    "^({|\\()?[A-Fa-f0-9]{8}-([A-Fa-f0-9]{4}-){3}[A-Fa-f0-9]{12}(}|\\))?$|" +
                                    "^({)?[0xA-Fa-f0-9]{3,10}(, {0,1}[0xA-Fa-f0-9]{3,6}){2}, {0,1}({)([0xA-Fa-f0-9]{3,4}, {0,1}){7}[0xA-Fa-f0-9]{3,4}(}})$";
 
-            var format = new Regex(pattern);
-            var match = format.Match(source);
-
-            return match.Success;
+            return Regex.IsMatch(source, pattern);
         }
 
         /// <summary>

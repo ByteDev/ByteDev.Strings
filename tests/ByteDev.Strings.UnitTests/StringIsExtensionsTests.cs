@@ -97,56 +97,81 @@ namespace ByteDev.Strings.UnitTests
         [TestFixture]
         public class IsEmailAddress
         {
-            [TestCase(null, false)]
-            [TestCase("", false)]
-            [TestCase("john.com", false)]
-            [TestCase("@somewhere.com", false)]
-            [TestCase("john@google.com", true)]
-            public void WhenProvided_ThenReturnExpected(string sut, bool expected)
+            [TestCase(null)]
+            [TestCase("")]
+            [TestCase("john.com")]
+            [TestCase("@somewhere.com")]
+            [TestCase("a@a")]
+            public void WhenProvided_ThenReturnExpected(string sut)
             {
                 var result = sut.IsEmailAddress();
 
-                Assert.That(result, Is.EqualTo(expected));
+                Assert.That(result, Is.False);
+            }
+
+            [TestCase("a@a.com")]
+            [TestCase("john@google.com")]
+            public void WhenIsEmailAddress_ThenReturnTrue(string sut)
+            {
+                var result = sut.IsEmailAddress();
+
+                Assert.That(result, Is.True);
             }
         }
 
         [TestFixture]
         public class IsIpAddress
         {
-            [TestCase("0.0.0.0", true)]
-            [TestCase("127.0.0.1", true)]
-            [TestCase("192.168.1.254", true)]
-            [TestCase("255.255.255.255", true)]
-            [TestCase(null, false)]
-            [TestCase("", false)]
-            [TestCase("192", false)]
-            [TestCase("192.168", false)]
-            [TestCase("192.168.1", false)]
-            [TestCase("192.168.1.XXX", false)]
-            [TestCase("192.168.1.256", false)]
-            public void WhenProvided_ThenReturnExpected(string sut, bool expected)
+            [TestCase(null)]
+            [TestCase("")]
+            [TestCase("192")]
+            [TestCase("192.168")]
+            [TestCase("192.168.1")]
+            [TestCase("192.168.1.XXX")]
+            [TestCase("192.168.1.256")]
+            public void WhenIsNotIpAddress_ThenReturnFalse(string sut)
             {
                 var result = sut.IsIpAddress();
 
-                Assert.That(result, Is.EqualTo(expected));
+                Assert.That(result, Is.False);
+            }
+
+            [TestCase("0.0.0.0")]
+            [TestCase("127.0.0.1")]
+            [TestCase("192.168.1.254")]
+            [TestCase("255.255.255.255")]
+            public void WhenIsIpAddress_ThenReturnTrue(string sut)
+            {
+                var result = sut.IsIpAddress();
+
+                Assert.That(result, Is.True);
             }
         }
 
         [TestFixture]
         public class IsGuid
         {
-            [TestCase(null, false)]
-            [TestCase("", false)]
-            [TestCase("123456567-ABCDEFGH", false)]
-            [TestCase("A5EF801D-13BC-4C6F-94AA-C7152C8BC158", true)]
-            [TestCase("a5ef801d-13bc-4c6f-94aa-c7152c8bc158", true)]
-            [TestCase("{a5ef801d-13bc-4c6f-94aa-c7152c8bc158}", true)]
-            [TestCase("00000000-0000-0000-0000-000000000000", true)]
-            public void WhenProvided_ThenReturnExpected(string sut, bool expected)
+            [TestCase(null)]
+            [TestCase("")]
+            [TestCase("123456567-ABCDEFGH")]
+            [TestCase("A5EF801D-13BC-4C6F-94AA-C7152C8BC15G")]
+            public void WhenIsNotGuid_ThenReturnFalse(string sut)
             {
                 var result = sut.IsGuid();
 
-                Assert.That(result, Is.EqualTo(expected));
+                Assert.That(result, Is.False);
+            }
+
+            [TestCase("A5EF801D-13BC-4C6F-94AA-C7152C8BC158")]
+            [TestCase("a5ef801d-13bc-4c6f-94aa-c7152c8bc158")]
+            [TestCase("{a5ef801d-13bc-4c6f-94aa-c7152c8bc158}")]
+            [TestCase("a5ef801d13bc4c6f94aac7152c8bc158")]
+            [TestCase("00000000-0000-0000-0000-000000000000")]
+            public void WhenIsGuid_ThenReturnTrue(string sut)
+            {
+                var result = sut.IsGuid();
+
+                Assert.That(result, Is.True);
             }
         }
 
@@ -202,7 +227,7 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class IsUrl
+        public class IsHttpUrl
         {
             [TestCase("http://www.google.co.uk")]
             [TestCase("http://www.google.co.uk/")]
@@ -212,7 +237,7 @@ namespace ByteDev.Strings.UnitTests
             [TestCase("http://www.google.co.uk/path/#fragment")]
             public void WhenIsUrl_ThenReturnTrue(string sut)
             {
-                var result = sut.IsUrl();
+                var result = sut.IsHttpUrl();
 
                 Assert.That(result, Is.True);
             }
@@ -223,7 +248,7 @@ namespace ByteDev.Strings.UnitTests
             [TestCase("www.google.co.uk")]
             public void WhenIsNotUrl_ThenReturnFalse(string sut)
             {
-                var result = sut.IsUrl();
+                var result = sut.IsHttpUrl();
 
                 Assert.That(result, Is.False);                
             }
