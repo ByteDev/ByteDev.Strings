@@ -3,6 +3,7 @@
 ## 2.0.0 - ?? May 2020
 
 Breaking changes:
+- Added IsNumeric extension method
 - IsUrl is now IsHttpUrl
 
 New features:

@@ -197,7 +197,7 @@ namespace ByteDev.Strings
         }
 
         /// <summary>
-        /// Indicates whether string is a single digit.
+        /// Indicates whether this string is a single digit.
         /// </summary>
         /// <param name="source">The string to perform this operation on.</param>
         /// <returns>True if is a single digit only; otherwise returns false.</returns>
@@ -209,6 +209,38 @@ namespace ByteDev.Strings
             var array = source.ToCharArray();
 
             return array.Length == 1 && char.IsDigit(array[0]);
+        }
+
+        /// <summary>
+        /// Indicates whether this string is numeric (contains only digits and
+        /// an optional single period character).
+        /// </summary>
+        /// <param name="source">The string to perform this operation on.</param>
+        /// <returns>True if is numeric; otherwise return false.</returns>
+        public static bool IsNumeric(this string source)
+        {
+            if (string.IsNullOrEmpty(source) || source.StartsWith("."))
+                return false;
+
+            var hasPeriod = false;
+
+            foreach (char c in source)
+            {
+                if (c == '.')
+                {
+                    if (hasPeriod)
+                        return false;
+
+                    hasPeriod = true;
+                }
+                else
+                {
+                    if (!char.IsDigit(c))
+                        return false;
+                }
+            }
+
+            return true;
         }
 
         /// <summary>

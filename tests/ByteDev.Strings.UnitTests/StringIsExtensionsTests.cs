@@ -230,11 +230,14 @@ namespace ByteDev.Strings.UnitTests
         public class IsHttpUrl
         {
             [TestCase("http://www.google.co.uk")]
-            [TestCase("http://www.google.co.uk/")]
-            [TestCase("http://www.google.co.uk/path")]
-            [TestCase("http://www.google.co.uk/path/")]
-            [TestCase("http://www.google.co.uk/path/file")]
-            [TestCase("http://www.google.co.uk/path/#fragment")]
+            [TestCase("http://www.google.com")]
+            [TestCase("http://www.google.com/")]
+            [TestCase("http://www.google.com/path")]
+            [TestCase("http://www.google.com/path/")]
+            [TestCase("http://www.google.com/path/file")]
+            [TestCase("http://www.google.com/path/#fragment")]
+            [TestCase("https://www.google.com//path/search?q=value")]
+            [TestCase("https://www.google.com//path/search?q=value#fragment")]
             public void WhenIsUrl_ThenReturnTrue(string sut)
             {
                 var result = sut.IsHttpUrl();
@@ -334,6 +337,35 @@ namespace ByteDev.Strings.UnitTests
                 var result = sut.IsDigit();
 
                 Assert.That(result, Is.False);
+            }
+        }
+
+        [TestFixture]
+        public class IsNumeric
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            [TestCase(" ")]
+            [TestCase("A1")]
+            [TestCase("1.0.1")]
+            public void WhenIsNotNumeric_ThenReturnFalse(string sut)
+            {
+                var result = sut.IsNumeric();
+
+                Assert.That(result, Is.False);
+            }
+
+            [TestCase("0")]
+            [TestCase("10")]
+            [TestCase("1.0")]
+            [TestCase("1.01")]
+            [TestCase("10.01")]
+            [TestCase("00.00")]
+            public void WhenIsNumeric_ThenReturnTrue(string sut)
+            {
+                var result = sut.IsNumeric();
+
+                Assert.That(result, Is.True);                
             }
         }
 
