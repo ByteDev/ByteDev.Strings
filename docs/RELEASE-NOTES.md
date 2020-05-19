@@ -5,9 +5,10 @@
 Breaking changes:
 - Added IsNumeric extension method
 - IsUrl is now IsHttpUrl
+- CountOccurrences method name spelling mistake
 
 New features:
-- (None)
+- Added CountOccurrences overload for char value
 
 Bug fixes:
 - (None)

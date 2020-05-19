@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -132,20 +133,30 @@ namespace ByteDev.Strings
         }
 
         /// <summary>
-        /// Returns the occurence count of <paramref name="value" /> within the string.
+        /// Returns the occurrence count of <paramref name="value" /> within the string.
         /// </summary>
         /// <param name="source">The string to perform the operation on.</param>
-        /// <param name="value">The string to count the occurence of.</param>
-        /// <returns>Count of occurence.</returns>
+        /// <param name="value">The string to count the occurrence of.</param>
+        /// <returns>Count of occurrences.</returns>
         /// <exception cref="T:System.ArgumentException"><paramref name="value" /> is null or empty.</exception>
-        public static int CountOccurences(this string source, string value)
+        public static int CountOccurrences(this string source, string value)
         {
             if (string.IsNullOrEmpty(value))
-                throw new ArgumentException("Value was null or empty.", nameof(value));
-            
-            return Regex.Matches(source, Regex.Escape(value)).Count;
+                throw new ArgumentException("Value is null or empty", nameof(value));
+
+            return string.IsNullOrEmpty(source) ? 0 : Regex.Matches(source, Regex.Escape(value)).Count;
         }
 
+        /// <summary>
+        /// Returns the occurrence count of <paramref name="value" /> within the string.
+        /// </summary>
+        /// <param name="source">The string to perform the operation on.</param>
+        /// <param name="value">The string to count the occurrence of.</param>
+        /// <returns>Count of occurrences.</returns>
+        public static int CountOccurrences(this string source, char value)
+        {
+            return string.IsNullOrEmpty(source) ? 0 : source.Count(mt => mt == value);
+        }
         
         /// <summary>
         /// Returns a masked string.

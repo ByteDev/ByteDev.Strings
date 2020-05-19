@@ -169,14 +169,22 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class CountOccurences
+        public class CountOccurrences
         {
+            [Test]
+            public void WhenSourceIsNull_ThenReturnZero()
+            {
+                var result = StringExtensions.CountOccurrences(null, "something");
+
+                Assert.That(result, Is.EqualTo(0));
+            }
+
             [Test]
             public void WhenSourceIsEmpty_ThenReturnZero()
             {
                 var sut = string.Empty;
 
-                var result = sut.CountOccurences("something");
+                var result = sut.CountOccurrences("something");
 
                 Assert.That(result, Is.EqualTo(0));
             }
@@ -186,7 +194,7 @@ namespace ByteDev.Strings.UnitTests
             {
                 const string sut = "something";
 
-                Assert.Throws<ArgumentException>(() => sut.CountOccurences(null));
+                Assert.Throws<ArgumentException>(() => sut.CountOccurrences(null));
             }
 
             [Test]
@@ -194,7 +202,7 @@ namespace ByteDev.Strings.UnitTests
             {
                 const string sut = "something";
 
-                Assert.Throws<ArgumentException>(() => sut.CountOccurences(string.Empty));
+                Assert.Throws<ArgumentException>(() => sut.CountOccurrences(string.Empty));
             }
 
             [Test]
@@ -202,7 +210,7 @@ namespace ByteDev.Strings.UnitTests
             {
                 const string sut = "something";
 
-                var result = sut.CountOccurences("else");
+                var result = sut.CountOccurrences("else");
 
                 Assert.That(result, Is.EqualTo(0));
             }
@@ -212,9 +220,51 @@ namespace ByteDev.Strings.UnitTests
             {
                 const string sut = " something ";
 
-                var result = sut.CountOccurences("something");
+                var result = sut.CountOccurrences("something");
 
                 Assert.That(result, Is.EqualTo(1));
+            }
+
+            [Test]
+            public void WhenValueAppearsTwice_ThenReturnTwo()
+            {
+                const string sut = " something somewhere something else";
+
+                var result = sut.CountOccurrences("something");
+
+                Assert.That(result, Is.EqualTo(2));
+            }
+
+            [Test]
+            public void WhenChar_AndNull_ThenReturnZero()
+            {
+                var result = StringExtensions.CountOccurrences(null, '-');
+
+                Assert.That(result, Is.EqualTo(0));
+            }
+
+            [Test]
+            public void WhenChar_AndEmpty_ThenReturnZero()
+            {
+                var result = string.Empty.CountOccurrences('-');
+
+                Assert.That(result, Is.EqualTo(0));
+            }
+
+            [Test]
+            public void WhenChar_AndPresentOnce_ThenReturnOne()
+            {
+                var result = "something-else".CountOccurrences('-');
+
+                Assert.That(result, Is.EqualTo(1));
+            }
+
+            [Test]
+            public void WhenChar_AndPresentTwice_ThenReturnTwo()
+            {
+                var result = "something-else-".CountOccurrences('-');
+
+                Assert.That(result, Is.EqualTo(2));
             }
         }
 
