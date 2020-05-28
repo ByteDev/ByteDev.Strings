@@ -99,17 +99,22 @@ namespace ByteDev.Strings.UnitTests
         {
             [TestCase(null)]
             [TestCase("")]
+            [TestCase("a")]
+            [TestCase("aa")]
+            [TestCase("a@a b")]
+            [TestCase(" ab@aa")]
             [TestCase("john.com")]
             [TestCase("@somewhere.com")]
-            [TestCase("a@a")]
-            public void WhenProvided_ThenReturnExpected(string sut)
+            public void WhenIsNotEmailAddress_ThenReturnFalse(string sut)
             {
                 var result = sut.IsEmailAddress();
 
                 Assert.That(result, Is.False);
             }
 
-            [TestCase("a@a.com")]
+            [TestCase("a@a")]
+            [TestCase("a1@a1")]
+            [TestCase("a.b.c@a.com")]
             [TestCase("john@google.com")]
             public void WhenIsEmailAddress_ThenReturnTrue(string sut)
             {
@@ -360,6 +365,7 @@ namespace ByteDev.Strings.UnitTests
 
             [TestCase("0")]
             [TestCase("10")]
+            [TestCase("01")]
             [TestCase("1.0")]
             [TestCase("1.01")]
             [TestCase("10.01")]

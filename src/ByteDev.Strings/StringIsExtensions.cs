@@ -55,22 +55,16 @@ namespace ByteDev.Strings
         }
 
         /// <summary>
-        /// Indicates whether this string is an email address.
+        /// Indicates whether this string is (probably) an email address.
         /// </summary>
         /// <param name="source">The string to perform this operation on.</param>
-        /// <returns>True if is an email address; otherwise returns false.</returns>
+        /// <returns>True if is probably an email address; otherwise returns false.</returns>
         public static bool IsEmailAddress(this string source)
         {
             if (string.IsNullOrEmpty(source))
                 return false;
-            
-            const string pattern = @"^(([^<>()[\]\\.,;:\s@\""]+"
-                                   + @"(\.[^<>()[\]\\.,;:\s@\""]+)*)|(\"".+\""))@"
-                                   + @"((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}"
-                                   + @"\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+"
-                                   + @"[a-zA-Z]{2,}))$";
 
-            return new Regex(pattern).IsMatch(source);
+            return new Regex(@"^\S+@\S+$").IsMatch(source);
         }
 
         /// <summary>
@@ -213,7 +207,8 @@ namespace ByteDev.Strings
 
         /// <summary>
         /// Indicates whether this string is numeric (contains only digits and
-        /// an optional single period character).
+        /// an optional single period character). Starting with period character
+        /// returns false.
         /// </summary>
         /// <param name="source">The string to perform this operation on.</param>
         /// <returns>True if is numeric; otherwise return false.</returns>
@@ -244,7 +239,7 @@ namespace ByteDev.Strings
         }
 
         /// <summary>
-        /// Indicates whether string is only letters.
+        /// Indicates whether string is only letters (A-Z and a-z).
         /// </summary>
         /// <param name="source">The string to perform this operation on.</param>
         /// <returns>True if is letters only; otherwise returns false.</returns>

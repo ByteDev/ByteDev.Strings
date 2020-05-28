@@ -1,6 +1,6 @@
 # Release Notes
 
-## 2.0.0 - ?? May 2020
+## 2.0.0 - 28 May 2020
 
 Breaking changes:
 - Added IsNumeric extension method
@@ -11,7 +11,7 @@ New features:
 - Added CountOccurrences overload for char value
 
 Bug fixes:
-- (None)
+- Simplified IsEmailAddress implementation
 
 ## 1.0.0 - 30 April 2020
 
