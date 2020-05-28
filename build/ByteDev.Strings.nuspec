@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Set of string extension methods.</description>
     <tags>string strings extension methods helper</tags>
-    <iconUrl>https://raw.githubusercontent.com/bytedev/ByteDev.Strings/master/images/icon.png</iconUrl>
+    <icon>images\icon.png</icon>
     <dependencies>
       <group targetFramework=".NETStandard2.0" />
     </dependencies>
@@ -18,5 +18,6 @@
   <files>
     <file src="..\src\ByteDev.Strings\bin\Release\netstandard2.0\ByteDev.Strings.dll" target="lib\netstandard2.0" />
     <file src="..\src\ByteDev.Strings\bin\Release\netstandard2.0\ByteDev.Strings.xml" target="lib\netstandard2.0" />
+    <file src="..\images\icon.png" target="images\" />
   </files>
 </package>
