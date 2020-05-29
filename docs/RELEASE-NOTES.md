@@ -1,5 +1,32 @@
 # Release Notes
 
+## 2.1.0 - ?? May 2020
+
+Breaking changes:
+- (None)
+
+New features:
+- Added IsTrue
+- Added IsFalse
+- Added IsLengthBetween
+- Added IsLowerCase
+- Added IsUpperCase
+- Added IsTime
+
+Bug fixes:
+- (None)
+
+## 2.0.1 - 29 May 2020
+
+Breaking changes:
+- (None)
+
+New features:
+- (None)
+
+Bug fixes:
+- Fixes in IsHttpUrl method
+
 ## 2.0.0 - 28 May 2020
 
 Breaking changes:

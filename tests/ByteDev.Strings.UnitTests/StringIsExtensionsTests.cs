@@ -13,6 +13,7 @@ namespace ByteDev.Strings.UnitTests
             public void WhenEmpty_ThenReturnTrue()
             {
                 var sut = string.Empty;
+
                 Assert.That(sut.IsEmpty(), Is.True);
             }
 
@@ -20,6 +21,7 @@ namespace ByteDev.Strings.UnitTests
             public void WhenNotEmpty_ThenReturnFalse()
             {
                 const string sut = "something";
+
                 Assert.That(sut.IsEmpty(), Is.False);
             }
 
@@ -234,15 +236,22 @@ namespace ByteDev.Strings.UnitTests
         [TestFixture]
         public class IsHttpUrl
         {
+            [TestCase("http://localhost")]
+            [TestCase("http://localhost/")]
+            [TestCase("http://local-host")]
+            [TestCase("http://localhost:80")]
             [TestCase("http://www.google.co.uk")]
             [TestCase("http://www.google.com")]
             [TestCase("http://www.google.com/")]
+            [TestCase("http://www.google.com/?q=1")]
             [TestCase("http://www.google.com/path")]
             [TestCase("http://www.google.com/path/")]
             [TestCase("http://www.google.com/path/file")]
             [TestCase("http://www.google.com/path/#fragment")]
-            [TestCase("https://www.google.com//path/search?q=value")]
-            [TestCase("https://www.google.com//path/search?q=value#fragment")]
+            [TestCase("https://www.google.com/path/search?q=value")]
+            [TestCase("https://www.google.com/path/search?q=value&value2")]
+            [TestCase("https://www.google.com/path/search?q=value#fragment")]
+            [TestCase("https://www.google.co.uk")]
             public void WhenIsUrl_ThenReturnTrue(string sut)
             {
                 var result = sut.IsHttpUrl();
@@ -254,6 +263,10 @@ namespace ByteDev.Strings.UnitTests
             [TestCase("")]
             [TestCase("google.co.uk")]
             [TestCase("www.google.co.uk")]
+            [TestCase("Http://www.google.com")]
+            [TestCase(" http://www.google.com")]
+            [TestCase("http://www.google.com ")]
+            [TestCase("http://www.google.com/app?q=John Smith")]
             public void WhenIsNotUrl_ThenReturnFalse(string sut)
             {
                 var result = sut.IsHttpUrl();
@@ -398,6 +411,194 @@ namespace ByteDev.Strings.UnitTests
                 var result = sut.IsLetters();
 
                 Assert.That(result, Is.False);
+            }
+        }
+
+        [TestFixture]
+        public class IsTrue
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            [TestCase("t")]
+            [TestCase("false")]
+            [TestCase("0")]
+            public void WhenIsNotTrue_ThenReturnFalse(string sut)
+            {
+                var result = sut.IsTrue();
+
+                Assert.That(result, Is.False);
+            }
+
+            [TestCase("true")]
+            [TestCase("True")]
+            [TestCase("TRUE")]
+            [TestCase("on")]
+            [TestCase("On")]
+            [TestCase("ON")]
+            [TestCase("1")]
+            public void WhenIsTrue_ThenReturnTrue(string sut)
+            {
+                var result = sut.IsTrue();
+
+                Assert.That(result, Is.True);
+            }
+        }
+
+        [TestFixture]
+        public class IsFalse
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            [TestCase("f")]
+            [TestCase("true")]
+            [TestCase("1")]
+            public void WhenIsNotFalse_ThenReturnFalse(string sut)
+            {
+                var result = sut.IsFalse();
+
+                Assert.That(result, Is.False);
+            }
+
+            [TestCase("false")]
+            [TestCase("False")]
+            [TestCase("FALSE")]
+            [TestCase("off")]
+            [TestCase("Off")]
+            [TestCase("OFF")]
+            [TestCase("0")]
+            public void WhenIsFalse_ThenReturnTrue(string sut)
+            {
+                var result = sut.IsFalse();
+
+                Assert.That(result, Is.True);
+            }
+        }
+
+        [TestFixture]
+        public class IsLengthBetween
+        {
+            [Test]
+            public void WhenIsNull_ThenThrowException()
+            {
+                Assert.Throws<ArgumentNullException>(() => StringIsExtensions.IsLengthBetween(null, 0, 1));
+            }
+
+            [Test]
+            public void WhenMinGreaterThanMax_ThenThrowException()
+            {
+                Assert.Throws<ArgumentOutOfRangeException>(() => "something".IsLengthBetween(1, 0));
+            }
+
+            [TestCase("a", -1, -1)]
+            [TestCase("a", 0, 0)]
+            [TestCase("aa", 0, 1)]
+            [TestCase("aa", 1, 1)]
+            public void WhenLengthIsNotBetweenMinAndMax_ThenReturnFalse(string sut, int min, int max)
+            {
+                var result = sut.IsLengthBetween(min, max);
+
+                Assert.That(result, Is.False);
+            }
+
+            [TestCase("", -1, -1)]
+            [TestCase("", 0, 0)]
+            [TestCase("a", 1, 1)]
+            [TestCase("a", 0, 1)]
+            [TestCase("aa", 0, 2)]
+            [TestCase("aa", 2, 2)]
+            public void WhenLengthIsBetweenMinAndMax_ThenReturnTrue(string sut, int min, int max)
+            {
+                var result = sut.IsLengthBetween(min, max);
+
+                Assert.That(result, Is.True);
+            }
+        }
+
+        [TestFixture]
+        public class IsLowerCase
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            [TestCase("A")]
+            [TestCase("a1")]
+            [TestCase("a b")]
+            public void WhenIsNotLowerCase_ThenReturnFalse(string sut)
+            {
+                var result = sut.IsLowerCase();
+
+                Assert.That(result, Is.False);
+            }
+
+            [TestCase("a")]
+            [TestCase("ab")]
+            public void WhenIsLowerCase_ThenReturnTrue(string sut)
+            {
+                var result = sut.IsLowerCase();
+
+                Assert.That(result, Is.True);
+            }
+        }
+
+        [TestFixture]
+        public class IsUpperCase
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            [TestCase("a")]
+            [TestCase("A1")]
+            [TestCase("A B")]
+            public void WhenIsNotUpperCase_ThenReturnFalse(string sut)
+            {
+                var result = sut.IsUpperCase();
+
+                Assert.That(result, Is.False);
+            }
+
+            [TestCase("A")]
+            [TestCase("AB")]
+            public void WhenIsUpperCase_ThenReturnTrue(string sut)
+            {
+                var result = sut.IsUpperCase();
+
+                Assert.That(result, Is.True);
+            }
+        }
+
+        [TestFixture]
+        public class IsTime
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            [TestCase("0")]
+            [TestCase("00")]
+            [TestCase("23,59,59")]
+            [TestCase("24:59:59")]
+            [TestCase("23:60:59")]
+            [TestCase("23:59:60")]
+            public void WhenIsNotTime_ThenReturnFalse(string sut)
+            {
+                var result = sut.IsTime();
+
+                Assert.That(result, Is.False);
+            }
+
+            [TestCase("00:00:00")]
+            [TestCase("00-00-00")]
+            [TestCase("000000")]
+            [TestCase("23:59:59")]
+            [TestCase("23-59-59")]
+            [TestCase("235959")]
+            [TestCase("00:00")]
+            [TestCase("00-00")]
+            [TestCase("0000")]
+            [TestCase("23:59")]
+            [TestCase("23-59")]
+            [TestCase("2359")]
+            public void WhenIsTime_ThenReturnTrue(string sut)
+            {
+                var result = sut.IsTime();
+
+                Assert.That(result, Is.True);
             }
         }
     }
