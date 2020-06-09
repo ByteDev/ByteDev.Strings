@@ -147,29 +147,6 @@ namespace ByteDev.Strings
         }
 
         /// <summary>
-        /// Indicates whether this string is hexadecimal.
-        /// </summary>
-        /// <param name="source">The string to perform this operation on.</param>
-        /// <returns>True if is hexadecimal; otherwise returns false.</returns>
-        public static bool IsHex(this string source)
-        {
-            if (string.IsNullOrEmpty(source))
-                return false;
-
-            foreach(char c in source)
-            {
-                var isHex = c >= '0' && c <= '9' ||
-                            c >= 'a' && c <= 'f' ||
-                            c >= 'A' && c <= 'F';
-
-                if(!isHex)
-                    return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
         /// Indicates whether this string is only digits.
         /// </summary>
         /// <param name="source">The string to perform this operation on.</param>

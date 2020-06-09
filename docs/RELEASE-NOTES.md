@@ -1,5 +1,16 @@
 # Release Notes
 
+## 3.0.0 - ?? June 2020
+
+Breaking changes:
+- Deleted StringIsExtensions.IsHex(); see ByteDev.Encoding package
+
+New features:
+- (None)
+
+Bug fixes:
+- (None)
+
 ## 2.1.0 - 29 May 2020
 
 Breaking changes:
