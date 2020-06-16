@@ -47,7 +47,6 @@ Assembly contains string extension methods:
 - IsEmailAddress
 - IsFalse
 - IsGuid
-- IsHex
 - IsHttpUrl
 - IsIpAddress
 - IsLengthBetween
@@ -86,6 +85,23 @@ Assembly contains string extension methods:
 - ToLongOrDefault
 - ToDateTimeOrDefault
 - ToEnum
+
+### CaseConverter
+
+`CaseConverter` has the following methods:
+- ToCamelCase
+- ToKebabCase
+- ToPascalCase
+- ToSnakeCase
+- ToSnakeUpperCase
+
+To use `CaseConverter` reference the `ByteDev.Strings.Case` namespace.
+
+```csharp
+var s1 = CaseConverter.ToCamelCase("snake_case", CaseType.SnakeCase);   // "snakeCase"
+
+var s2 = CaseConverter.ToPascalCase("kebab-case", CaseType.KebabCase);  // "KebabCase"
+```
 
 ### ToStringHelper
 
