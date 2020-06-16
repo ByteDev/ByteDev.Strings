@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using ByteDev.Strings.Case;
+using NUnit.Framework;
 
 namespace ByteDev.Strings.UnitTests
 {

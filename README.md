@@ -98,9 +98,11 @@ Assembly contains string extension methods:
 To use `CaseConverter` reference the `ByteDev.Strings.Case` namespace.
 
 ```csharp
-var s1 = CaseConverter.ToCamelCase("snake_case", CaseType.SnakeCase);   // "snakeCase"
+string s1 = CaseConverter.ToCamelCase("snake_case", CaseType.SnakeCase);   // "snakeCase"
 
-var s2 = CaseConverter.ToPascalCase("kebab-case", CaseType.KebabCase);  // "KebabCase"
+string s2 = CaseConverter.ToPascalCase("kebab-case", CaseType.KebabCase);  // "KebabCase"
+
+bool isPascalCase = s2.IsPascalCase();   // true
 ```
 
 ### ToStringHelper

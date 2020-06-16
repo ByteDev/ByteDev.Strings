@@ -1,5 +1,16 @@
 # Release Notes
 
+## 3.1.0 - 16 June 2020
+
+Breaking changes:
+- (None)
+
+New features:
+- Added StringCaseExtensions: IsCamelCase, IsKebabCase, IsPascalCase, IsSnakeCase, IsSnakeUpperCase
+
+Bug fixes:
+- (None)
+
 ## 3.0.0 - 16 June 2020
 
 Breaking changes:
