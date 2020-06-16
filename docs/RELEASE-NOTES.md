@@ -1,15 +1,15 @@
 # Release Notes
 
-## 3.0.0 - ?? June 2020
+## 3.0.0 - 16 June 2020
 
 Breaking changes:
 - Deleted StringIsExtensions.IsHex(); see ByteDev.Encoding package
 
 New features:
-- (None)
+- Added CaseConverter & CaseType
 
 Bug fixes:
-- (None)
+- Fixed bug in ToTitleCase
 
 ## 2.1.0 - 29 May 2020
 

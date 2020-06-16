@@ -14,30 +14,45 @@ namespace ByteDev.Strings.UnitTests
             [Test]
             public void WhenStringIsNull_ThenThrowException()
             {
-                const string sut = null;
-                Assert.Throws<ArgumentNullException>(() => sut.ToTitleCase());
+                Assert.Throws<ArgumentNullException>(() => StringToExtensions.ToTitleCase(null));
+            }
+
+            [Test]
+            public void WhenIsEmpty_ThenReturnEmpty()
+            {
+                var result = string.Empty.ToTitleCase();
+
+                Assert.That(result, Is.Empty);
             }
 
             [Test]
             public void WhenLowerCase_ThenChangeCase()
             {
-                const string expected = "My Name Is John";
                 const string sut = "my name is john";
 
                 var result = sut.ToTitleCase();
 
-                Assert.That(result, Is.EqualTo(expected));
+                Assert.That(result, Is.EqualTo("My Name Is John"));
             }
 
             [Test]
             public void WhenLowerCaseWithPeriod_ThenChangeCase()
             {
-                const string expected = "My Name Is John.And I Work";
                 const string sut = "my name is john.and i work";
 
                 var result = sut.ToTitleCase();
 
-                Assert.That(result, Is.EqualTo(expected));
+                Assert.That(result, Is.EqualTo("My Name Is John.And I Work"));
+            }
+
+            [Test]
+            public void WhenUpperCaseWithPeriod_ThenChangeCase()
+            {
+                const string sut = "MY NAME IS JOHN.AND I WORK";
+
+                var result = sut.ToTitleCase();
+
+                Assert.That(result, Is.EqualTo("My Name Is John.And I Work"));
             }
         }
 

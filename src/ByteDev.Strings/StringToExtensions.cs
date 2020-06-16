@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 
@@ -20,7 +21,7 @@ namespace ByteDev.Strings
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
             
-            return System.Globalization.CultureInfo.InvariantCulture.TextInfo.ToTitleCase(source);
+            return CultureInfo.InvariantCulture.TextInfo.ToTitleCase(source.ToLower());
         }
 
         /// <summary>
