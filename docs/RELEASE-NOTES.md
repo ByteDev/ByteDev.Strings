@@ -1,9 +1,9 @@
 # Release Notes
 
-## 3.1.0 - 01 July 2020
+## 4.0.0 - 01 July 2020
 
 Breaking changes:
-- (None)
+- Replaced ToStringHelper class with ToStringBuilder class
 
 New features:
 - Added StringCaseExtensions: IsCamelCase, IsKebabCase, IsPascalCase, IsSnakeCase, IsSnakeUpperCase

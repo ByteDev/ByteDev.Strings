@@ -155,9 +155,9 @@ invoker.Invoke();
 ```
 
 
-### ToStringHelper
+### ToStringBuilder
 
-The assembly also contains the type `ToStringHelper` to help return string representations of an object when overriding it's ToString method.
+The assembly also contains the type `ToStringBuilder` to help return string representations of an object when overriding it's `ToString` method.
 
 ```csharp
 public class MyClass
@@ -175,16 +175,18 @@ public class MyClass
 
     public override string ToString()
     {
-        var helper = new ToStringHelper("<null>");
-
-        return helper.ToString(nameof(Name), Name) + ", " +
-                helper.ToString(nameof(Age), Age) + ", " +
-                helper.ToString(nameof(Address), Address);
+        return new ToStringBuilder()
+            .WithNullValue("<null>")
+            .WithStringQuoteChar('\'')
+            .With(nameof(Name), Name)
+            .With(nameof(Age), Age)
+            .With(nameof(Address), Address)
+            .Build();
     }
 }
 
 // ...
 string s = new MyClass().ToString();
 
-// s == "Name: John, Age: <null>, Address: { 123 Highstreet, London, UK }"
+// s == "Name: John, Age: <null>, Address: { '123 Highstreet', 'London', 'UK' }"
 ```
