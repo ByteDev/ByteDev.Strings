@@ -1,13 +1,11 @@
-﻿using ByteDev.Strings.StringCommands.BaseCommands;
-
-namespace ByteDev.Strings.StringCommands
+﻿namespace ByteDev.Strings.StringCommands
 {
     /// <summary>
     /// Represents a command that inserts a string at a certain position.
     /// </summary>
     public class InsertCommand : StringCommand
     {
-        public int Position { get; }
+        public int Position { get; private set; }
 
         public string InsertValue { get; }
 
@@ -19,18 +17,26 @@ namespace ByteDev.Strings.StringCommands
 
         public override void Execute()
         {
-            if (Position < 0)											
-			{
-                SetResult(InsertValue + Value);
-			}
-			else if (Position <= Value.Length)
-			{
-                SetResult(Value.Insert(Position, InsertValue));
-			}
-			else
-			{
-                SetResult(Value + InsertValue);
-			}
+            if (string.IsNullOrEmpty(Value))
+            {
+                SetResult(InsertValue);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(InsertValue))
+            {
+                SetResult(Value);
+                return;
+            }
+
+            if (Position < 0)
+                Position = 0;
+            else if (Position > Value.Length)
+                Position = Value.Length;
+
+            var insertValue = Value.Insert(Position, InsertValue);
+
+            SetResult(insertValue);
         }
 
         public override string ToString()

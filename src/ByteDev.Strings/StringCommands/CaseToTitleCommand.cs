@@ -1,11 +1,9 @@
-﻿using ByteDev.Strings.StringCommands.BaseCommands;
-
-namespace ByteDev.Strings.StringCommands
+﻿namespace ByteDev.Strings.StringCommands
 {
     /// <summary>
     /// Represents a command that converts a value to title case.
     /// </summary>
-    public class CaseToTitleCaseCommand : StringCommand
+    public class CaseToTitleCommand : StringCommand
     {
         public override void Execute()
         {

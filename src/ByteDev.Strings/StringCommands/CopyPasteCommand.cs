@@ -1,23 +1,31 @@
-﻿using ByteDev.Strings.StringCommands.BaseCommands;
-
-namespace ByteDev.Strings.StringCommands
+﻿namespace ByteDev.Strings.StringCommands
 {
     /// <summary>
     /// Represents a command that copies part of a value and pastes into
     /// the value at a certain position.
     /// </summary>
-    public class CopyPasteCommand : CutCopyPasteCommand
+    public class CopyPasteCommand : StringCommand
     {
-        public CopyPasteCommand(int copyPosition, int copyLength, int pastePosition) : 
-            base(copyPosition, copyLength, pastePosition)
+        public int CopyPosition { get; private set; }
+
+        public int CopyLength { get; private set; }
+
+        public int PastePosition { get; private set; }
+
+        public CopyPasteCommand(int copyPosition, int copyLength, int pastePosition)
         {
+            CopyPosition = copyPosition;
+            CopyLength = copyLength;
+            PastePosition = pastePosition;
         }
 
         public override void Execute()
         {
-            if (Value == null)
+            if (Value == null ||
+                CopyLength < 1 || 
+                CopyPosition == Value.Length)
             {
-                SetResult(null);
+                SetResult(Value);
                 return;
             }
 
@@ -25,14 +33,42 @@ namespace ByteDev.Strings.StringCommands
 
             var copyValue = Copy(Value);
             
-            Value = Paste(Value, copyValue);
+            var pasteValue = Paste(Value, copyValue);
 
-            SetResult(Value);
+            SetResult(pasteValue);
         }
 
         public override string ToString()
         {
             return $"{GetType().Name} ({CopyPosition}, {CopyLength}, {PastePosition})";
+        }
+
+        protected void ValidateParameters()
+        {
+            if (CopyPosition < 0)
+                CopyPosition = 0;
+            else if (CopyPosition > Value.Length)
+                CopyPosition = Value.Length;
+
+            if (PastePosition < 0)
+                PastePosition = 0;
+            else if (PastePosition > Value.Length)
+                PastePosition = Value.Length;
+
+            if (CopyLength < 0)
+                CopyLength = 0;
+            else if (CopyPosition + CopyLength > Value.Length)
+                CopyLength = Value.Length - CopyPosition;
+        }
+
+        protected string Copy(string value)
+        {
+            return value.Substring(CopyPosition, CopyLength);
+        }
+
+        protected string Paste(string value, string textToPaste)
+        {
+            return value.Insert(PastePosition, textToPaste);
         }
     }
 }

@@ -1,11 +1,9 @@
-﻿using ByteDev.Strings.StringCommands.BaseCommands;
-
-namespace ByteDev.Strings.StringCommands
+﻿namespace ByteDev.Strings.StringCommands
 {
     /// <summary>
     /// Represents a command that converts a value to lower case.
     /// </summary>
-    public class CaseToLowerCaseCommand : StringCommand
+    public class CaseToLowerCommand : StringCommand
     {
         public override void Execute()
         {

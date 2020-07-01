@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ByteDev.Strings.StringCommands.BaseCommands
+namespace ByteDev.Strings.StringCommands
 {
     [Serializable]
     public abstract class StringCommand

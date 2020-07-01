@@ -1,6 +1,4 @@
-﻿using ByteDev.Strings.StringCommands.BaseCommands;
-
-namespace ByteDev.Strings.StringCommands
+﻿namespace ByteDev.Strings.StringCommands
 {
     public class StringCommandInvoker
     {

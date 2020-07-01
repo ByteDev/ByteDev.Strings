@@ -1,6 +1,4 @@
-﻿using ByteDev.Strings.StringCommands.BaseCommands;
-
-namespace ByteDev.Strings.StringCommands
+﻿namespace ByteDev.Strings.StringCommands
 {
     /// <summary>
     /// Represents a command that replaces an old value with a
@@ -20,13 +18,16 @@ namespace ByteDev.Strings.StringCommands
 
         public override void Execute()
         {
-			if(string.IsNullOrEmpty(OldValue))
+			if(string.IsNullOrEmpty(Value) ||
+               string.IsNullOrEmpty(OldValue))
 			{
 				SetResult(Value);
 				return;
 			}
 
-            SetResult(Value.Replace(OldValue, NewValue));
+            var replaceValue = Value.Replace(OldValue, NewValue);
+
+            SetResult(replaceValue);
         }
 
         public override string ToString()

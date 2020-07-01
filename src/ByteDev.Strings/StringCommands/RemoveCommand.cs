@@ -1,6 +1,4 @@
-﻿using ByteDev.Strings.StringCommands.BaseCommands;
-
-namespace ByteDev.Strings.StringCommands
+﻿namespace ByteDev.Strings.StringCommands
 {
     /// <summary>
     /// Represents a command that removes all given values.
@@ -16,13 +14,16 @@ namespace ByteDev.Strings.StringCommands
 
         public override void Execute()
         {
-			if(string.IsNullOrEmpty(RemoveValue))
-			{
-				SetResult(Value);
-				return;
-			}
+            if (string.IsNullOrEmpty(Value) || 
+                string.IsNullOrEmpty(RemoveValue))
+            {
+                SetResult(Value);
+                return;
+            }
 
-            SetResult(Value.Replace(RemoveValue, string.Empty));
+            var removeValue = Value.Replace(RemoveValue, string.Empty);
+
+            SetResult(removeValue);
         }
 
         public override string ToString()

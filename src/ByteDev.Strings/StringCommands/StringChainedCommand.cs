@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using ByteDev.Strings.StringCommands.BaseCommands;
 
 namespace ByteDev.Strings.StringCommands
 {

@@ -1,6 +1,4 @@
-﻿using ByteDev.Strings.StringCommands.BaseCommands;
-
-namespace ByteDev.Strings.StringCommands
+﻿namespace ByteDev.Strings.StringCommands
 {
     /// <summary>
     /// Represents a command that removes value from a start position
@@ -8,40 +6,36 @@ namespace ByteDev.Strings.StringCommands
     /// </summary>
     public class RemovePositionCommand : StringCommand
     {
-        public int Position { get; }
+        public int Position { get; private set; }
 
-        public int Length { get; }
+        public int Length { get; private set; }
 
         public RemovePositionCommand(int position, int length)
         {
             Position = position;
-			Length = length;
+            Length = length;
         }
 
         public override void Execute()
         {
-			if(Length < 1)
-			{
-				SetResult(Value);
-				return;
-			}
-
-            var startPos = Position;
-
-            if (startPos < 0)
-            {
-                startPos = 0;
-            }
-            else if (startPos > Value.Length)
+            if (string.IsNullOrEmpty(Value) ||
+                Position >= Value.Length ||
+                Length < 1)
             {
                 SetResult(Value);
-            	return;
+                return;
             }
 
-            var left = Value.Substring(0, startPos);     
-            var right = Value.Substring(startPos + Length);
+            if (Position < 0)
+                Position = 0;
 
-            SetResult(left + right + Value);
+            if (Position + Length > Value.Length)
+                Length = Value.Length - Position;
+
+            var left = Value.Substring(0, Position);     
+            var right = Value.Substring(Position + Length);
+
+            SetResult(left + right);
         }
 
         public override string ToString()
