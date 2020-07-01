@@ -5,16 +5,30 @@
     /// </summary>
     public class InsertCommand : StringCommand
     {
+        /// <summary>
+        /// Position to insert value.
+        /// </summary>
         public int Position { get; private set; }
 
+        /// <summary>
+        /// String to insert.
+        /// </summary>
         public string InsertValue { get; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:ByteDev.Strings.StringCommands.InsertCommand" /> class.
+        /// </summary>
+        /// <param name="position">Position to insert value.</param>
+        /// <param name="insertValue">String to insert.</param>
         public InsertCommand(int position, string insertValue)
         {
             Position = position;
             InsertValue = insertValue;
         }
 
+        /// <summary>
+        /// Execute the command.
+        /// </summary>
         public override void Execute()
         {
             if (string.IsNullOrEmpty(Value))

@@ -6,12 +6,27 @@
     /// </summary>
     public class CopyPasteCommand : StringCommand
     {
+        /// <summary>
+        /// Copy segment start position.
+        /// </summary>
         public int CopyPosition { get; private set; }
 
+        /// <summary>
+        /// Copy segment length.
+        /// </summary>
         public int CopyLength { get; private set; }
 
+        /// <summary>
+        /// Paste position for segment.
+        /// </summary>
         public int PastePosition { get; private set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:ByteDev.Strings.StringCommands.CopyPasteCommand" /> class.
+        /// </summary>
+        /// <param name="copyPosition">Copy segment start position.</param>
+        /// <param name="copyLength">Copy segment length.</param>
+        /// <param name="pastePosition">Paste position for segment.</param>
         public CopyPasteCommand(int copyPosition, int copyLength, int pastePosition)
         {
             CopyPosition = copyPosition;
@@ -19,6 +34,9 @@
             PastePosition = pastePosition;
         }
 
+        /// <summary>
+        /// Execute the command.
+        /// </summary>
         public override void Execute()
         {
             if (Value == null ||

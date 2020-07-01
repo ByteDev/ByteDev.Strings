@@ -9,7 +9,7 @@
     <copyright>Copyright 2020</copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Set of string related extension methods and classes.</description>
-    <tags>string strings extension methods helper case converter pascalcase camelcase</tags>
+    <tags>string strings extension methods helper case converter command</tags>
     <projectUrl>https://github.com/ByteDev/ByteDev.Strings</projectUrl>
     <icon>images\icon.png</icon>
     <license type="file">LICENSE</license>

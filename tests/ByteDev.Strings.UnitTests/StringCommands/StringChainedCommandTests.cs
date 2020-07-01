@@ -26,11 +26,8 @@ namespace ByteDev.Strings.UnitTests.StringCommands
             [Test]
             public void WhenCommandsIsEmpty_ThenSetResultToValue()
             {
-                var commands = new List<StringCommand>();
+                var sut = new StringChainedCommand(new List<StringCommand>()).SetValue(Value);
 
-                var sut = new StringChainedCommand(commands);
-
-                sut.SetValue(Value);
                 sut.Execute();
 
                 Assert.That(sut.Result, Is.EqualTo(Value));
@@ -46,9 +43,8 @@ namespace ByteDev.Strings.UnitTests.StringCommands
                     new CutPasteCommand(5, 5, 0)
                 };
 
-                var sut = new StringChainedCommand(commands);
+                var sut = new StringChainedCommand(commands).SetValue(Value);
 
-                sut.SetValue(Value);
                 sut.Execute();
 
                 Assert.That(sut.Result, Is.EqualTo("smithjohn  lives in England."));

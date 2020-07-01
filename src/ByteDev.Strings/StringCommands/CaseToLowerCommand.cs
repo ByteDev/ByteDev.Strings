@@ -5,6 +5,9 @@
     /// </summary>
     public class CaseToLowerCommand : StringCommand
     {
+        /// <summary>
+        /// Execute the command.
+        /// </summary>
         public override void Execute()
         {
             SetResult(Value?.ToLower());

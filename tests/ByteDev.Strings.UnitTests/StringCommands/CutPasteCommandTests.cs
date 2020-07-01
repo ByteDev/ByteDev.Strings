@@ -21,9 +21,8 @@ namespace ByteDev.Strings.UnitTests.StringCommands
         [Test]
         public void WhenCopyLengthIsLessThanOne_ThenSetToSame()
         {
-            var sut = new CutPasteCommand(0, 0, 5);
+            var sut = new CutPasteCommand(0, 0, 5).SetValue(Value);
 
-            sut.SetValue(Value);
             sut.Execute();
 
             Assert.That(sut.Result, Is.EqualTo(Value));
@@ -33,9 +32,8 @@ namespace ByteDev.Strings.UnitTests.StringCommands
         [TestCase(11, 1, 0)]
         public void WhenCopyPositionEqualsOrGreaterThanValueLength_ThenSetToSame(int copyPosition, int copyLength, int pastePosition)
         {
-            var sut = new CutPasteCommand(copyPosition, copyLength, pastePosition);
+            var sut = new CutPasteCommand(copyPosition, copyLength, pastePosition).SetValue(Value);
 
-            sut.SetValue(Value);
             sut.Execute();
 
             Assert.That(sut.Result, Is.EqualTo(Value));
@@ -44,9 +42,8 @@ namespace ByteDev.Strings.UnitTests.StringCommands
         [Test]
         public void WhenPastePositionGreaterThanLength_ThenPasteAtEnd()
         {
-            var sut = new CutPasteCommand(0, 4, Value.Length + 1);
+            var sut = new CutPasteCommand(0, 4, Value.Length + 1).SetValue(Value);
 
-            sut.SetValue(Value);
             sut.Execute();
 
             Assert.That(sut.Result, Is.EqualTo(" SmithJohn"));
@@ -59,9 +56,8 @@ namespace ByteDev.Strings.UnitTests.StringCommands
         [TestCase(9, 2, "hJohn Smit")]
         public void WhenCutLength_ThenCopyTillEnd(int cutPosition, int cutLength, string expected)
         {
-            var sut = new CutPasteCommand(cutPosition, cutLength, 0);
+            var sut = new CutPasteCommand(cutPosition, cutLength, 0).SetValue(Value);
 
-            sut.SetValue(Value);
             sut.Execute();
 
             Assert.That(sut.Result, Is.EqualTo(expected));
@@ -74,9 +70,8 @@ namespace ByteDev.Strings.UnitTests.StringCommands
         [TestCase(0, 11, 10, Value)]
         public void WhenCutParamsWithinValue_ThenPaste(int cutPosition, int cutLength, int pastePosition, string expected)
         {
-            var sut = new CutPasteCommand(cutPosition, cutLength, pastePosition);
+            var sut = new CutPasteCommand(cutPosition, cutLength, pastePosition).SetValue(Value);
 
-            sut.SetValue(Value);
             sut.Execute();
 
             Assert.That(sut.Result, Is.EqualTo(expected));
@@ -88,9 +83,8 @@ namespace ByteDev.Strings.UnitTests.StringCommands
         [TestCase(10, 1, 10)]
         public void WhenCutPositionEqualToPastePosition_ThenSetSame(int cutPosition, int cutLength, int pastePosition)
         {
-            var sut = new CutPasteCommand(cutPosition, cutLength, pastePosition);
-
-            sut.SetValue(Value);
+            var sut = new CutPasteCommand(cutPosition, cutLength, pastePosition).SetValue(Value);
+            
             sut.Execute();
 
             Assert.That(sut.Result, Is.EqualTo(Value));

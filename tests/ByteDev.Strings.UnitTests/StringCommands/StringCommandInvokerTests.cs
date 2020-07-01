@@ -37,8 +37,7 @@ namespace ByteDev.Strings.UnitTests.StringCommands
             [Test]
             public void WhenCommandSet_ThenExecuteCommand()
             {
-                var command = new CaseToLowerCommand();
-                command.SetValue("John Smith");
+                var command = new CaseToLowerCommand().SetValue("John Smith");
 
                 _sut.SetCommands(command);
                 _sut.Invoke();
@@ -49,11 +48,8 @@ namespace ByteDev.Strings.UnitTests.StringCommands
             [Test]
             public void WhenCommandsSet_ThenExecuteCommands()
             {                
-                var c1 = new CaseToLowerCommand();
-                c1.SetValue("John Smith");
-
-                var c2 = new CopyPasteCommand(0, 4, 0);
-                c2.SetValue("John Smith");
+                var c1 = new CaseToLowerCommand().SetValue("John Smith");
+                var c2 = new CopyPasteCommand(0, 4, 0).SetValue("John Smith");
 
                 _sut.SetCommands(c1, c2);
                 _sut.Invoke();

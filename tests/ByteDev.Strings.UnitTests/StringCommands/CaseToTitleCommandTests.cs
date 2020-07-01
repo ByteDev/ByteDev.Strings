@@ -10,9 +10,8 @@ namespace ByteDev.Strings.UnitTests.StringCommands
         [TestCase("")]
         public void WhenValueIsNullOrEmpty_ThenSetToValue(string value)
         {
-            var sut = new CaseToTitleCommand();
+            var sut = new CaseToTitleCommand().SetValue(value);
 
-            sut.SetValue(value);
             sut.Execute();
 
             Assert.That(sut.Result, Is.EqualTo(value));
@@ -21,9 +20,8 @@ namespace ByteDev.Strings.UnitTests.StringCommands
         [Test]
         public void WhenValueIsNotNullOrEmpty_ThenSet()
         {
-            var sut = new CaseToTitleCommand();
+            var sut = new CaseToTitleCommand().SetValue("john smith");
 
-            sut.SetValue("john smith");
             sut.Execute();
 
             Assert.That(sut.Result, Is.EqualTo("John Smith"));

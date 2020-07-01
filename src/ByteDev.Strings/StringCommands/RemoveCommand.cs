@@ -5,13 +5,23 @@
     /// </summary>
     public class RemoveCommand : StringCommand
     {
+        /// <summary>
+        /// String value to remove.
+        /// </summary>
         public string RemoveValue { get; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:ByteDev.Strings.StringCommands.RemoveCommand" /> class.
+        /// </summary>
+        /// <param name="removeValue">String value to remove.</param>
         public RemoveCommand(string removeValue)
         {
             RemoveValue = removeValue;
         }
 
+        /// <summary>
+        /// Execute the command.
+        /// </summary>
         public override void Execute()
         {
             if (string.IsNullOrEmpty(Value) || 

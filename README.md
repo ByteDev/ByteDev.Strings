@@ -5,7 +5,7 @@
 
 # ByteDev.Strings
 
-Set of string extension methods.
+Set of string related extension methods and classes.
 
 ## Installation
 
@@ -88,14 +88,14 @@ Assembly contains string extension methods:
 
 ### CaseConverter
 
+To use `CaseConverter` reference the `ByteDev.Strings.Case` namespace.
+
 `CaseConverter` has the following methods:
 - ToCamelCase
 - ToKebabCase
 - ToPascalCase
 - ToSnakeCase
 - ToSnakeUpperCase
-
-To use `CaseConverter` reference the `ByteDev.Strings.Case` namespace.
 
 ```csharp
 string s1 = CaseConverter.ToCamelCase("snake_case", CaseType.SnakeCase);   // "snakeCase"
@@ -104,6 +104,56 @@ string s2 = CaseConverter.ToPascalCase("kebab-case", CaseType.KebabCase);  // "K
 
 bool isPascalCase = s2.IsPascalCase();   // true
 ```
+
+There are also a number of case related string extension methods:
+
+- IsCamelCase
+- IsKebabCase
+- IsPascalCase
+- IsSnakeCase
+- IsSnakeUpperCase
+- IsCaseType
+
+### StringCommands
+
+To use the various string commands reference the `ByteDev.Strings.StringCommands` namespace.
+
+```csharp
+var c1 = new CaseToLowerCommand().SetValue("John Smith");
+var c2 = new CopyPasteCommand(0, 4, 0).SetValue("John Smith");
+
+IStringCommandInvoker invoker = new StringCommandInvoker();
+
+invoker.SetCommands(c1, c2);
+invoker.Invoke();
+
+// c1.Result == "john smith" 
+// c2.Result == "JohnJohn Smith"
+```
+
+Commands can also be chained together using the `StringChainedCommand`:
+
+```csharp
+// Note: we don't have to call SetValue on each command just on StringChainedCommand
+// as this will provide the initial value.
+
+var commands = new List<StringCommand>
+{
+    new CaseToLowerCommand(),
+    new InsertCommand(100, " lives in England."),
+    new CutPasteCommand(5, 5, 0)
+};
+
+var c1 = new StringChainedCommand(commands).SetValue("John Smith");
+
+IStringCommandInvoker invoker = new StringCommandInvoker();
+
+invoker.SetCommands(c1);
+invoker.Invoke();
+
+// command.Result == "smithjohn  lives in England."
+```
+
 
 ### ToStringHelper
 

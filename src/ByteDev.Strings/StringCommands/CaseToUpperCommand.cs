@@ -5,11 +5,14 @@
     /// </summary>
     public class CaseToUpperCommand : StringCommand
     {
+        /// <summary>
+        /// Execute the command.
+        /// </summary>
         public override void Execute()
         {
             SetResult(Value?.ToUpper());
         }
-
+        
         public override string ToString()
         {
             return GetType().Name;

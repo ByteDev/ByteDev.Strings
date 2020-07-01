@@ -3,16 +3,26 @@ using System.Collections.Generic;
 
 namespace ByteDev.Strings.StringCommands
 {
-    public class StringCommandInvoker
+    /// <summary>
+    /// Represents an invoker of string commands.
+    /// </summary>
+    public class StringCommandInvoker : IStringCommandInvoker
     {
         private readonly IList<StringCommand> _commands;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:ByteDev.Strings.StringCommands.StringCommandInvoker" /> class.
+        /// </summary>
         public StringCommandInvoker()
         {
             _commands = new List<StringCommand>();
         }
 
-        public void SetCommands(params StringCommand[] commands)
+        /// <summary>
+        /// Set the command(s) to be invoked.
+        /// </summary>
+        /// <param name="commands">Commands to invoke.</param>
+        public StringCommandInvoker SetCommands(params StringCommand[] commands)
         {
             if (commands == null)
                 throw new ArgumentNullException(nameof(commands));
@@ -23,8 +33,13 @@ namespace ByteDev.Strings.StringCommands
             {
                 _commands.Add(command);
             }
+
+            return this;
         }
         
+        /// <summary>
+        /// Invoke the command(s).
+        /// </summary>
         public void Invoke()
         {
             foreach (var command in _commands)

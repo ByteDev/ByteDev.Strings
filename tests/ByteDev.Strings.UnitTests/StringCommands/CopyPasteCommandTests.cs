@@ -21,9 +21,8 @@ namespace ByteDev.Strings.UnitTests.StringCommands
         [Test]
         public void WhenCopyLengthIsLessThanOne_ThenSetToSame()
         {
-            var sut = new CopyPasteCommand(0, 0, 5);
-
-            sut.SetValue(Value);
+            var sut = new CopyPasteCommand(0, 0, 5).SetValue(Value);
+            
             sut.Execute();
 
             Assert.That(sut.Result, Is.EqualTo(Value));
@@ -33,9 +32,8 @@ namespace ByteDev.Strings.UnitTests.StringCommands
         [TestCase(11, 1, 0)]
         public void WhenCopyPositionEqualsOrGreaterThanValueLength_ThenSetToSame(int copyPosition, int copyLength, int pastePosition)
         {
-            var sut = new CopyPasteCommand(copyPosition, copyLength, pastePosition);
+            var sut = new CopyPasteCommand(copyPosition, copyLength, pastePosition).SetValue(Value);
 
-            sut.SetValue(Value);
             sut.Execute();
 
             Assert.That(sut.Result, Is.EqualTo(Value));
@@ -44,9 +42,8 @@ namespace ByteDev.Strings.UnitTests.StringCommands
         [Test]
         public void WhenPastePositionGreaterThanLength_ThenPasteAtEnd()
         {
-            var sut = new CopyPasteCommand(0, 4, Value.Length + 1);
-
-            sut.SetValue(Value);
+            var sut = new CopyPasteCommand(0, 4, Value.Length + 1).SetValue(Value);
+                
             sut.Execute();
 
             Assert.That(sut.Result, Is.EqualTo(Value + "John"));
@@ -59,9 +56,8 @@ namespace ByteDev.Strings.UnitTests.StringCommands
         [TestCase(9, 2, 0, "h" + Value)]
         public void WhenCopyLengthWouldGoOutOfRange_ThenCopyTillEnd(int copyPosition, int copyLength, int pastePosition, string expected)
         {
-            var sut = new CopyPasteCommand(copyPosition, copyLength, pastePosition);
+            var sut = new CopyPasteCommand(copyPosition, copyLength, pastePosition).SetValue(Value);
 
-            sut.SetValue(Value);
             sut.Execute();
 
             Assert.That(sut.Result, Is.EqualTo(expected));
@@ -72,9 +68,8 @@ namespace ByteDev.Strings.UnitTests.StringCommands
         [TestCase(0, 4, 10, Value + "John")]
         public void WhenCopyParamsWithinValue_ThenPaste(int copyPosition, int copyLength, int pastePosition, string expected)
         {
-            var sut = new CopyPasteCommand(copyPosition, copyLength, pastePosition);
+            var sut = new CopyPasteCommand(copyPosition, copyLength, pastePosition).SetValue(Value);
 
-            sut.SetValue(Value);
             sut.Execute();
 
             Assert.That(sut.Result, Is.EqualTo(expected));

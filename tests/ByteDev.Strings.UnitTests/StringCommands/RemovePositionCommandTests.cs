@@ -12,11 +12,10 @@ namespace ByteDev.Strings.UnitTests.StringCommands
         [TestCase("")]
         public void WhenValueIsNullOrEmpty_ThenSetSame(string value)
         {
-            var sut = new RemovePositionCommand(0, 1);
+            var sut = new RemovePositionCommand(0, 1).SetValue(value);
 
-            sut.SetValue(value);
             sut.Execute();
-
+            
             Assert.That(sut.Result, Is.EqualTo(value));
         }
 
@@ -27,9 +26,8 @@ namespace ByteDev.Strings.UnitTests.StringCommands
         [TestCase(11, "John Smith")]
         public void WhenPositionSet_ThenSet(int position, string expected)
         {
-            var sut = new RemovePositionCommand(position, 1);
+            var sut = new RemovePositionCommand(position, 1).SetValue(Value);
 
-            sut.SetValue(Value);
             sut.Execute();
 
             Assert.That(sut.Result, Is.EqualTo(expected));
@@ -42,11 +40,10 @@ namespace ByteDev.Strings.UnitTests.StringCommands
         [TestCase(10, 1, "John Smith")]
         public void WhenLengthSet_ThenSet(int position, int length, string expected)
         {
-            var sut = new RemovePositionCommand(position, length);
+            var sut = new RemovePositionCommand(position, length).SetValue(Value);
 
-            sut.SetValue(Value);
             sut.Execute();
-
+            
             Assert.That(sut.Result, Is.EqualTo(expected));
         }
     }

@@ -5,6 +5,9 @@
     /// </summary>
     public class CaseToTitleCommand : StringCommand
     {
+        /// <summary>
+        /// Execute the command.
+        /// </summary>
         public override void Execute()
         {
             SetResult(Value?.ToTitleCase());

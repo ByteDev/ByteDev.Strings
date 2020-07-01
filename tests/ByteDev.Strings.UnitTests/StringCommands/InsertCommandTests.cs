@@ -12,9 +12,8 @@ namespace ByteDev.Strings.UnitTests.StringCommands
         [TestCase("")]
         public void WhenValueIsNullOrEmpty_ThenSetToInsertValue(string value)
         {
-            var sut = new InsertCommand(10, "Peter");
-
-            sut.SetValue(value);
+            var sut = new InsertCommand(10, "Peter").SetValue(value);
+            
             sut.Execute();
 
             Assert.That(sut.Result, Is.EqualTo("Peter"));
@@ -28,11 +27,10 @@ namespace ByteDev.Strings.UnitTests.StringCommands
         [TestCase(11, Value + "Peter")]
         public void WhenPositionSet_ThenSet(int position, string expected)
         {
-            var sut = new InsertCommand(position, "Peter");
+            var sut = new InsertCommand(position, "Peter").SetValue(Value);
 
-            sut.SetValue(Value);
             sut.Execute();
-
+            
             Assert.That(sut.Result, Is.EqualTo(expected));
         }
 
@@ -40,9 +38,8 @@ namespace ByteDev.Strings.UnitTests.StringCommands
         [TestCase("")]
         public void WhenInsertValueIsNullOrEmpty_ThenSetToValue(string insertValue)
         {
-            var sut = new InsertCommand(0, insertValue);
+            var sut = new InsertCommand(0, insertValue).SetValue(Value);
 
-            sut.SetValue(Value);
             sut.Execute();
 
             Assert.That(sut.Result, Is.EqualTo(Value));

@@ -6,12 +6,27 @@
     /// </summary>
     public class CutPasteCommand : StringCommand
     {
+        /// <summary>
+        /// Cut segment start position.
+        /// </summary>
         public int CutPosition { get; private set; }
 
+        /// <summary>
+        /// Cut segment length.
+        /// </summary>
         public int CutLength { get; private set; }
 
+        /// <summary>
+        /// Paste position for segment.
+        /// </summary>
         public int PastePosition { get; private set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:ByteDev.Strings.StringCommands.CutPasteCommand" /> class.
+        /// </summary>
+        /// <param name="cutPosition">Cut segment start position.</param>
+        /// <param name="cutLength">Cut segment length.</param>
+        /// <param name="pastePosition">Paste position for segment.</param>
         public CutPasteCommand(int cutPosition, int cutLength, int pastePosition)
         {
             CutPosition = cutPosition;
@@ -19,6 +34,9 @@
             PastePosition = pastePosition;
         }
 
+        /// <summary>
+        /// Execute the command.
+        /// </summary>
         public override void Execute()
         {
             if (Value == null ||
@@ -84,6 +102,5 @@
         {
             return value.Insert(PastePosition, textToPaste);
         }
-
     }
 }

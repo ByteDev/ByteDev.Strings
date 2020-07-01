@@ -12,9 +12,8 @@ namespace ByteDev.Strings.UnitTests.StringCommands
         [TestCase("")]
         public void WhenValueIsNullOrEmpty_ThenSetSame(string value)
         {
-            var sut = new ReplaceCommand("John", "Peter");
+            var sut = new ReplaceCommand("John", "Peter").SetValue(value);
 
-            sut.SetValue(value);
             sut.Execute();
 
             Assert.That(sut.Result, Is.EqualTo(value));
@@ -24,9 +23,8 @@ namespace ByteDev.Strings.UnitTests.StringCommands
         [TestCase("")]
         public void WhenOldValueIsNullOrEmpty_ThenSetSame(string oldValue)
         {
-            var sut = new ReplaceCommand(oldValue, "Peter");
+            var sut = new ReplaceCommand(oldValue, "Peter").SetValue(Value);
 
-            sut.SetValue(Value);
             sut.Execute();
 
             Assert.That(sut.Result, Is.EqualTo(Value));
@@ -36,9 +34,8 @@ namespace ByteDev.Strings.UnitTests.StringCommands
         [TestCase("")]
         public void WhenNewValueIsNullOrEmpty_ThenReplaceWithEmpty(string newValue)
         {
-            var sut = new ReplaceCommand("John", newValue);
+            var sut = new ReplaceCommand("John", newValue).SetValue(Value);
 
-            sut.SetValue(Value);
             sut.Execute();
 
             Assert.That(sut.Result, Is.EqualTo(" Smith  Smith"));
@@ -47,22 +44,20 @@ namespace ByteDev.Strings.UnitTests.StringCommands
         [Test]
         public void WhenOldValueValueNotPresent_ThenSetSame()
         {
-            var sut = new ReplaceCommand("Jill", "Peter");
+            var sut = new ReplaceCommand("Jill", "Peter").SetValue(Value);
 
-            sut.SetValue(Value);
             sut.Execute();
-
+            
             Assert.That(sut.Result, Is.EqualTo(Value));
         }
 
         [Test]
         public void WhenOldValuePresent_ThenReplaceWithNewValue()
         {
-            var sut = new ReplaceCommand("John", "Peter");
+            var sut = new ReplaceCommand("John", "Peter").SetValue(Value);
 
-            sut.SetValue(Value);
             sut.Execute();
-
+            
             Assert.That(sut.Result, Is.EqualTo("Peter Smith Peter Smith"));
         }
     }
