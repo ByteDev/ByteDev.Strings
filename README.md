@@ -188,5 +188,5 @@ public class MyClass
 // ...
 string s = new MyClass().ToString();
 
-// s == "Name: John, Age: <null>, Address: { '123 Highstreet', 'London', 'UK' }"
+// s == "Name: 'John', Age: <null>, Address: { '123 Highstreet', 'London', 'UK' }"
 ```
