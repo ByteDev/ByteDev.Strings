@@ -33,7 +33,7 @@
 
             if (CutPosition == 0 && CutLength >= Value.Length)
             {
-                SetResult(string.Empty);
+                SetResult(Value);
                 return;
             }
 
@@ -54,7 +54,7 @@
             return $"{GetType().Name} ({CutPosition}, {CutLength}, {PastePosition})";
         }
 
-        protected void ValidateParameters()
+        private void ValidateParameters()
         {
             if (CutPosition < 0)
                 CutPosition = 0;
@@ -70,17 +70,17 @@
                 CutLength = Value.Length - CutPosition;
         }
 
-        protected string Cut(string value)
+        private string Cut(string value)
         {
             return value.Remove(CutPosition, CutLength);
         }
 
-        protected string Copy(string value)
+        private string Copy(string value)
         {
             return value.Substring(CutPosition, CutLength);
         }
 
-        protected string Paste(string value, string textToPaste)
+        private string Paste(string value, string textToPaste)
         {
             return value.Insert(PastePosition, textToPaste);
         }

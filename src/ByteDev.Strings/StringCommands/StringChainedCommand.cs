@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ByteDev.Strings.StringCommands
 {
@@ -11,21 +12,22 @@ namespace ByteDev.Strings.StringCommands
 
         public StringChainedCommand(IList<StringCommand> commands)
         {
-            _commands = commands;
+            _commands = commands ?? throw new ArgumentNullException(nameof(commands));
         }
 
         public override void Execute()
         {
-            string lastValue = null;
+            string last = Value;
 
             foreach (var command in _commands)
             {
-                if (lastValue != null)
-                    command.SetValue(lastValue);
-
+                command.SetValue(last);
                 command.Execute();
-                lastValue = command.Result;
+
+                last = command.Result;
             }
+
+            SetResult(last);
         }
     }
 }

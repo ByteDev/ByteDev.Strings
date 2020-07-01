@@ -7,10 +7,10 @@ namespace ByteDev.Strings.StringCommands
     {
         protected string Value;
 
-        public abstract void Execute();
-
         public string Result { get; private set; }
 
+        public abstract void Execute();
+        
         public void SetValue(string value)
         {
             Value = value;

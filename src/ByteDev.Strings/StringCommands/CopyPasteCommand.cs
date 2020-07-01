@@ -43,7 +43,7 @@
             return $"{GetType().Name} ({CopyPosition}, {CopyLength}, {PastePosition})";
         }
 
-        protected void ValidateParameters()
+        private void ValidateParameters()
         {
             if (CopyPosition < 0)
                 CopyPosition = 0;
@@ -61,12 +61,12 @@
                 CopyLength = Value.Length - CopyPosition;
         }
 
-        protected string Copy(string value)
+        private string Copy(string value)
         {
             return value.Substring(CopyPosition, CopyLength);
         }
 
-        protected string Paste(string value, string textToPaste)
+        private string Paste(string value, string textToPaste)
         {
             return value.Insert(PastePosition, textToPaste);
         }

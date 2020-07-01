@@ -52,9 +52,6 @@ namespace ByteDev.Strings.UnitTests.StringCommands
             Assert.That(sut.Result, Is.EqualTo(" SmithJohn"));
         }
 
-        // John Smith
-        // 0123456789
-
         [TestCase(5, 5, "SmithJohn ")]
         [TestCase(5, 6, "SmithJohn ")]
         [TestCase(5, 7, "SmithJohn ")]
@@ -73,8 +70,8 @@ namespace ByteDev.Strings.UnitTests.StringCommands
         [TestCase(0, 4, 0, "John Smith")]
         [TestCase(0, 4, 1, " JohnSmith")]
         [TestCase(0, 4, 10, " SmithJohn")]
-        [TestCase(0, 10, 10, "")]
-        [TestCase(0, 11, 10, "")]
+        [TestCase(0, 10, 10, Value)]
+        [TestCase(0, 11, 10, Value)]
         public void WhenCutParamsWithinValue_ThenPaste(int cutPosition, int cutLength, int pastePosition, string expected)
         {
             var sut = new CutPasteCommand(cutPosition, cutLength, pastePosition);
@@ -83,6 +80,20 @@ namespace ByteDev.Strings.UnitTests.StringCommands
             sut.Execute();
 
             Assert.That(sut.Result, Is.EqualTo(expected));
+        }
+
+        [TestCase(-1, 1, 0)]
+        [TestCase(0, 1, 0)]
+        [TestCase(1, 1, 1)]
+        [TestCase(10, 1, 10)]
+        public void WhenCutPositionEqualToPastePosition_ThenSetSame(int cutPosition, int cutLength, int pastePosition)
+        {
+            var sut = new CutPasteCommand(cutPosition, cutLength, pastePosition);
+
+            sut.SetValue(Value);
+            sut.Execute();
+
+            Assert.That(sut.Result, Is.EqualTo(Value));
         }
     }
 }
