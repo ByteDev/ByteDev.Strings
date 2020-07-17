@@ -340,9 +340,9 @@ namespace ByteDev.Strings.UnitTests
             [Test]
             public void WhenIsDateTimeFormat_ThenReturnDateTime()
             {
-                var expected = new DateTime(2000, 12, 9, 12, 0, 0);
+                var expected = new DateTime(2000, 12, 13, 12, 0, 0);
 
-                var result = "09/12/2000 12:00".ToDateTime();
+                var result = "13/12/2000 12:00".ToDateTime();
 
                 Assert.That(result, Is.EqualTo(expected));
             }
