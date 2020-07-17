@@ -9,20 +9,58 @@ namespace ByteDev.Strings.UnitTests
     public class StringToExtensionsTests
     {
         [TestFixture]
-        public class ToTitleCase
+        public class ToEnum
         {
-            [Test]
-            public void WhenStringIsNull_ThenThrowException()
+            private enum TestEnum
             {
-                Assert.Throws<ArgumentNullException>(() => StringToExtensions.ToTitleCase(null));
+                Test1
             }
 
             [Test]
-            public void WhenIsEmpty_ThenReturnEmpty()
+            public void WhenIsNull_ThenThrowException()
             {
-                var result = string.Empty.ToTitleCase();
+                Assert.Throws<ArgumentNullException>(() => StringToExtensions.ToEnum<TestEnum>(null));
+            }
 
-                Assert.That(result, Is.Empty);
+            [Test]
+            public void WhenIsNotEnumValue_ThenThrowException()
+            {
+                Assert.Throws<ArgumentException>(() => "Test2".ToEnum<TestEnum>());
+            }
+
+            [Test]
+            public void WhenRegardCase_AndIsEnumValueButDiffCase_ThenThrowException()
+            {
+                Assert.Throws<ArgumentException>(() => "test1".ToEnum<TestEnum>());
+            }
+
+            [Test]
+            public void WhenIsEnumValue_ThenReturnEnum()
+            {
+                var result = "Test1".ToEnum<TestEnum>();
+
+                Assert.That(result, Is.EqualTo(TestEnum.Test1));
+            }
+
+            [Test]
+            public void WhenIgnoreCase_AndIsEnumValueButDiffCase_ThenReturnEnum()
+            {
+                var result = "test1".ToEnum<TestEnum>(true);
+
+                Assert.That(result, Is.EqualTo(TestEnum.Test1));
+            }
+        }
+
+        [TestFixture]
+        public class ToTitleCase
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenIsNullOrEmpty_ThenReturnSame(string sut)
+            {
+                var result = sut.ToTitleCase();
+
+                Assert.That(result, Is.EqualTo(sut));
             }
 
             [Test]
@@ -59,8 +97,17 @@ namespace ByteDev.Strings.UnitTests
         [TestFixture]
         public class ToLines
         {
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenIsNullOrEmpty_ThenReturnEmpty(string sut)
+            {
+                var result = sut.ToLines();
+
+                Assert.That(result, Is.Empty);
+            }
+
             [Test]
-            public void WhenStringHasOneLine_ThenReturnOneElement()
+            public void WhenHasOneLine_ThenReturnOneElement()
             {
                 const string sut = "Hello World";
 
@@ -70,7 +117,7 @@ namespace ByteDev.Strings.UnitTests
             }
 
             [Test]
-            public void WhenStringHasThreeLines_ThenReturnThreeElements()
+            public void WhenHasThreeLines_ThenReturnThreeElements()
             {
                 const string sut = "Hello World\r\nmy name\r\nis John";
 
@@ -81,32 +128,18 @@ namespace ByteDev.Strings.UnitTests
                 Assert.That(result.Second(), Is.EqualTo("my name"));
                 Assert.That(result.Third(), Is.EqualTo("is John"));
             }
-
-            [Test]
-            public void WhenIsEmpty_ThenReturnEmptyCollection()
-            {
-                var sut = string.Empty;
-
-                var result = sut.ToLines();
-
-                Assert.That(result.Count(), Is.EqualTo(0));
-            }
-
-            [Test]
-            public void WhenIsNull_ThenReturnEmptyCollection()
-            {
-                var result = StringToExtensions.ToLines(null);
-
-                Assert.That(result.Count(), Is.EqualTo(0));
-            }
         }
 
         [TestFixture]
         public class ToByteArray
         {
-            private static byte ConvertToByte(char c)
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenNull_ThenReturnEmptyArray(string sut)
             {
-                return BitConverter.GetBytes(c).First();
+                var result = sut.ToByteArray();
+
+                Assert.That(result, Is.Empty);
             }
 
             [Test]
@@ -124,22 +157,90 @@ namespace ByteDev.Strings.UnitTests
                 Assert.That(result.Fifth(), Is.EqualTo(ConvertToByte('o')));
             }
 
-            [Test]
-            public void WhenNull_ThenReturnEmptyArray()
+            private static byte ConvertToByte(char c)
             {
-                var result = StringToExtensions.ToByteArray(null);
+                return BitConverter.GetBytes(c).First();
+            }
+        }
 
-                Assert.That(result.Length, Is.EqualTo(0));
+        [TestFixture]
+        public class ToBool
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenIsNullOrEmpty_ThenReturnFalse(string sut)
+            {
+                var result = sut.ToBool();
+
+                Assert.That(result, Is.False);
             }
 
             [Test]
-            public void WhenEmpty_ThenReturnEmptyArray()
+            public void WhenIsNotBool_ThenReturnFalse()
             {
-                var sut = string.Empty;
+                var result = "A".ToBool();
 
-                var result = sut.ToByteArray();
+                Assert.That(result, Is.False);
+            }
 
-                Assert.That(result.Length, Is.EqualTo(0));
+            [Test]
+            public void WhenIsBool_ThenReturnValue()
+            {
+                var result = "true".ToBool();
+
+                Assert.That(result, Is.True);
+            }
+        }
+
+        [TestFixture]
+        public class ToBoolOrDefault
+        {
+            [Test]
+            public void WhenIsNull_ThenReturnDefault()
+            {
+                var result = StringToExtensions.ToBoolOrDefault(null, true);
+
+                Assert.That(result, Is.True);
+            }
+
+            [Test]
+            public void WhenInvalidString_ThenReturnDefault()
+            {
+                var result = "A".ToBoolOrDefault();
+
+                Assert.That(result, Is.Null);
+            }
+
+            [Test]
+            public void WhenValidString_ThenReturnAsLong()
+            {
+                var result = "true".ToBoolOrDefault();
+
+                Assert.That(result, Is.True);
+            }
+        }
+
+        [TestFixture]
+        public class ToInt
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            [TestCase("A")]
+            public void WhenIsNotInt_ThenReturnZero(string sut)
+            {
+                var result = sut.ToInt();
+
+                Assert.That(result, Is.EqualTo(0));
+            }
+
+            [TestCase("-1", -1)]
+            [TestCase("0", 0)]
+            [TestCase("1", 1)]
+            public void WhenIsInt_ThenReturnInt(string sut, int expected)
+            {
+                var result = sut.ToInt();
+
+                Assert.That(result, Is.EqualTo(expected));
             }
         }
 
@@ -147,31 +248,51 @@ namespace ByteDev.Strings.UnitTests
         public class ToIntOrDefault
         {
             [Test]
-            public void WhenValidString_ThenReturnAsInt()
-            {
-                const string sut = "123";
-
-                var result = sut.ToIntOrDefault(1);
-
-                Assert.That(result, Is.EqualTo(123));
-            }
-
-            [Test]
-            public void WhenInvalidString_ThenReturnDefault()
-            {
-                const string sut = "A123";
-
-                var result = sut.ToIntOrDefault(1);
-
-                Assert.That(result, Is.EqualTo(1));
-            }
-
-            [Test]
-            public void WhenNull_ThenReturnDefault()
+            public void WhenIsNull_ThenReturnDefault()
             {
                 var result = StringToExtensions.ToIntOrDefault(null, 1);
 
                 Assert.That(result, Is.EqualTo(1));
+            }
+
+            [Test]
+            public void WhenIsInvalid_ThenReturnDefault()
+            {
+                var result = "A123".ToIntOrDefault(1);
+
+                Assert.That(result, Is.EqualTo(1));
+            }
+
+            [Test]
+            public void WhenIsValid_ThenReturnAsInt()
+            {
+                var result = "123".ToIntOrDefault();
+
+                Assert.That(result, Is.EqualTo(123));
+            }
+        }
+
+        [TestFixture]
+        public class ToLong
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            [TestCase("A")]
+            public void WhenIsNotLong_ThenReturnZero(string sut)
+            {
+                var result = sut.ToLong();
+
+                Assert.That(result, Is.EqualTo(0));
+            }
+
+            [TestCase("-1", -1)]
+            [TestCase("0", 0)]
+            [TestCase("1", 1)]
+            public void WhenIsLong_ThenReturnLong(string sut, int expected)
+            {
+                var result = sut.ToLong();
+
+                Assert.That(result, Is.EqualTo(expected));
             }
         }
 
@@ -179,7 +300,7 @@ namespace ByteDev.Strings.UnitTests
         public class ToLongOrDefault
         {
             [Test]
-            public void WhenNull_ThenReturnDefault()
+            public void WhenIsNull_ThenReturnDefault()
             {
                 var result = StringToExtensions.ToLongOrDefault(null, 1);
 
@@ -187,23 +308,43 @@ namespace ByteDev.Strings.UnitTests
             }
 
             [Test]
-            public void WhenValidString_ThenReturnAsLong()
+            public void WhenIsInvalid_ThenReturnDefault()
             {
-                const string sut = "123";
+                var result = "A123".ToLongOrDefault(1);
 
-                var result = sut.ToLongOrDefault(1);
-
-                Assert.That(result, Is.EqualTo(123));
+                Assert.That(result, Is.EqualTo(1));
             }
 
             [Test]
-            public void WhenInvalidString_ThenReturnDefault()
+            public void WhenIsValid_ThenReturnAsLong()
             {
-                const string sut = "A123";
+                var result = "123".ToLongOrDefault();
 
-                var result = sut.ToLongOrDefault(1);
+                Assert.That(result, Is.EqualTo(123));
+            }
+        }
 
-                Assert.That(result, Is.EqualTo(1));
+        [TestFixture]
+        public class ToDateTime
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            [TestCase("A")]
+            public void WhenIsNotDateTime_ThenReturnMin(string sut)
+            {
+                var result = sut.ToDateTime();
+
+                Assert.That(result, Is.EqualTo(DateTime.MinValue));
+            }
+
+            [Test]
+            public void WhenIsDateTimeFormat_ThenReturnDateTime()
+            {
+                var expected = new DateTime(2000, 12, 9, 12, 0, 0);
+
+                var result = "09/12/2000 12:00".ToDateTime();
+
+                Assert.That(result, Is.EqualTo(expected));
             }
         }
 
@@ -237,49 +378,102 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class ToEnum
+        public class ToCsv
         {
-            private enum TestEnum
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenIsNullOrEmpty_ThenReturnEmpty(string sut)
             {
-                Test1
-            }
+                var result = sut.ToCsv();
 
-            public struct NotEnum
-            {
-            }
-
-            [Test]
-            public void WhenTypeIsNotEnum_ThenThrowException()
-            {
-                Assert.Throws<ArgumentException>(() => "Test1".ToEnum<NotEnum>());
+                Assert.That(result, Is.Empty);
             }
 
             [Test]
-            public void WhenIsNotEnumValue_ThenThrowException()
+            public void WhenDelimiterIsNotPresent_ThenReturnSingle()
             {
-                Assert.Throws<ArgumentException>(() => "Test2".ToEnum<TestEnum>());
+                var result = "John Smith".ToCsv();
+
+                Assert.That(result.Single(), Is.EqualTo("John Smith"));
             }
 
             [Test]
-            public void WhenIsEnumValue_ThenReturnEnum()
+            public void WhenDelimiterPresent_ThenReturnMultiple()
             {
-                var result = "Test1".ToEnum<TestEnum>();
+                var result = "John:Smith".ToCsv(':');
 
-                Assert.That(result, Is.EqualTo(TestEnum.Test1));
+                Assert.That(result.Count(), Is.EqualTo(2));
+                Assert.That(result.First(), Is.EqualTo("John"));
+                Assert.That(result.Second(), Is.EqualTo("Smith"));
             }
 
             [Test]
-            public void WhenIgnoreCase_AndIsEnumValueButDiffCase_ThenReturnEnum()
+            public void WhenTrimValues_ThenReturnTrimedValues()
             {
-                var result = "test1".ToEnum<TestEnum>(true);
+                var result = "John : Smith:Peter: ".ToCsv(':', true);
 
-                Assert.That(result, Is.EqualTo(TestEnum.Test1));
+                Assert.That(result.Count(), Is.EqualTo(3));
+                Assert.That(result.First(), Is.EqualTo("John"));
+                Assert.That(result.Second(), Is.EqualTo("Smith"));
+                Assert.That(result.Third(), Is.EqualTo("Peter"));
+            }
+        }
+
+        [TestFixture]
+        public class ToUri
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenIsNullOrEmpty_ThenReturnNull(string sut)
+            {
+                var result = sut.ToUri();
+
+                Assert.That(result, Is.Null);
             }
 
             [Test]
-            public void WhenRegardCase_AndIsEnumValueButDiffCase_ThenThrowException()
+            public void WhenIsNotValidUri_ThenReturnNull()
             {
-                Assert.Throws<ArgumentException>(() => "test1".ToEnum<TestEnum>());
+                var result = "A".ToUri();
+
+                Assert.That(result, Is.Null);
+            }
+
+            [Test]
+            public void WhenIsUri_ThenReturnUri()
+            {
+                var result = "http://localhost/".ToUri();
+
+                Assert.That(result, Is.EqualTo(new Uri("http://localhost/")));
+            }
+        }
+
+        [TestFixture]
+        public class ToGuid
+        {
+            [Test]
+            public void WhenIsNull_ThenReturnDefault()
+            {
+                var result = StringToExtensions.ToGuid(null);
+
+                Assert.That(result, Is.EqualTo(Guid.Empty));
+            }
+
+            [TestCase("")]
+            [TestCase("123")]
+            public void WhenIsNotGuid_ThenReturnDefault(string sut)
+            {
+                var result = sut.ToGuid();
+
+                Assert.That(result, Is.EqualTo(Guid.Empty));
+            }
+
+            [Test]
+            public void WhenIsGuid_ThenReturnGuid()
+            {
+                var result = "9f28c9c7-31f5-4575-b3fc-d5c4ffd1df30".ToGuid();
+
+                Assert.That(result, Is.EqualTo(new Guid("9f28c9c7-31f5-4575-b3fc-d5c4ffd1df30")));
             }
         }
     }

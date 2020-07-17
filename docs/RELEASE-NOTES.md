@@ -1,5 +1,23 @@
 # Release Notes
 
+## 4.1.0 - 17 July 2020
+
+Breaking changes:
+- (None)
+
+New features:
+- Add StringToExtensions.ToInt
+- Add StringToExtensions.ToLong
+- Add StringToExtensions.ToDateTime
+- Add StringToExtensions.ToCsv
+- Add StringToExtensions.ToUri
+- Add StringToExtensions.ToBool
+- Add StringToExtensions.ToBoolOrDefault
+- Add StringToExtensions.ToGuid
+
+Bug fixes / internal changes:
+- (None)
+
 ## 4.0.0 - 01 July 2020
 
 Breaking changes:
@@ -9,7 +27,7 @@ New features:
 - Added StringCaseExtensions: IsCamelCase, IsKebabCase, IsPascalCase, IsSnakeCase, IsSnakeUpperCase
 - Added StringCommands
 
-Bug fixes:
+Bug fixes / internal changes:
 - (None)
 
 ## 3.0.0 - 16 June 2020
@@ -20,7 +38,7 @@ Breaking changes:
 New features:
 - Added CaseConverter & CaseType
 
-Bug fixes:
+Bug fixes / internal changes:
 - Fixed bug in ToTitleCase
 
 ## 2.1.0 - 29 May 2020
@@ -36,7 +54,7 @@ New features:
 - Added IsUpperCase
 - Added IsTime
 
-Bug fixes:
+Bug fixes / internal changes:
 - (None)
 
 ## 2.0.1 - 29 May 2020
@@ -47,7 +65,7 @@ Breaking changes:
 New features:
 - (None)
 
-Bug fixes:
+Bug fixes / internal changes:
 - Fixes in IsHttpUrl method
 
 ## 2.0.0 - 28 May 2020
@@ -60,7 +78,7 @@ Breaking changes:
 New features:
 - Added CountOccurrences overload for char value
 
-Bug fixes:
+Bug fixes / internal changes:
 - Simplified IsEmailAddress implementation
 
 ## 1.0.0 - 30 April 2020

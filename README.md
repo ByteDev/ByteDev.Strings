@@ -72,13 +72,20 @@ Assembly contains string extension methods:
 - Right
 - SafeLength
 - SafeSubstring
-- ToTitleCase
-- ToLines
+- ToBool
+- ToBoolOrDefault
 - ToByteArray
-- ToIntOrDefault
-- ToLongOrDefault
+- ToCsv
+- ToDateTime
 - ToDateTimeOrDefault
 - ToEnum
+- ToLines
+- ToInt
+- ToIntOrDefault
+- ToLong
+- ToLongOrDefault
+- ToUri
+- ToTitleCase
 
 ### CaseConverter
 
