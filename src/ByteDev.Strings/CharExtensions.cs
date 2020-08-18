@@ -6,5 +6,10 @@
         {
             return source >= 'A' && source <= 'Z';
         }
+
+        public static bool IsSpace(this char source)
+        {
+            return source == ' ';
+        }
     }
 }
