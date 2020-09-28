@@ -157,44 +157,6 @@ namespace ByteDev.Strings
         {
             return string.IsNullOrEmpty(source) ? 0 : source.Count(mt => mt == value);
         }
-        
-        /// <summary>
-        /// Returns a masked string.
-        /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
-        /// <param name="beginCharsToShow">Chars to show from the left.</param>
-        /// <param name="endCharsToShow">Chars to show from the right.</param>
-        /// <returns>String with masked characters.</returns>
-        /// <exception cref="T:System.ArgumentNullException"><paramref name="source" /> is null.</exception>
-        public static string Mask(this string source, int beginCharsToShow, int endCharsToShow)
-        {
-            return Mask(source, beginCharsToShow, endCharsToShow, '*');
-        }
-
-        /// <summary>
-        /// Returns a masked string.
-        /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
-        /// <param name="beginCharsToShow">Chars to show from the left.</param>
-        /// <param name="endCharsToShow">Chars to show from the right.</param>
-        /// <param name="maskChar">Mask character.</param>
-        /// <returns>String with masked characters.</returns>
-        /// <exception cref="T:System.ArgumentNullException"><paramref name="source" /> is null.</exception>
-        public static string Mask(this string source, int beginCharsToShow, int endCharsToShow, char maskChar)
-        {
-            if (source == null)
-                throw new ArgumentNullException(nameof(source));
-
-            var len = source.Length;
-            var sb = new StringBuilder(len);
-
-            for (var pos = 0; pos < len; pos++)
-            {
-                sb.Append(pos < beginCharsToShow || len - pos <= endCharsToShow ? source[pos] : maskChar);
-            }
-
-            return sb.ToString();
-        }
 
         /// <summary>
         /// Returns a string with a prefix appended if the prefix does not already exist.

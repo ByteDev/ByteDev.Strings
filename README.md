@@ -5,7 +5,7 @@
 
 # ByteDev.Strings
 
-Set of string related extension methods and classes.
+Library of extended string related functionality
 
 ## Installation
 
@@ -27,9 +27,10 @@ Full details of the release notes can be viewed on [GitHub](https://github.com/B
 
 ### String Extensions
 
-To use any extension methods simply reference the `ByteDev.Strings` namespace.
+To use any of the extension method reference the `ByteDev.Strings` namespace.
 
-Assembly contains string extension methods:
+String extension methods:
+
 - AddPrefix
 - AddSuffix
 - ContainsIgnoreCase
@@ -57,7 +58,6 @@ Assembly contains string extension methods:
 - Left
 - LeftWithEllipsis
 - LeftWithInnerEllipsis
-- Mask
 - Pluralize
 - Remove
 - RemoveStartsWith
@@ -87,9 +87,13 @@ Assembly contains string extension methods:
 - ToUri
 - ToTitleCase
 
+---
+
 ### CaseConverter
 
-To use `CaseConverter` reference the `ByteDev.Strings.Case` namespace.
+`CaseConverter` can be used to change the case of different strings.
+
+Reference namespace: `ByteDev.Strings.Case`.
 
 `CaseConverter` has the following methods:
 - ToCamelCase
@@ -115,9 +119,13 @@ There are also a number of case related string extension methods:
 - IsSnakeUpperCase
 - IsCaseType
 
+---
+
 ### StringCommands
 
-To use the various string commands reference the `ByteDev.Strings.StringCommands` namespace.
+Various `StringCommands` are included that encapsulate different string operations.
+
+Reference namespace: `ByteDev.Strings.StringCommands`.
 
 ```csharp
 var c1 = new CaseToLowerCommand().SetValue("John Smith");
@@ -155,10 +163,13 @@ invoker.Invoke();
 // command.Result == "smithjohn  lives in England."
 ```
 
+---
 
 ### ToStringBuilder
 
 The assembly also contains the type `ToStringBuilder` to help return string representations of an object when overriding it's `ToString` method.
+
+Reference namespace: `ByteDev.Strings`.
 
 ```csharp
 public class MyClass
@@ -190,4 +201,49 @@ public class MyClass
 string s = new MyClass().ToString();
 
 // s == "Name: 'John', Age: <null>, Address: { '123 Highstreet', 'London', 'UK' }"
+```
+
+---
+
+### Masker
+
+Use the `Masker` type to help mask different types of strings.
+
+Reference namespace: `ByteDev.Strings.Masking`.
+
+```csharp
+// Initialize Masker type
+
+var options = new MaskerOptions
+{
+    MaskChar = '#',
+    MaskSpace = true
+};
+
+var masker = new Masker(options);
+```
+
+```csharp
+// Mask a payment card number
+
+string card = masker.PaymentCard("4111111111111111");
+
+// card == "############1111"
+```
+
+```csharp
+// Mask an email address
+
+string email = masker.EmailAddress("john.smith@gmail.co.uk");
+
+// email = "j#########@#####.co.uk"
+```
+
+```csharp
+// Mask a custom string
+
+string custom = masker.Custom("12345", 1, 2);
+
+// custom = "1##45"
+```
 ```

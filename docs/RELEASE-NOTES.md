@@ -1,5 +1,16 @@
 # Release Notes
 
+## 5.0.0 - 28 September 2020
+
+Breaking changes:
+- Removed `StringExtensions.Mask`
+
+New features:
+- Added `Masker` type
+
+Bug fixes / internal changes:
+- (None)
+
 ## 4.1.0 - 17 July 2020
 
 Breaking changes:
