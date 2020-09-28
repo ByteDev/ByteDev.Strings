@@ -5,7 +5,7 @@
 
 # ByteDev.Strings
 
-Library of extended string related functionality
+Library of extended string related functionality.
 
 ## Installation
 
@@ -246,4 +246,4 @@ string custom = masker.Custom("12345", 1, 2);
 
 // custom = "1##45"
 ```
-```
+
