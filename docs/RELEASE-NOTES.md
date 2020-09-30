@@ -1,5 +1,17 @@
 # Release Notes
 
+## 6.0.0 - ??
+
+Breaking changes:
+- Fixed `CaseType` namespace
+
+New features:
+- Added `StringEndLineCharsExtensions.GetEndLineChars`
+- Added `StringEndLineCharsExtensions.RemoveEndLineChars`
+
+Bug fixes / internal changes:
+- (None)
+
 ## 5.0.0 - 28 September 2020
 
 Breaking changes:
@@ -17,14 +29,14 @@ Breaking changes:
 - (None)
 
 New features:
-- Add StringToExtensions.ToInt
-- Add StringToExtensions.ToLong
-- Add StringToExtensions.ToDateTime
-- Add StringToExtensions.ToCsv
-- Add StringToExtensions.ToUri
-- Add StringToExtensions.ToBool
-- Add StringToExtensions.ToBoolOrDefault
-- Add StringToExtensions.ToGuid
+- Add `StringToExtensions.ToInt`
+- Add `StringToExtensions.ToLong`
+- Add `StringToExtensions.ToDateTime`
+- Add `StringToExtensions.ToCsv`
+- Add `StringToExtensions.ToUri`
+- Add `StringToExtensions.ToBool`
+- Add `StringToExtensions.ToBoolOrDefault`
+- Add `StringToExtensions.ToGuid`
 
 Bug fixes / internal changes:
 - (None)
@@ -32,11 +44,12 @@ Bug fixes / internal changes:
 ## 4.0.0 - 01 July 2020
 
 Breaking changes:
-- Replaced ToStringHelper class with ToStringBuilder class
+- Deleted `ToStringHelper` class (use `ToStringBuilder`) 
 
 New features:
-- Added StringCaseExtensions: IsCamelCase, IsKebabCase, IsPascalCase, IsSnakeCase, IsSnakeUpperCase
-- Added StringCommands
+- Added `ToStringBuilder` class
+- Added `StringCaseExtensions`: `IsCamelCase`, `IsKebabCase`, `IsPascalCase`, `IsSnakeCase`, `IsSnakeUpperCase`
+- Added `StringCommands`
 
 Bug fixes / internal changes:
 - (None)
@@ -44,13 +57,14 @@ Bug fixes / internal changes:
 ## 3.0.0 - 16 June 2020
 
 Breaking changes:
-- Deleted StringIsExtensions.IsHex(); see ByteDev.Encoding package
+- Deleted `StringIsExtensions.IsHex()` (instead use `ByteDev.Encoding` package)
 
 New features:
-- Added CaseConverter & CaseType
+- Added `CaseConverter` type
+- Added `CaseType` enum
 
 Bug fixes / internal changes:
-- Fixed bug in ToTitleCase
+- Fixed bug in `ToTitleCase`
 
 ## 2.1.0 - 29 May 2020
 
@@ -58,12 +72,12 @@ Breaking changes:
 - (None)
 
 New features:
-- Added IsTrue
-- Added IsFalse
-- Added IsLengthBetween
-- Added IsLowerCase
-- Added IsUpperCase
-- Added IsTime
+- Added `StringIsExtensions.IsTrue`
+- Added `StringIsExtensions.IsFalse`
+- Added `StringIsExtensions.IsLengthBetween`
+- Added `StringIsExtensions.IsLowerCase`
+- Added `StringIsExtensions.IsUpperCase`
+- Added `StringIsExtensions.IsTime`
 
 Bug fixes / internal changes:
 - (None)
@@ -77,20 +91,20 @@ New features:
 - (None)
 
 Bug fixes / internal changes:
-- Fixes in IsHttpUrl method
+- Fixes in `IsHttpUrl` method
 
 ## 2.0.0 - 28 May 2020
 
 Breaking changes:
-- Added IsNumeric extension method
-- IsUrl is now IsHttpUrl
-- CountOccurrences method name spelling mistake
+- Added `StringIsExtensions.IsNumeric`
+- Renamed `IsUrl` to `IsHttpUrl`
+- Renamed `CountOccurrences` method name (spelling mistake)
 
 New features:
-- Added CountOccurrences overload for char value
+- Added `CountOccurrences` overload for char value
 
 Bug fixes / internal changes:
-- Simplified IsEmailAddress implementation
+- Simplified `IsEmailAddress` implementation
 
 ## 1.0.0 - 30 April 2020
 

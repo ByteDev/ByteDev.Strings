@@ -1,4 +1,4 @@
-﻿namespace ByteDev.Strings
+﻿namespace ByteDev.Strings.Case
 {
     /// <summary>
     /// Represents a case type.

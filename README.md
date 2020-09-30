@@ -36,6 +36,7 @@ String extension methods:
 - ContainsIgnoreCase
 - CountOccurrences
 - FormatWith
+- GetEndLineChars
 - IsDigit
 - IsDigits
 - IsEmpty
@@ -60,6 +61,7 @@ String extension methods:
 - LeftWithInnerEllipsis
 - Pluralize
 - Remove
+- RemoveEndLineChars
 - RemoveStartsWith
 - RemoveEndsWith
 - RemoveBracketedText
