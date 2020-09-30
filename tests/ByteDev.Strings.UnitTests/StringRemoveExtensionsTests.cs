@@ -11,10 +11,13 @@ namespace ByteDev.Strings.UnitTests
         {
             private const string Sut = "My name is John";
 
-            [Test]
-            public void WhenSourceIsNull_ThenThrowException()
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenSourceIsNullOrEmpty_ThenReturnSame(string sut)
             {
-                Assert.Throws<ArgumentNullException>(() => StringRemoveExtensions.RemoveStartsWith(null, "M"));
+                var result = sut.RemoveStartsWith("M");
+
+                Assert.That(result, Is.EqualTo(sut));
             }
 
             [Test]
@@ -61,10 +64,13 @@ namespace ByteDev.Strings.UnitTests
         {
             private const string Sut = "My name is John";
 
-            [Test]
-            public void WhenSourceIsNull_ThenThrowException()
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenSourceIsNullOrEmpty_ThenReturnSame(string sut)
             {
-                Assert.Throws<ArgumentNullException>(() => StringRemoveExtensions.RemoveEndsWith(null, "M"));
+                var result = sut.RemoveEndsWith("M");
+
+                Assert.That(result, Is.EqualTo(sut));
             }
 
             [Test]

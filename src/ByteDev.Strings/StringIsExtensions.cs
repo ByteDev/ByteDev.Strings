@@ -15,7 +15,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Indicates whether this string is empty.
         /// </summary>
-        /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <returns>True if empty; otherwise returns false.</returns>
         public static bool IsEmpty(this string source)
         {
@@ -25,7 +25,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Indicates whether this string is null or empty.
         /// </summary>
-        /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <returns>True if null or empty; otherwise returns false.</returns>
         public static bool IsNullOrEmpty(this string source)
         {
@@ -35,7 +35,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Indicates whether this string is null or contains only white space characters.
         /// </summary>
-        /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <returns>True if null or only contains white space characters; otherwise returns false.</returns>
         public static bool IsNullOrWhitespace(this string source)
         {
@@ -45,7 +45,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Indicates whether this string is not null or empty.
         /// </summary>
-        /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <returns>True if not null or empty; otherwise returns false.</returns>
         public static bool IsNotNullOrEmpty(this string source)
         {
@@ -55,7 +55,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Indicates whether this string is (probably) an email address.
         /// </summary>
-        /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <returns>True if is probably an email address; otherwise returns false.</returns>
         public static bool IsEmailAddress(this string source)
         {
@@ -68,7 +68,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Indicates whether this string is a URL (HTTP URI).
         /// </summary>
-        /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <returns>True if is a URL; otherwise returns false.</returns>
         public static bool IsHttpUrl(this string source)
         {
@@ -81,7 +81,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Indicates whether this string is an IP address (v4).
         /// </summary>
-        /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <returns>True if is an IP address; otherwise returns false.</returns>
         public static bool IsIpAddress(this string source)
         {
@@ -96,7 +96,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Indicates whether this string is a GUID.
         /// </summary>
-        /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <returns>True if is a GUID; otherwise returns false.</returns>
         public static bool IsGuid(this string source)
         {
@@ -113,7 +113,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Indicates whether this string is XML.
         /// </summary>
-        /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <returns>True if is XML; otherwise returns false.</returns>
         public static bool IsXml(this string source)
         {
@@ -149,7 +149,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Indicates whether this string is only digits.
         /// </summary>
-        /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <returns>True if is digits only; otherwise returns false.</returns>
         public static bool IsDigits(this string source)
         {
@@ -168,7 +168,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Indicates whether this string is a single digit.
         /// </summary>
-        /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <returns>True if is a single digit only; otherwise returns false.</returns>
         public static bool IsDigit(this string source)
         {
@@ -185,7 +185,7 @@ namespace ByteDev.Strings
         /// an optional single period character). Starting with period character
         /// returns false.
         /// </summary>
-        /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <returns>True if is numeric; otherwise return false.</returns>
         public static bool IsNumeric(this string source)
         {
@@ -216,7 +216,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Indicates whether string is only letters (A-Z and a-z).
         /// </summary>
-        /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <returns>True if is letters only; otherwise returns false.</returns>
         public static bool IsLetters(this string source)
         {
@@ -230,7 +230,7 @@ namespace ByteDev.Strings
         /// Indicates whether string looks like it is a true value
         /// (case insensitive "true" or "on" or "1").
         /// </summary>
-        /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <returns>True if it appears the string is true; otherwise returns false.</returns>
         public static bool IsTrue(this string source)
         {
@@ -250,7 +250,7 @@ namespace ByteDev.Strings
         /// Indicates whether string looks like it is a false value
         /// (case insensitive "false" or "off" or "0").
         /// </summary>
-        /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <returns>True if it appears the string is false; otherwise returns false.</returns>
         public static bool IsFalse(this string source)
         {
@@ -270,7 +270,7 @@ namespace ByteDev.Strings
         /// Indicates whether string's length is between a range (min and max values
         /// are both inclusive).
         /// </summary>
-        /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <param name="min">Minimum allowable length.</param>
         /// <param name="max">Maximum allowable length.</param>
         /// <returns>True if the string length is between the range; otherwise returns false.</returns>
@@ -293,7 +293,7 @@ namespace ByteDev.Strings
         /// Indicates whether string contains only one or more lower
         /// case characters (a-z). Null and empty strings will return false.
         /// </summary>
-        /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <returns>True if string is only lower case characters; otherwise returns false.</returns>
         public static bool IsLowerCase(this string source)
         {
@@ -321,7 +321,7 @@ namespace ByteDev.Strings
         /// Indicates whether string appears to be a time in any of the formats:
         /// hh:mm:ss, hh-mm-ss, hhmmss, hh:mm, hh-mm or hhmm.
         /// </summary>
-        /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <returns>True if the string is a time; otherwise returns false.</returns>
         public static bool IsTime(this string source)
         {

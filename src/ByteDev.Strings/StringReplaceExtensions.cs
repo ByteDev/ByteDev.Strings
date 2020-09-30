@@ -11,7 +11,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Replace all the tokens in the <paramref name="source" /> with <paramref name="value" />.
         /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <param name="tokenName">The token to search and replace on.</param>
         /// <param name="value">The value to replace with.</param>
         /// <returns>String with all the instances of the token replaced.</returns>
@@ -26,7 +26,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Replaces the first occurence of <paramref name="oldValue" /> with <paramref name="newValue" />.
         /// </summary>
-        /// <param name="source"></param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <param name="oldValue">The string to replace.</param>
         /// <param name="newValue">The string to replace all occurrences with.</param>
         /// <returns>String with any first occurrence replaced.</returns>
@@ -43,7 +43,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Replaces the last occurence of <paramref name="oldValue" /> with <paramref name="newValue" />.
         /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <param name="oldValue">The string to replace.</param>
         /// <param name="newValue">The string to replace all occurrences with.</param>
         /// <returns>String with any last occurrence replaced.</returns>

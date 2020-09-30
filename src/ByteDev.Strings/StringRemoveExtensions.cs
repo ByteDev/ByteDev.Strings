@@ -12,18 +12,17 @@ namespace ByteDev.Strings
         /// <summary>
         /// Removes starting string <paramref name="value" /> if this string starts with it.
         /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <param name="value">The starting string.</param>
         /// <returns>String with the starting string <paramref name="value" /> removed if it starts with it.</returns>
-        /// <exception cref="T:System.ArgumentNullException"><paramref name="source" /> is null.</exception>
         /// <exception cref="T:System.ArgumentNullException"><paramref name="value" /> is null.</exception>
         public static string RemoveStartsWith(this string source, string value)
         {
-            if(source == null)
-                throw new ArgumentNullException(nameof(source));
-
             if(value == null)
                 throw new ArgumentNullException(nameof(value));
+
+            if (string.IsNullOrEmpty(source))
+                return source;
 
             if (value == string.Empty)
                 return source;
@@ -37,20 +36,19 @@ namespace ByteDev.Strings
         /// <summary>
         /// Removes ending string <paramref name="value" /> if this string ends with it.
         /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <param name="value">The ending string.</param>
         /// <returns>String with the ending string <paramref name="value" /> removed if it ends with it.</returns>
-        /// <exception cref="T:System.ArgumentNullException"><paramref name="source" /> is null.</exception>
         /// <exception cref="T:System.ArgumentNullException"><paramref name="value" /> is null.</exception>
         public static string RemoveEndsWith(this string source, string value)
         {
-            if(source == null)
-                throw new ArgumentNullException(nameof(source));
-
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
 
             if (value == string.Empty)
+                return source;
+
+            if (string.IsNullOrEmpty(source))
                 return source;
 
             if (source.EndsWith(value))
@@ -65,7 +63,7 @@ namespace ByteDev.Strings
         /// <example>
         /// "(Something) in (brackets) again" becomes " in  again".
         /// </example>
-        /// <param name="source">The string to perform the operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <returns>String without bracketed text.</returns>
         public static string RemoveBracketedText(this string source)
         {
@@ -95,7 +93,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Removes all white space characters from the string.
         /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <returns>String without white space characters.</returns>
         public static string RemoveWhiteSpace(this string source)
         {
@@ -108,7 +106,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Removes all <paramref name="removeValue" /> from this string.
         /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <param name="removeValue">Value to remove.</param>
         /// <param name="ignoreCase">True will ignore case; otherwise not ignore case.</param>
         /// <returns>String with <paramref name="removeValue" /> removed.</returns>
@@ -125,10 +123,11 @@ namespace ByteDev.Strings
         /// <summary>
         /// Removes all <paramref name="removeValues" /> from this string.
         /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <param name="removeValues">Values to remove.</param>
         /// <param name="ignoreCase">True will ignore case; otherwise not ignore case.</param>
         /// <returns>String with <paramref name="removeValues" /> removed.</returns>
+        /// <exception cref="T:System.ArgumentNullException"><paramref name="removeValues" /> is null.</exception>
         public static string Remove(this string source, IEnumerable<string> removeValues, bool ignoreCase = false)
         {
             if (removeValues == null)

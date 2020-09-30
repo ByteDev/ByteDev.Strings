@@ -8,7 +8,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Returns the length of a string or zero if it is null.
         /// </summary>
-        /// <param name="source">The string to return the length on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <returns>Length of the string. Zero if the string is null.</returns>
         public static int SafeLength(this string source)
         {
@@ -18,7 +18,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Safely retrieves a substring from this instance. No exceptions will be thrown.
         /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <param name="startIndex">The zero-based starting character position of a substring in this instance.</param>
         /// <param name="length">The number of characters in the substring.</param>
         /// <returns>A string that is equivalent to the substring of length <paramref name="length" /> that begins at <paramref name="startIndex" />.</returns>

@@ -13,7 +13,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Replaces the format item in a specified string with the string representation of a corresponding object in a specified array.
         /// </summary>
-        /// <param name="source">String to format.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <param name="args">Arguments to format the string with.</param>
         /// <returns>A copy of <paramref name="source">format</paramref> in which the format items have been replaced by the string representation of the corresponding objects in <paramref name="args">args</paramref>.</returns>
         /// <exception cref="T:System.ArgumentNullException"><paramref name="source" /> is null.</exception>
@@ -28,7 +28,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Retrieves a substring from this instance taking <paramref name="length" /> characters from the left.
         /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <param name="length">The number of characters to take starting on the left.</param>
         /// <returns>A string that is equivalent to the substring of length <paramref name="length" /> taking characters from the left.</returns>
         public static string Left(this string source, int length)
@@ -39,7 +39,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Takes the length of characters from the left. Uses an appended ellipsis if the max length minus 3 is reached.
         /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <param name="maxLength">The number of characters to take starting on the left.</param>
         /// <returns>Shortened string with ellipsis if greater than max length minus 3; otherwise returns the original string.</returns>
         /// <exception cref="T:System.ArgumentNullException"><paramref name="source" /> is null.</exception>
@@ -71,7 +71,7 @@ namespace ByteDev.Strings
         /// "This string has too many characters for its own good."LeftWithInnerEllipsis(32) yields 
         /// "This string has...its own good."
         /// </example>
-        /// <param name="source">The string to perform the operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <param name="maxLength">The number of characters to take starting on the left.</param>
         /// <returns>Shortened string with inner ellipsis if greater than max length minus 3; otherwise returns the original string.</returns>
         public static string LeftWithInnerEllipsis(this string source, int maxLength)
@@ -91,7 +91,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Retrieves a substring from this instance taking <paramref name="length" /> characters from the right.
         /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <param name="length">The number of characters to take starting on the right.</param>
         /// <returns>A string that is equivalent to the substring of length <paramref name="length" /> taking characters from the right.</returns>
         public static string Right(this string source, int length)
@@ -105,7 +105,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Returns <paramref name="source" /> repeated <paramref name="count" /> times.
         /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <param name="count">The count of instances to return.</param>
         /// <returns>String repeated.</returns>
         /// <exception cref="T:System.ArgumentNullException"><paramref name="source" /> is null.</exception>
@@ -120,7 +120,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Returns a string with additional plural suffix. 
         /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <param name="number">The number to base the plural on.</param>
         /// <returns>String with an required plural suffix.</returns>
         public static string Pluralize(this string source, int number)
@@ -135,7 +135,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Returns the occurrence count of <paramref name="value" /> within the string.
         /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <param name="value">The string to count the occurrence of.</param>
         /// <returns>Count of occurrences.</returns>
         /// <exception cref="T:System.ArgumentException"><paramref name="value" /> is null or empty.</exception>
@@ -150,7 +150,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Returns the occurrence count of <paramref name="value" /> within the string.
         /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <param name="value">The string to count the occurrence of.</param>
         /// <returns>Count of occurrences.</returns>
         public static int CountOccurrences(this string source, char value)
@@ -161,7 +161,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Returns a string with a prefix appended if the prefix does not already exist.
         /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <param name="prefix">Prefix to check for and add if not present.</param>
         /// <returns>String with the prefix.</returns>
         public static string AddPrefix(this string source, string prefix)
@@ -178,7 +178,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Returns a string with a suffix appended if the suffix does not already exist.
         /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <param name="suffix">Suffix to check for and add if not present.</param>
         /// <returns>String with the suffix.</returns>
         public static string AddSuffix(this string source, string suffix)
@@ -195,7 +195,7 @@ namespace ByteDev.Strings
         /// <summary>
         /// Returns a string with characters reversed.
         /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <returns>String with all characters reversed.</returns>
         public static string Reverse(this string source)
         {
@@ -211,7 +211,7 @@ namespace ByteDev.Strings
         /// Returns a value indicating whether a specified substring occurs within this string
         /// ignoring the case of the string.
         /// </summary>
-        /// <param name="source">The string to perform the operation on.</param>
+        /// <param name="source">String to perform the operation on.</param>
         /// <param name="value">The string to seek.</param>
         /// <returns>True if <paramref name="value" /> occurs; otherwise false.</returns>
         public static bool ContainsIgnoreCase(this string source, string value)

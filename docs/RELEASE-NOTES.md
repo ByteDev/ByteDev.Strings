@@ -1,6 +1,6 @@
 # Release Notes
 
-## 6.0.0 - ??
+## 6.0.0 - 30 September 2020
 
 Breaking changes:
 - Fixed `CaseType` namespace
@@ -10,7 +10,8 @@ New features:
 - Added `StringEndLineCharsExtensions.RemoveEndLineChars`
 
 Bug fixes / internal changes:
-- (None)
+- Fixed `RemoveStartsWith` to now return same value on empty or null
+- Fixed `RemoveEndsWith` to now return same value on empty or null
 
 ## 5.0.0 - 28 September 2020
 
