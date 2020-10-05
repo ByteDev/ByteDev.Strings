@@ -1,5 +1,16 @@
 # Release Notes
 
+## 6.1.0 - ??
+
+Breaking changes:
+- (None)
+
+New features:
+- `Masker.EmailAddress` now takes optional params
+
+Bug fixes / internal changes:
+- (None)
+
 ## 6.0.0 - 30 September 2020
 
 Breaking changes:

@@ -72,10 +72,33 @@ namespace ByteDev.Strings.UnitTests.Masking
 
             [TestCase("j@localhost", "j@#########")]
             [TestCase("john@gmail.com", "j###@#####.com")]
-            [TestCase("john.smith@gmail.co.uk", "j#########@#####.co.uk")]
+            [TestCase("john.smith@gmail.co.uk", "j#########@########.uk")]
+            [TestCase("john.smith@outbound.gmail.co.uk", "j#########@#################.uk")]
             public void WhenCalled_ThenReturnMasked(string value, string expected)
             {
                 var result = _sut.EmailAddress(value);
+
+                Assert.That(result, Is.EqualTo(expected));
+            }
+
+            [TestCase("j@localhost", "j@localhost")]
+            [TestCase("john@gmail.com", "j###@gmail.com")]
+            [TestCase("john.smith@gmail.co.uk", "j#########@gmail.co.uk")]
+            [TestCase("john.smith@outbound.gmail.co.uk", "j#########@outbound.gmail.co.uk")]
+            public void WhenNotMaskingHost_ThenReturnMasked(string value, string expected)
+            {
+                var result = _sut.EmailAddress(value, 1, false);
+
+                Assert.That(result, Is.EqualTo(expected));
+            }
+
+            [TestCase("j@localhost", "j@localhost")]
+            [TestCase("john@gmail.com", "joh#@gmail.com")]
+            [TestCase("john.smith@gmail.co.uk", "joh#######@gmail.co.uk")]
+            [TestCase("john.smith@outbound.gmail.co.uk", "joh#######@outbound.gmail.co.uk")]
+            public void WhenNameExposeCharIsThree_ThenReturnMasked(string value, string expected)
+            {
+                var result = _sut.EmailAddress(value, 3, false);
 
                 Assert.That(result, Is.EqualTo(expected));
             }

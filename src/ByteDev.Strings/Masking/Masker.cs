@@ -41,49 +41,46 @@ namespace ByteDev.Strings.Masking
         }
 
         /// <summary>
-        /// Masks an email address. Exposes the first letter of the email address and the
-        /// constant suffix (e.g. ".com").
+        /// Masks an email address.
         /// </summary>
-        /// <param name="value">Email address.</param>
+        /// <param name="value">Email address to mask.</param>
+        /// <param name="exposeNameChars">Number of characters to expose in the name segment.</param>
+        /// <param name="maskDomainName">True: mask the domain name segment (the TLD will never be masked).</param>
         /// <returns>Masked email address.</returns>
-        public string EmailAddress(string value)
+        public string EmailAddress(string value, int exposeNameChars = 1, bool maskDomainName = true)
         {
             if (string.IsNullOrEmpty(value))
                 return value;
 
+            if (exposeNameChars < 1)
+                exposeNameChars = 1;
+
             var sb = new StringBuilder(value.Length);
             var inHost = false;
-            var maskOff = false;
+            var posLastDot = value.LastIndexOf('.');    // TLD
 
             for (var pos = 0; pos < value.Length; pos++)
             {
-                if (pos == 0 || maskOff)
-                {
-                    sb.Append(value[pos]);
-                }
-                else if (value[pos] == '@')
+                if (value[pos] == '@')
                 {
                     sb.Append(value[pos]);
                     inHost = true;
                 }
-                else
+                else if (inHost)
                 {
-                    if (inHost)
+                    if (pos >= posLastDot && posLastDot != -1)
                     {
-                        if (value[pos] == '.')
-                        {
-                            sb.Append(value[pos]);
-                            maskOff = true;
-                        }
-                        else
-                        {
-                            sb.Append(Options.MaskChar);
-                        }
+                        sb.Append(value[pos]);
                     }
                     else
                     {
-                        sb.Append(Options.MaskChar);
+                        sb.Append(maskDomainName ? Options.MaskChar : value[pos]);
                     }
+                }
+                else
+                {
+                    // Name
+                    sb.Append(pos < exposeNameChars ? value[pos] : Options.MaskChar);
                 }
             }
 
