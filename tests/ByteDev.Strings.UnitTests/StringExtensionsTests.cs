@@ -553,49 +553,5 @@ namespace ByteDev.Strings.UnitTests
                 Assert.That(result, Is.EqualTo("Some" + sut));
             }
         }
-
-        [TestFixture]
-        public class ContainsIgnoreCase
-        {
-            [Test]
-            public void WhenSourceIsNull_ThenReturnsFalse()
-            {
-                var result = StringExtensions.ContainsIgnoreCase(null, "A");
-
-                Assert.That(result, Is.False);
-            }
-
-            [Test]
-            public void WhenSourceIsEmpty_ThenReturnsFalse()
-            {
-                var result = string.Empty.ContainsIgnoreCase("A");
-
-                Assert.That(result, Is.False);
-            }
-
-            [Test]
-            public void WhenDoesNotContain_ThenReturnFalse()
-            {
-                var result = "ABC".ContainsIgnoreCase("D");
-
-                Assert.That(result, Is.False);
-            }
-
-            [Test]
-            public void WhenDoesContainWithSameCase_ThenReturnTrue()
-            {
-                var result = "ABC".ContainsIgnoreCase("B");
-
-                Assert.That(result, Is.True);
-            }
-
-            [Test]
-            public void WhenDoesContainWithDifferentCase_ThenReturnTrue()
-            {
-                var result = "ABC".ContainsIgnoreCase("b");
-
-                Assert.That(result, Is.True);
-            }
-        }
     }
 }

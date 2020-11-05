@@ -8,6 +8,8 @@ Breaking changes:
 
 New features:
 - `Masker.EmailAddress` now takes optional params
+- Added `StringContainsExtensions.ContainsOnly`
+- Added `StringContainsExtensions.ContainsAny`
 
 Bug fixes / internal changes:
 - (None)

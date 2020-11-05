@@ -31,6 +31,8 @@ To use any of the extension method reference the `ByteDev.Strings` namespace.
 
 String extension methods:
 
+- ContainsAny
+- ContainsOnly
 - ContainsIgnoreCase
 - CountOccurrences
 - EnsureStartsWith

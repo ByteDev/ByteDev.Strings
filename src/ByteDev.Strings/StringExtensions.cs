@@ -205,21 +205,6 @@ namespace ByteDev.Strings
             var charArray = source.ToCharArray();
             Array.Reverse(charArray);
             return new string(charArray);
-        } 
-
-        /// <summary>
-        /// Returns a value indicating whether a specified substring occurs within this string
-        /// ignoring the case of the string.
-        /// </summary>
-        /// <param name="source">String to perform the operation on.</param>
-        /// <param name="value">The string to seek.</param>
-        /// <returns>True if <paramref name="value" /> occurs; otherwise false.</returns>
-        public static bool ContainsIgnoreCase(this string source, string value)
-        {
-            if (source == null)
-                return false;
-
-            return source.IndexOf(value, StringComparison.InvariantCultureIgnoreCase) != -1;
         }
     }
 }
