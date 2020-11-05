@@ -1,6 +1,6 @@
 # Release Notes
 
-## 7.0.0 - ??
+## 7.0.0 - 05 November 2020
 
 Breaking changes:
 - Renamed `StringExtensions.AddPrefix` to `EnsureStartsWith`
