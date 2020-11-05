@@ -475,12 +475,12 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class AddSuffix
+        public class EnsureEndsWith
         {
             [Test]
             public void WhenIsNull_ThenReturnSuffix()
             {
-                var result = StringExtensions.AddSuffix(null, "thing");
+                var result = StringExtensions.EnsureEndsWith(null, "thing");
 
                 Assert.That(result, Is.EqualTo("thing"));
             }
@@ -488,7 +488,7 @@ namespace ByteDev.Strings.UnitTests
             [Test]
             public void WhenIsEmpty_ThenReturnSuffix()
             {
-                var result = string.Empty.AddSuffix("thing");
+                var result = string.Empty.EnsureEndsWith("thing");
 
                 Assert.That(result, Is.EqualTo("thing"));
             }
@@ -498,7 +498,7 @@ namespace ByteDev.Strings.UnitTests
             {
                 const string sut = "Something";
 
-                var result = sut.AddSuffix("thing");
+                var result = sut.EnsureEndsWith("thing");
 
                 Assert.That(result, Is.EqualTo(sut));
             }
@@ -508,19 +508,19 @@ namespace ByteDev.Strings.UnitTests
             {
                 const string sut = "Some";
 
-                var result = sut.AddSuffix("thing");
+                var result = sut.EnsureEndsWith("thing");
 
                 Assert.That(result, Is.EqualTo(sut + "thing"));
             }
         }
 
         [TestFixture]
-        public class AddPrefix
+        public class EnsureStartsWith
         {
             [Test]
             public void WhenIsNull_ThenReturnPrefix()
             {
-                var result = StringExtensions.AddPrefix(null, "thing");
+                var result = StringExtensions.EnsureStartsWith(null, "thing");
 
                 Assert.That(result, Is.EqualTo("thing"));
             }
@@ -528,7 +528,7 @@ namespace ByteDev.Strings.UnitTests
             [Test]
             public void WhenIsEmpty_ThenReturnPrefix()
             {
-                var result = string.Empty.AddPrefix("thing");
+                var result = string.Empty.EnsureStartsWith("thing");
 
                 Assert.That(result, Is.EqualTo("thing"));
             }
@@ -538,7 +538,7 @@ namespace ByteDev.Strings.UnitTests
             {
                 const string sut = "Something";
 
-                var result = sut.AddPrefix("Some");
+                var result = sut.EnsureStartsWith("Some");
 
                 Assert.That(result, Is.EqualTo(sut));
             }
@@ -548,7 +548,7 @@ namespace ByteDev.Strings.UnitTests
             {
                 const string sut = "thing";
 
-                var result = sut.AddPrefix("Some");
+                var result = sut.EnsureStartsWith("Some");
 
                 Assert.That(result, Is.EqualTo("Some" + sut));
             }

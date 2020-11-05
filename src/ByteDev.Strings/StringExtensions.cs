@@ -164,7 +164,7 @@ namespace ByteDev.Strings
         /// <param name="source">String to perform the operation on.</param>
         /// <param name="prefix">Prefix to check for and add if not present.</param>
         /// <returns>String with the prefix.</returns>
-        public static string AddPrefix(this string source, string prefix)
+        public static string EnsureStartsWith(this string source, string prefix)
         {
             if (source == null)
                 return prefix;
@@ -181,7 +181,7 @@ namespace ByteDev.Strings
         /// <param name="source">String to perform the operation on.</param>
         /// <param name="suffix">Suffix to check for and add if not present.</param>
         /// <returns>String with the suffix.</returns>
-        public static string AddSuffix(this string source, string suffix)
+        public static string EnsureEndsWith(this string source, string suffix)
         {
             if (source == null)
                 return suffix;

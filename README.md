@@ -31,10 +31,10 @@ To use any of the extension method reference the `ByteDev.Strings` namespace.
 
 String extension methods:
 
-- AddPrefix
-- AddSuffix
 - ContainsIgnoreCase
 - CountOccurrences
+- EnsureStartsWith
+- EnsureEndsWith
 - FormatWith
 - GetEndLineChars
 - IsDigit

@@ -1,9 +1,10 @@
 # Release Notes
 
-## 6.1.0 - ??
+## 7.0.0 - ??
 
 Breaking changes:
-- (None)
+- Renamed `StringExtensions.AddPrefix` to `EnsureStartsWith`
+- Renamed `StringExtensions.AddSuffix` to `EnsureEndsWith`
 
 New features:
 - `Masker.EmailAddress` now takes optional params
