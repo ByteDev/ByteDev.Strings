@@ -52,8 +52,8 @@ String extension methods:
 - IsLowerCase
 - IsNullOrEmpty
 - IsNullOrWhitespace
-- IsNotNullOrEmpty
 - IsNumeric
+- IsPhoneNumber
 - IsUpperCase
 - IsTime
 - IsTrue

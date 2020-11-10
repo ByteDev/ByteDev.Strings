@@ -1,5 +1,16 @@
 # Release Notes
 
+## 8.0.0 - 10 November 2020
+
+Breaking changes:
+- Removed `StringIsExtensions.IsNotNullOrEmpty`
+
+New features:
+- Added `StringIsExtensions.IsPhoneNumber`
+
+Bug fixes / internal changes:
+- Fix `StringIsExtensions.IsNumeric` now allows hyphen prefix
+
 ## 7.0.0 - 05 November 2020
 
 Breaking changes:

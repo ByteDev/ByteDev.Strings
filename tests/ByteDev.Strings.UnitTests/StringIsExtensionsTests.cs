@@ -57,30 +57,6 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class IsNotNullOrEmpty
-        {
-            [Test]
-            public void WhenNull_ThenReturnFalse()
-            {
-                Assert.That((null as string).IsNotNullOrEmpty(), Is.False);
-            }
-
-            [Test]
-            public void WhenEmpty_ThenReturnFalse()
-            {
-                Assert.That(string.Empty.IsNotNullOrEmpty(), Is.False);
-            }
-
-            [Test]
-            public void WhenNotNullOrEmpty_ThenReturnTrue()
-            {
-                const string sut = "test";
-
-                Assert.That(sut.IsNotNullOrEmpty(), Is.True);
-            }
-        }
-
-        [TestFixture]
         public class IsNullOrWhitespace
         {
             [TestCase(null, true)]
@@ -320,6 +296,7 @@ namespace ByteDev.Strings.UnitTests
 
             [TestCase(null)]
             [TestCase("")]
+            [TestCase(" ")]
             [TestCase("00")]
             [TestCase("A")]
             public void WhenIsNotDigits_ThenReturnFalse(string sut)
@@ -340,7 +317,10 @@ namespace ByteDev.Strings.UnitTests
             [TestCase(".1")]
             [TestCase("A.1")]
             [TestCase("A1")]
+            [TestCase("1A")]
             [TestCase("1.0.1")]
+            [TestCase("1..")]
+            [TestCase("1-0")]
             public void WhenIsNotNumeric_ThenReturnFalse(string sut)
             {
                 var result = sut.IsNumeric();
@@ -351,10 +331,14 @@ namespace ByteDev.Strings.UnitTests
             [TestCase("0")]
             [TestCase("10")]
             [TestCase("01")]
+            [TestCase("1.")]
             [TestCase("1.0")]
             [TestCase("1.01")]
             [TestCase("10.01")]
             [TestCase("00.00")]
+            [TestCase("-1")]
+            [TestCase("-1.0")]
+            [TestCase("-1.01")]
             public void WhenIsNumeric_ThenReturnTrue(string sut)
             {
                 var result = sut.IsNumeric();
@@ -571,6 +555,41 @@ namespace ByteDev.Strings.UnitTests
                 var result = sut.IsTime();
 
                 Assert.That(result, Is.True);
+            }
+        }
+
+        [TestFixture]
+        public class IsPhoneNumber
+        {
+            [TestCase("12")]
+            [TestCase("12345")]
+            [TestCase("12 345")]
+            [TestCase("+12345")]
+            [TestCase("+12 345")]
+            [TestCase("+12-345")]
+            [TestCase("+1 2-345")]
+            [TestCase("+12")]
+            [TestCase("0012")]
+            public void WhenIsPhoneNumber_ThenReturnTrue(string sut)
+            {
+                var result = sut.IsPhoneNumber();
+
+                Assert.That(result, Is.True);
+            }
+
+            [TestCase(null)]
+            [TestCase("")]
+            [TestCase(" ")]
+            [TestCase("1")]
+            [TestCase(" 1")]
+            [TestCase("+1")]
+            [TestCase("++1")]
+            [TestCase(" +1")]
+            public void WhenIsNotPhoneNumber_ThenReturnFalse(string sut)
+            {
+                var result = sut.IsPhoneNumber();
+
+                Assert.That(result, Is.False);
             }
         }
     }

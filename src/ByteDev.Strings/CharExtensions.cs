@@ -4,7 +4,7 @@
     {
         public static bool IsUpperCase(this char source)
         {
-            return source >= 'A' && source <= 'Z';
+            return char.IsUpper(source);
         }
 
         public static bool IsSpace(this char source)

@@ -39,17 +39,7 @@ namespace ByteDev.Strings
         /// <returns>True if null or only contains white space characters; otherwise returns false.</returns>
         public static bool IsNullOrWhitespace(this string source)
         {
-            return string.IsNullOrEmpty(source) || string.IsNullOrEmpty(source.Trim());
-        }
-
-        /// <summary>
-        /// Indicates whether this string is not null or empty.
-        /// </summary>
-        /// <param name="source">String to perform the operation on.</param>
-        /// <returns>True if not null or empty; otherwise returns false.</returns>
-        public static bool IsNotNullOrEmpty(this string source)
-        {
-            return !string.IsNullOrEmpty(source);
+            return string.IsNullOrWhiteSpace(source);
         }
 
         /// <summary>
@@ -181,9 +171,9 @@ namespace ByteDev.Strings
         }
 
         /// <summary>
-        /// Indicates whether this string is numeric (contains only digits and
-        /// an optional single period character). Starting with period character
-        /// returns false.
+        /// Indicates whether this string is numeric (contains only digits,
+        /// an optional single period character, and optional hyphen prefix).
+        /// Starting with period character returns false.
         /// </summary>
         /// <param name="source">String to perform the operation on.</param>
         /// <returns>True if is numeric; otherwise return false.</returns>
@@ -193,9 +183,18 @@ namespace ByteDev.Strings
                 return false;
 
             var hasPeriod = false;
+            var isFirstChar = true;
 
             foreach (char c in source)
             {
+                if (isFirstChar)
+                {
+                    isFirstChar = false;
+
+                    if (c == '-')
+                        continue;
+                }
+                
                 if (c == '.')
                 {
                     if (hasPeriod)
@@ -203,10 +202,9 @@ namespace ByteDev.Strings
 
                     hasPeriod = true;
                 }
-                else
+                else if (!char.IsDigit(c))
                 {
-                    if (!char.IsDigit(c))
-                        return false;
+                    return false;
                 }
             }
 
@@ -275,6 +273,7 @@ namespace ByteDev.Strings
         /// <param name="max">Maximum allowable length.</param>
         /// <returns>True if the string length is between the range; otherwise returns false.</returns>
         /// <exception cref="T:System.ArgumentNullException"><paramref name="source" /> is null.</exception>
+        /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="min" /> should be equal to or less than <paramref name="max" />.</exception>
         public static bool IsLengthBetween(this string source, int min, int max)
         {
             if (source == null)
@@ -297,10 +296,10 @@ namespace ByteDev.Strings
         /// <returns>True if string is only lower case characters; otherwise returns false.</returns>
         public static bool IsLowerCase(this string source)
         {
-            if (source == null)
+            if (string.IsNullOrEmpty(source))
                 return false;
 
-            return Regex.IsMatch(source, "^[a-z]+$");
+            return source.All(char.IsLower);
         }
 
         /// <summary>
@@ -311,10 +310,10 @@ namespace ByteDev.Strings
         /// <returns>True if string is only upper case characters; otherwise returns false.</returns>
         public static bool IsUpperCase(this string source)
         {
-            if (source == null)
+            if (string.IsNullOrEmpty(source))
                 return false;
 
-            return Regex.IsMatch(source, "^[A-Z]+$");
+            return source.All(char.IsUpper);
         }
 
         /// <summary>
@@ -354,6 +353,20 @@ namespace ByteDev.Strings
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Indicates whether string appears to be a phone number or not.
+        /// Allows characters 0-9, space, hyphen, and a plus character prefix.
+        /// </summary>
+        /// <param name="source">String to perform the operation on.</param>
+        /// <returns>True if the string appears to be a phone number; otherwise false.</returns>
+        public static bool IsPhoneNumber(this string source)
+        {
+            if (string.IsNullOrEmpty(source))
+                return false;
+
+            return new Regex(@"^\+*[0-9][0-9- ]+$").IsMatch(source);
         }
     }
 }
