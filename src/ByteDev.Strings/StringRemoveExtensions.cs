@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace ByteDev.Strings
@@ -20,7 +21,7 @@ namespace ByteDev.Strings
         {
             if(value == null)
                 throw new ArgumentNullException(nameof(value));
-
+            
             if (string.IsNullOrEmpty(source))
                 return source;
 
@@ -100,7 +101,9 @@ namespace ByteDev.Strings
             if (string.IsNullOrEmpty(source))
                 return source;
 
-            return Regex.Replace(source, @"\s+", string.Empty);
+            return new string(source
+                .Where(c => !char.IsWhiteSpace(c))
+                .ToArray());
         }
 
         /// <summary>

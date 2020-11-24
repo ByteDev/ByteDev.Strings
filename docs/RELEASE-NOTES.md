@@ -1,5 +1,16 @@
 # Release Notes
 
+## 8.0.1 - 24 November 2020
+
+Breaking changes:
+- (None)
+
+New features:
+- (None)
+
+Bug fixes / internal changes:
+- Changed `StringRemoveExtensions.RemoveWhiteSpace` implementation
+
 ## 8.0.0 - 10 November 2020
 
 Breaking changes:

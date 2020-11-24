@@ -115,36 +115,21 @@ namespace ByteDev.Strings.UnitTests
         [TestFixture]
         public class RemoveWhiteSpace
         {
-            [Test]
-            public void WhenIsNull_ThenReturnNull()
+            [TestCase(null)]
+            [TestCase("")]
+            [TestCase("Something")]
+            public void WhenIsHasNoWhiteSpace_ThenReturnSame(string sut)
             {
-                var result = StringRemoveExtensions.RemoveWhiteSpace(null);
-
-                Assert.That(result, Is.Null);
-            }
-
-            [Test]
-            public void WhenIsEmpty_ThenReturnEmpty()
-            {
-                string sut = string.Empty;
-
                 var result = sut.RemoveWhiteSpace();
 
-                Assert.That(result, Is.Empty);
+                Assert.That(result, Is.EqualTo(sut));
             }
 
-            [Test]
-            public void WhenHasSpaces_ThenRemoveSpaces()
+            [TestCase(" something    and  something else   \n\r")]
+            [TestCase("  something       and something   else    ")]
+            public void WhenHasWhiteSpace_ThenRemove(string sut)
             {
-                var result = " something    and  something else   ".RemoveWhiteSpace();
-
-                Assert.That(result, Is.EqualTo("somethingandsomethingelse"));
-            }
-
-            [Test]
-            public void WhenHasTabs_ThenRemoveTabs()
-            {
-                var result = "  something       and something   else    ".RemoveWhiteSpace();
+                var result = sut.RemoveWhiteSpace();
 
                 Assert.That(result, Is.EqualTo("somethingandsomethingelse"));
             }
