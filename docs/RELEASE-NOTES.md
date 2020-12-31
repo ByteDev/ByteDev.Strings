@@ -1,15 +1,16 @@
 # Release Notes
 
-## 8.0.1 - ?
+## 8.1.0 - 31 December 2020
 
 Breaking changes:
 - (None)
 
 New features:
-- (None)
+- Added overload for `StringSafeExtensions.SafeSubstring`
 
 Bug fixes / internal changes:
 - Changed `StringRemoveExtensions.RemoveWhiteSpace` implementation
+- Fixed bug in `StringSafeExtensions.SafeSubstring`
 
 ## 8.0.0 - 10 November 2020
 

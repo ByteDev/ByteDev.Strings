@@ -8,42 +8,45 @@ namespace ByteDev.Strings.UnitTests
         [TestFixture]
         public class SafeLength : StringExtensionsTests
         {
-            [Test]
-            public void WhenIsNull_ThenReturnZero()
+            [TestCase(null, 0)]
+            [TestCase("", 0)]
+            [TestCase("A", 1)]
+            [TestCase("A1", 2)]
+            public void WhenCalled_ThenReturnLength(string sut, int expected)
             {
-                var result = StringSafeExtensions.SafeLength(null);
-
-                Assert.That(result, Is.EqualTo(0));
-            }
-
-            [Test]
-            public void WhenIsNotNull_ThenReturnLength()
-            {
-                var sut = "123";
-
                 var result = sut.SafeLength();
 
-                Assert.That(result, Is.EqualTo(3));
+                Assert.That(result, Is.EqualTo(expected));
             }
         }
 
         [TestFixture]
         public class SafeSubstring
         {
-            [Test]
-            public void WhenIsNull_ThenReturnEmpty()
+            private const string Sut = "John Smith";
+
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenIsNullOrEmpty_ThenReturnEmpty(string sut)
             {
-                var result = StringSafeExtensions.SafeSubstring(null, 0, 5);
+                var result = sut.SafeSubstring(0, 1);
 
                 Assert.That(result, Is.Empty);
             }
 
             [Test]
-            public void WhenIsEmpty_ThenReturnEmpty()
+            public void WhenStartIndexIsLessThanZero_ThenUseStartIndexZero()
             {
-                var sut = string.Empty;
+                var result = Sut.SafeSubstring(-1, 4);
 
-                var result = sut.SafeSubstring(0, 5);
+                Assert.That(result, Is.EqualTo("John"));
+            }
+
+            [TestCase(10)]
+            [TestCase(11)]
+            public void WhenStartIndexIsEqualOrGreaterThanLength_ThenReturnEmpty(int startIndex)
+            {
+                var result = Sut.SafeSubstring(startIndex, 1);
 
                 Assert.That(result, Is.Empty);
             }
@@ -51,41 +54,67 @@ namespace ByteDev.Strings.UnitTests
             [Test]
             public void WhenLengthIsLessThanOne_ThenReturnEmpty()
             {
-                const string sut = "John Smith";
-
-                var result = sut.SafeSubstring(0, 0);
+                var result = Sut.SafeSubstring(0, 0);
 
                 Assert.That(result, Is.Empty);
             }
 
             [Test]
-            public void WhenSourceLengthIsEqualToStart_ThenReturnEmpty()
+            public void WhenLengthIsGreaterThanSourceLength_ThenReturnString()
             {
-                const string sut = "John Smith";
+                var result = Sut.SafeSubstring(5, 6);
 
-                var result = sut.SafeSubstring(sut.Length, 5);
+                Assert.That(result, Is.EqualTo("Smith"));
+            }
+
+            [Test]
+            public void WhenRangeIsInbounds_ThenReturnString()
+            {
+                var result = Sut.SafeSubstring(5, 5);
+
+                Assert.That(result, Is.EqualTo("Smith"));
+            }
+        }
+
+        [TestFixture]
+        public class SafeSubstring_NoLength
+        {
+            private const string Sut = "John Smith";
+
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenIsNullOrEmpty_ThenReturnEmpty(string sut)
+            {
+                var result = sut.SafeSubstring(0);
 
                 Assert.That(result, Is.Empty);
             }
 
             [Test]
-            public void WhenDesiredLengthIsGreaterThanSourceLength_ThenReturnSource()
+            public void WhenStartIndexIsLessThanZero_ThenReturnSameString()
             {
-                const string sut = "John Smith";
+                var result = Sut.SafeSubstring(-1);
 
-                var result = sut.SafeSubstring(5, 6);
-
-                Assert.That(result, Is.EqualTo("Smith"));
+                Assert.That(result, Is.EqualTo(Sut));
             }
 
-            [Test]
-            public void WhenRangeIsWithinSource_ThenReturnRequiredRangeOfChars()
+            [TestCase(10)]
+            [TestCase(11)]
+            public void WhenStartIndexIsEqualOrGreaterThanLength_ThenReturnEmpty(int startIndex)
             {
-                const string sut = "John Smith";
+                var result = Sut.SafeSubstring(startIndex);
 
-                var result = sut.SafeSubstring(5, 5);
+                Assert.That(result, Is.Empty);
+            }
 
-                Assert.That(result, Is.EqualTo("Smith"));
+            [TestCase(0, "John Smith")]
+            [TestCase(1, "ohn Smith")]
+            [TestCase(9, "h")]
+            public void WhenStartIndexIsInbounds_ThenReturnString(int startIndex, string expected)
+            {
+                var result = Sut.SafeSubstring(startIndex);
+
+                Assert.That(result, Is.EqualTo(expected));
             }
         }
     }

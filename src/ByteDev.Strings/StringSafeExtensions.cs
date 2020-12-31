@@ -27,16 +27,38 @@ namespace ByteDev.Strings
             if (string.IsNullOrEmpty(source))
                 return string.Empty;
 
-            if (length < 1)
+            if (startIndex < 0)
+                startIndex = 0;
+            else if (startIndex >= source.Length)
                 return string.Empty;
 
-            if (source.Length <= startIndex) 
+            if (length < 1)
                 return string.Empty;
 
             if (source.Length - startIndex <= length) 
                 return source.Substring(startIndex);
 
             return source.Substring(startIndex, length);
+        }
+
+        /// <summary>
+        /// Safely retrieves a substring from this instance. No exceptions will be thrown.
+        /// </summary>
+        /// <param name="source">String to perform the operation on.</param>
+        /// <param name="startIndex">The zero-based starting character position of a substring in this instance.</param>
+        /// <returns>A string that is equivalent to the substring that begins at <paramref name="startIndex" />.</returns>
+        public static string SafeSubstring(this string source, int startIndex)
+        {
+            if (string.IsNullOrEmpty(source))
+                return string.Empty;
+
+            if (startIndex < 1)
+                return source;
+            
+            if (startIndex >= source.Length)
+                return string.Empty;
+
+            return source.Substring(startIndex);
         }
     }
 }
