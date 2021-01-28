@@ -431,46 +431,42 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class Reverse
+        public class EnsureStartsWith
         {
             [Test]
-            public void WhenIsNull_ThenReturnNull()
+            public void WhenIsNull_ThenReturnPrefix()
             {
-                var result = (null as string).Reverse();
+                var result = StringExtensions.EnsureStartsWith(null, "thing");
 
-                Assert.That(result, Is.Null);
+                Assert.That(result, Is.EqualTo("thing"));
             }
 
             [Test]
-            public void WhenIsEmpty_ThenReturnEmpty()
+            public void WhenIsEmpty_ThenReturnPrefix()
             {
-                var result = string.Empty.Reverse();
+                var result = string.Empty.EnsureStartsWith("thing");
 
-                Assert.That(result, Is.Empty);
+                Assert.That(result, Is.EqualTo("thing"));
             }
 
             [Test]
-            public void WhenSingleChar_ThenReturnSingleChar()
+            public void WhenPrefixExists_ThenReturnUnchanged()
             {
-                var result = "a".Reverse();
+                const string sut = "Something";
 
-                Assert.That(result, Is.EqualTo("a"));
+                var result = sut.EnsureStartsWith("Some");
+
+                Assert.That(result, Is.EqualTo(sut));
             }
 
             [Test]
-            public void WhenTwoChars_ThenReverseChars()
+            public void WhenPrefixDoesNotExists_ThenReturnWithSuffix()
             {
-                var result = "ab".Reverse();
+                const string sut = "thing";
 
-                Assert.That(result, Is.EqualTo("ba"));
-            }
+                var result = sut.EnsureStartsWith("Some");
 
-            [Test]
-            public void WhenThreeChars_ThenReverseChars()
-            {
-                var result = "abc".Reverse();
-
-                Assert.That(result, Is.EqualTo("cba"));
+                Assert.That(result, Is.EqualTo("Some" + sut));
             }
         }
 
@@ -515,42 +511,84 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class EnsureStartsWith
+        public class Reverse
         {
             [Test]
-            public void WhenIsNull_ThenReturnPrefix()
+            public void WhenIsNull_ThenReturnNull()
             {
-                var result = StringExtensions.EnsureStartsWith(null, "thing");
+                var result = (null as string).Reverse();
 
-                Assert.That(result, Is.EqualTo("thing"));
+                Assert.That(result, Is.Null);
             }
 
             [Test]
-            public void WhenIsEmpty_ThenReturnPrefix()
+            public void WhenIsEmpty_ThenReturnEmpty()
             {
-                var result = string.Empty.EnsureStartsWith("thing");
+                var result = string.Empty.Reverse();
 
-                Assert.That(result, Is.EqualTo("thing"));
+                Assert.That(result, Is.Empty);
             }
 
             [Test]
-            public void WhenPrefixExists_ThenReturnUnchanged()
+            public void WhenSingleChar_ThenReturnSingleChar()
             {
-                const string sut = "Something";
+                var result = "a".Reverse();
 
-                var result = sut.EnsureStartsWith("Some");
-
-                Assert.That(result, Is.EqualTo(sut));
+                Assert.That(result, Is.EqualTo("a"));
             }
 
             [Test]
-            public void WhenPrefixDoesNotExists_ThenReturnWithSuffix()
+            public void WhenTwoChars_ThenReverseChars()
             {
-                const string sut = "thing";
+                var result = "ab".Reverse();
 
-                var result = sut.EnsureStartsWith("Some");
+                Assert.That(result, Is.EqualTo("ba"));
+            }
 
-                Assert.That(result, Is.EqualTo("Some" + sut));
+            [Test]
+            public void WhenThreeChars_ThenReverseChars()
+            {
+                var result = "abc".Reverse();
+
+                Assert.That(result, Is.EqualTo("cba"));
+            }
+        }
+
+        [TestFixture]
+        public class Wrap : StringExtensionsTests
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenIsNullOrEmpty_ThenReturnString(string sut)
+            {
+                var result = sut.Wrap("'");
+
+                Assert.That(result, Is.EqualTo("''"));
+            }
+
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenWrapperIsNullOrEmpty_ThenReturnString(string wrapper)
+            {
+                var result = "a".Wrap(wrapper);
+
+                Assert.That(result, Is.EqualTo("a"));
+            }
+
+            [Test]
+            public void WhenSourceAndWrapperHasChars_ThenReturnString()
+            {
+                var result = "a".Wrap("**");
+
+                Assert.That(result, Is.EqualTo("**a**"));
+            }
+
+            [Test]
+            public void WhenWrapperIsChar_ThenReturnString()
+            {
+                var result = "a".Wrap('*');
+
+                Assert.That(result, Is.EqualTo("*a*"));
             }
         }
     }

@@ -43,8 +43,9 @@ namespace ByteDev.Strings
         /// Returns this string as a collection of lines.
         /// </summary>
         /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="ignoreEmptyLines">If true empty and whitespace only lines will not be returned.</param>
         /// <returns>The string as a collection of lines.</returns>
-        public static IEnumerable<string> ToLines(this string source)
+        public static IEnumerable<string> ToLines(this string source, bool ignoreEmptyLines = false)
         {
             if (source == null)
                 source = string.Empty;
@@ -54,6 +55,9 @@ namespace ByteDev.Strings
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
+                    if (ignoreEmptyLines && string.IsNullOrWhiteSpace(line))
+                        continue;
+
                     yield return line;
                 }
             }

@@ -119,7 +119,9 @@ namespace ByteDev.Strings.UnitTests
             [Test]
             public void WhenHasThreeLines_ThenReturnThreeElements()
             {
-                const string sut = "Hello World\r\nmy name\r\nis John";
+                const string sut = "Hello World\r\n" + 
+                                   "my name\r\n" +
+                                   "is John";
 
                 var result = sut.ToLines().ToList();
 
@@ -127,6 +129,23 @@ namespace ByteDev.Strings.UnitTests
                 Assert.That(result.First(), Is.EqualTo("Hello World"));
                 Assert.That(result.Second(), Is.EqualTo("my name"));
                 Assert.That(result.Third(), Is.EqualTo("is John"));
+            }
+
+            [Test]
+            public void WhenIgnoreEmptyLines_ThenReturnNonEmptyLines()
+            {
+                const string sut = "Hello World\r\n" + 
+                                   "\r\n" +
+                                   " \r\n" +
+                                   "  \r\n" +
+                                   "    \r\n" +
+                                   "is John";
+
+                var result = sut.ToLines(true).ToList();
+
+                Assert.That(result.Count, Is.EqualTo(2));
+                Assert.That(result.First(), Is.EqualTo("Hello World"));
+                Assert.That(result.Second(), Is.EqualTo("is John"));
             }
         }
 

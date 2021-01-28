@@ -90,6 +90,13 @@ String extension methods:
 - ToLongOrDefault
 - ToUri
 - ToTitleCase
+- Wrap
+
+StringBuilder extension methods:
+
+- AppendLines
+- AppendValues
+- IsEmpty
 
 ---
 

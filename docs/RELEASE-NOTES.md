@@ -9,6 +9,8 @@ New features:
 - Added `StringBuilder.IsEmpty`.
 - Added `StringBuilder.AppendValues`.
 - Added `StringBuilder.AppendLines`.
+- Added `StringToExtensions.ToLines` optional param.
+- Added `StringExtensions.Wrap`.
 
 Bug fixes / internal changes:
 - (None)

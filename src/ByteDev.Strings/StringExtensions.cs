@@ -206,6 +206,28 @@ namespace ByteDev.Strings
             Array.Reverse(charArray);
             return new string(charArray);
         }
+
+        /// <summary>
+        /// Returns a string with a wrapper string to the left and right of it.
+        /// </summary>
+        /// <param name="source">String to perform the operation on.</param>
+        /// <param name="wrapper">Wrapper to use.</param>
+        /// <returns>String wrapped with the wrapper.</returns>
+        public static string Wrap(this string source, string wrapper)
+        {
+            return wrapper + source + wrapper;
+        }
+
+        /// <summary>
+        /// Returns a string with a wrapper string to the left and right of it.
+        /// </summary>
+        /// <param name="source">String to perform the operation on.</param>
+        /// <param name="wrapper">Wrapper to use.</param>
+        /// <returns>String wrapped with the wrapper.</returns>
+        public static string Wrap(this string source, char wrapper)
+        {
+            return wrapper + source + wrapper;
+        }
     }
 }
 
