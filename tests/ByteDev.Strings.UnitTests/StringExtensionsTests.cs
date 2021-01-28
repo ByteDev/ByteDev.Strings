@@ -552,6 +552,14 @@ namespace ByteDev.Strings.UnitTests
 
                 Assert.That(result, Is.EqualTo("cba"));
             }
+
+            [Test]
+            public void WhenUnicodeChars_ThenReverseChars()
+            {
+                var result = "火山".Reverse();
+
+                Assert.That(result, Is.EqualTo("山火"));
+            }
         }
 
         [TestFixture]
