@@ -1,5 +1,18 @@
 # Release Notes
 
+## 8.2.0 - ?
+
+Breaking changes:
+- (None)
+
+New features:
+- Added `StringBuilder.IsEmpty`.
+- Added `StringBuilder.AppendValues`.
+- Added `StringBuilder.AppendLines`.
+
+Bug fixes / internal changes:
+- (None)
+
 ## 8.1.0 - 31 December 2020
 
 Breaking changes:

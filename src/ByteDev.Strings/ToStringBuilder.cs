@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace ByteDev.Strings
@@ -64,62 +63,6 @@ namespace ByteDev.Strings
             }
 
             return sb.ToString();
-        }
-    }
-
-    internal static class StringBuilderExtensions
-    {
-        public static StringBuilder AppendName(this StringBuilder source, string name)
-        {
-            if (source.Length > 0)
-                source.Append(", ");
-
-            source.Append(name);
-            source.Append(": ");
-
-            return source;
-        }
-
-        public static StringBuilder AppendCollection(this StringBuilder source, IEnumerable<object> collection, char stringQuoteChar)
-        {
-            source.Append("{");
-
-            var isFirst = true;
-
-            foreach (var element in collection)
-            {
-                if (isFirst)
-                {
-                    isFirst = false;
-                    source.Append(" ");
-                }
-                else
-                {
-                    source.Append(", ");
-                }
-
-                source.AppendValue(element, stringQuoteChar);
-            }
-                       
-            source.Append(" }");
-
-            return source;
-        }
-
-        public static StringBuilder AppendValue(this StringBuilder source, object value, char stringQuoteChar)
-        {
-            if (stringQuoteChar == '\0' || !(value is string))
-            {
-                source.Append(value);
-            }
-            else
-            {
-                source.Append(stringQuoteChar);
-                source.Append(value);
-                source.Append(stringQuoteChar);
-            }
-
-            return source;
         }
     }
 }
