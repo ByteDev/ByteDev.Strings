@@ -1,6 +1,6 @@
 # Release Notes
 
-## 8.2.0 - ?
+## 8.2.0 - 28 January 2021
 
 Breaking changes:
 - (None)
