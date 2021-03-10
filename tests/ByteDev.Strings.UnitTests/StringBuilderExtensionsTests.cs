@@ -211,5 +211,85 @@ namespace ByteDev.Strings.UnitTests
                 Assert.That(result.Third(), Is.EqualTo("a test"));
             }
         }
+
+        [TestFixture]
+        public class AppendIfNotEmpty : StringBuilderExtensionsTests
+        {
+            [Test]
+            public void WhenSourceIsNull_ThenThrowException()
+            {
+                Assert.Throws<ArgumentNullException>(() => StringBuilderExtensions.AppendIfNotEmpty(null, "value"));
+            }
+
+            [Test]
+            public void WhenValueIsNull_ThenDoNothing()
+            {
+                var sut = new StringBuilder("something");
+
+                sut.AppendIfNotEmpty(null);
+
+                Assert.That(sut.ToString(), Is.EqualTo("something"));
+            }
+
+            [Test]
+            public void WhenEmpty_ThenDoNothing()
+            {
+                var sut = new StringBuilder();
+
+                sut.AppendIfNotEmpty("value");
+
+                Assert.That(sut.ToString(), Is.Empty);
+            }
+
+            [Test]
+            public void WhenNotEmpty_ThenAppend()
+            {
+                var sut = new StringBuilder("something");
+
+                sut.AppendIfNotEmpty("value");
+
+                Assert.That(sut.ToString(), Is.EqualTo("somethingvalue"));
+            }
+        }
+
+        [TestFixture]
+        public class AppendIfEmpty : StringBuilderExtensionsTests
+        {
+            [Test]
+            public void WhenSourceIsNull_ThenThrowException()
+            {
+                Assert.Throws<ArgumentNullException>(() => StringBuilderExtensions.AppendIfEmpty(null, "value"));
+            }
+
+            [Test]
+            public void WhenValueIsNull_ThenDoNothing()
+            {
+                var sut = new StringBuilder();
+
+                sut.AppendIfEmpty(null);
+
+                Assert.That(sut.ToString(), Is.Empty);
+            }
+
+            [Test]
+            public void WhenEmpty_ThenAppend()
+            {
+                var sut = new StringBuilder();
+
+                sut.AppendIfEmpty("value");
+
+                Assert.That(sut.ToString(), Is.EqualTo("value"));
+            }
+
+            [Test]
+            public void WhenNotEmpty_ThenDoNothing()
+            {
+                var sut = new StringBuilder("something");
+
+                sut.AppendIfEmpty("value");
+
+                Assert.That(sut.ToString(), Is.EqualTo("something"));
+            }
+        }
     }
 }

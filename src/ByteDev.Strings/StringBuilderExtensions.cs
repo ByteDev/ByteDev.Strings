@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -96,6 +95,38 @@ namespace ByteDev.Strings
             {
                 source.AppendLine(value);
             }
+        }
+
+        /// <summary>
+        /// Appends a copy of the string to this instance if the instance
+        /// is currently empty.
+        /// </summary>
+        /// <param name="source">StringBuilder to perform the operation on.</param>
+        /// <param name="value">Value to append.</param>
+        /// <exception cref="T:System.ArgumentNullException"><paramref name="source" /> is null.</exception>
+        public static void AppendIfEmpty(this StringBuilder source, string value)
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            if (source.Length == 0)
+                source.Append(value);
+        }
+
+        /// <summary>
+        /// Appends a copy of the string to this instance if the instance is
+        /// currently not empty.
+        /// </summary>
+        /// <param name="source">StringBuilder to perform the operation on.</param>
+        /// <param name="value">Value to append.</param>
+        /// <exception cref="T:System.ArgumentNullException"><paramref name="source" /> is null.</exception>
+        public static void AppendIfNotEmpty(this StringBuilder source, string value)
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            if (source.Length > 0)
+                source.Append(value);
         }
     }
 }

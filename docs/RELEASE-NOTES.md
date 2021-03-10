@@ -1,5 +1,17 @@
 # Release Notes
 
+## 8.3.0 - 10 March 2021
+
+Breaking changes:
+- (None)
+
+New features:
+- Added `StringBuilderExtensions.AppendIfEmpty`.
+- Added `StringBuilderExtensions.AppendIfNotEmpty`.
+
+Bug fixes / internal changes:
+- (None)
+
 ## 8.2.0 - 28 January 2021
 
 Breaking changes:
