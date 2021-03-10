@@ -94,6 +94,8 @@ String extension methods:
 
 StringBuilder extension methods:
 
+- AppendIfEmpty
+- AppendIfNotEmpty
 - AppendLines
 - AppendValues
 - IsEmpty
