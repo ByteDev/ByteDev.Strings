@@ -1,5 +1,21 @@
 # Release Notes
 
+## 9.0.0 - 15 March 2021
+
+Breaking changes:
+- Renamed `StringEndLineCharsExtensions.GetEndLineChars` to `StringNewLineExtensions.GetEndNewLine`.
+- Renamed `StringEndLineCharsExtensions.RemoveEndLineChars` to `StringNewLineExtensions.RemoveEndNewLine`.
+
+New features:
+- Added `StringNewLineExtensions.DetectNewLineType`.
+- Added `StringNewLineExtensions.NormalizeNewLinesToUnix`.
+- Added `StringNewLineExtensions.NormalizeNewLinesToWindows`.
+- Added `NewLineType`.
+- Added `NewLineStrings`.
+
+Bug fixes / internal changes:
+- (None)
+
 ## 8.3.0 - 10 March 2021
 
 Breaking changes:

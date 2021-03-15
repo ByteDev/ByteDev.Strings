@@ -35,10 +35,11 @@ String extension methods:
 - ContainsOnly
 - ContainsIgnoreCase
 - CountOccurrences
+- DetectNewLineType
 - EnsureStartsWith
 - EnsureEndsWith
 - FormatWith
-- GetEndLineChars
+- GetEndNewLine
 - IsDigit
 - IsDigits
 - IsEmpty
@@ -61,9 +62,11 @@ String extension methods:
 - Left
 - LeftWithEllipsis
 - LeftWithInnerEllipsis
+- NormalizeNewLinesToUnix
+- NormalizeNewLinesToWindows
 - Pluralize
 - Remove
-- RemoveEndLineChars
+- RemoveEndNewLine
 - RemoveStartsWith
 - RemoveEndsWith
 - RemoveBracketedText
