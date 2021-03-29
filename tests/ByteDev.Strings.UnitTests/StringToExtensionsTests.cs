@@ -495,5 +495,88 @@ namespace ByteDev.Strings.UnitTests
                 Assert.That(result, Is.EqualTo(new Guid("9f28c9c7-31f5-4575-b3fc-d5c4ffd1df30")));
             }
         }
+
+        [TestFixture]
+        public class ToKeyValuePair : StringToExtensionsTests
+        {
+            [Test]
+            public void WhenSourceIsNull_ThenReturnKeyValuePair()
+            {
+                var result = (null as string).ToKeyValuePair("=");
+
+                Assert.That(result.Key, Is.Null);
+                Assert.That(result.Value, Is.Null);
+            }
+
+            [Test]
+            public void WhenSourceIsEmpty_ThenReturnEmptyKeyAndValue()
+            {
+                var result = string.Empty.ToKeyValuePair("=");
+
+                Assert.That(result.Key, Is.Empty);
+                Assert.That(result.Value, Is.Empty);
+            }
+
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenDelimiterIsNullOrEmpty_ThenReturnEmptyValue(string delimiter)
+            {
+                var result = "a".ToKeyValuePair(delimiter);
+
+                Assert.That(result.Key, Is.EqualTo("a"));
+                Assert.That(result.Value, Is.Empty);
+            }
+
+            [TestCase("a")]
+            [TestCase("a1")]
+            public void WhenDelimiterDoesNotExist_ThenValueIsEmpty(string sut)
+            {
+                var result = sut.ToKeyValuePair("=");
+
+                Assert.That(result.Key, Is.EqualTo(sut));
+                Assert.That(result.Value, Is.Empty);
+            }
+
+            [Test]
+            public void WhenKeyIsEmpty_ThenKeyIsEmpty()
+            {
+                var result = "=1".ToKeyValuePair("=");
+
+                Assert.That(result.Key, Is.Empty);
+                Assert.That(result.Value, Is.EqualTo("1"));
+            }
+
+            [Test]
+            public void WhenOnlyDelimiterExists_ThenReturnEmptyKeyAndValue()
+            {
+                var result = "=".ToKeyValuePair("=");
+
+                Assert.That(result.Key, Is.Empty);
+                Assert.That(result.Value, Is.Empty);
+            }
+
+            [TestCase("a=", "a", "")]
+            [TestCase("a=1", "a", "1")]
+            [TestCase("ab1=123", "ab1", "123")]
+            public void WhenDelimiterExists_ThenReturnKeyValuePair(string sut, string key, string value)
+            {
+                var result = sut.ToKeyValuePair("=");
+
+                Assert.That(result.Key, Is.EqualTo(key));
+                Assert.That(result.Value, Is.EqualTo(value));
+            }
+
+            [TestCase("a==", "a", "=")]
+            [TestCase("a==1", "a", "=1")]
+            [TestCase("ab1==123", "ab1", "=123")]
+            [TestCase("a=1=2=3", "a", "1=2=3")]
+            public void WhenDelimiterExistsTwice_ThenReturnKeyValuePair(string sut, string key, string value)
+            {
+                var result = sut.ToKeyValuePair("=");
+
+                Assert.That(result.Key, Is.EqualTo(key));
+                Assert.That(result.Value, Is.EqualTo(value));
+            }
+        }
     }
 }

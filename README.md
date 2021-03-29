@@ -86,6 +86,7 @@ String extension methods:
 - ToDateTime
 - ToDateTimeOrDefault
 - ToEnum
+- ToKeyValuePair
 - ToLines
 - ToInt
 - ToIntOrDefault

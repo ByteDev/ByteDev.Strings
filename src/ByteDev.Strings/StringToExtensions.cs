@@ -244,5 +244,30 @@ namespace ByteDev.Strings
                 return default;
             }
         }
+
+        /// <summary>
+        /// Returns the string as a KeyValuePair.
+        /// </summary>
+        /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="delimiter">String delimiter for the key value pair.</param>
+        /// <returns>New KeyValuePair instance.</returns>
+        public static KeyValuePair<string, string> ToKeyValuePair(this string source, string delimiter)
+        {
+            if (source == null)
+                return new KeyValuePair<string, string>();
+
+            if (string.IsNullOrEmpty(delimiter))
+                return new KeyValuePair<string, string>(source, string.Empty);
+
+            int index = source.IndexOf(delimiter, StringComparison.Ordinal);
+
+            if (index < 0)
+                return new KeyValuePair<string, string>(source, string.Empty);
+
+            var key = source.Substring(0, index);
+            var value = source.Substring(index + delimiter.Length);
+
+            return new KeyValuePair<string, string>(key, value);
+        }
     }
 }
