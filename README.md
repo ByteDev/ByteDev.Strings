@@ -253,7 +253,7 @@ string card = masker.PaymentCard("4111111111111111");
 
 string email = masker.EmailAddress("john.smith@gmail.co.uk");
 
-// email = "j#########@#####.co.uk"
+// email == "j#########@#####.co.uk"
 ```
 
 ```csharp
@@ -261,6 +261,6 @@ string email = masker.EmailAddress("john.smith@gmail.co.uk");
 
 string custom = masker.Custom("12345", 1, 2);
 
-// custom = "1##45"
+// custom == "1##45"
 ```
 
