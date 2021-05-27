@@ -56,6 +56,7 @@ String extension methods:
 - IsNumeric
 - IsPhoneNumber
 - IsUpperCase
+- IsUri
 - IsTime
 - IsTrue
 - IsXml
@@ -88,6 +89,7 @@ String extension methods:
 - ToEnum
 - ToKeyValuePair
 - ToLines
+- ToLinesList
 - ToInt
 - ToIntOrDefault
 - ToLong

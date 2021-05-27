@@ -40,11 +40,11 @@ namespace ByteDev.Strings
         }
 
         /// <summary>
-        /// Returns this string as a collection of lines.
+        /// Returns this string as a sequence of lines.
         /// </summary>
         /// <param name="source">The string to perform this operation on.</param>
         /// <param name="ignoreEmptyLines">If true empty and whitespace only lines will not be returned.</param>
-        /// <returns>The string as a collection of lines.</returns>
+        /// <returns>The string as a sequence of lines.</returns>
         public static IEnumerable<string> ToLines(this string source, bool ignoreEmptyLines = false)
         {
             if (source == null)
@@ -61,6 +61,34 @@ namespace ByteDev.Strings
                     yield return line;
                 }
             }
+        }
+
+        /// <summary>
+        /// Returns this string as a list of lines.
+        /// </summary>
+        /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="ignoreEmptyLines">If true empty and whitespace only lines will not be returned.</param>
+        /// <returns>The string as a list of lines.</returns>
+        public static IList<string> ToLinesList(this string source, bool ignoreEmptyLines = false)
+        {
+            if (string.IsNullOrEmpty(source))
+                return new List<string>();
+
+            var lines = new List<string>();
+
+            using (var reader = new StringReader(source))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    if (ignoreEmptyLines && string.IsNullOrWhiteSpace(line))
+                        continue;
+
+                    lines.Add(line);
+                }
+            }
+
+            return lines;
         }
 
         /// <summary>

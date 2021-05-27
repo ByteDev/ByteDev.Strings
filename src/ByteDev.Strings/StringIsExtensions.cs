@@ -368,5 +368,15 @@ namespace ByteDev.Strings
 
             return new Regex(@"^\+*[0-9][0-9- ]+$").IsMatch(source);
         }
+
+        /// <summary>
+        /// Indicates whether this string is a URI.
+        /// </summary>
+        /// <param name="source">String to perform the operation on.</param>
+        /// <returns>True if is a URI; otherwise returns false.</returns>
+        public static bool IsUri(this string source)
+        {
+            return source.ToUri() != null;
+        }
     }
 }

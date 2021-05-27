@@ -1,5 +1,17 @@
 # Release Notes
 
+## 9.2.0 - 27 May 2021
+
+Breaking changes:
+- (None)
+
+New features:
+- Added `StringIsExtensions.IsUri`.
+- Added `StringToExtensions.ToLinesList`.
+
+Bug fixes / internal changes:
+- (None)
+
 ## 9.1.0 - 29 March 2021
 
 Breaking changes:

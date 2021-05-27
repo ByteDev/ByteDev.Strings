@@ -250,7 +250,7 @@ namespace ByteDev.Strings.UnitTests
                 Assert.That(result, Is.False);                
             }
         }
-
+        
         [TestFixture]
         public class IsDigits
         {
@@ -588,6 +588,30 @@ namespace ByteDev.Strings.UnitTests
             public void WhenIsNotPhoneNumber_ThenReturnFalse(string sut)
             {
                 var result = sut.IsPhoneNumber();
+
+                Assert.That(result, Is.False);
+            }
+        }
+
+        [TestFixture]
+        public class IsUri : StringIsExtensionsTests
+        {
+            [TestCase("http://www.google.com/")]
+            [TestCase("mailto:John.Doe@example.com")]
+            [TestCase("myscheme://somepath")]
+            public void WhenIsUri_ThenReturnTrue(string sut)
+            {
+                var result = sut.IsUri();
+
+                Assert.That(result, Is.True);
+            }
+
+            [TestCase(null)]
+            [TestCase("")]
+            [TestCase("myscheme")]
+            public void WhenIsNotUri_ThenReturnFalse(string sut)
+            {
+                var result = sut.IsUri();
 
                 Assert.That(result, Is.False);
             }

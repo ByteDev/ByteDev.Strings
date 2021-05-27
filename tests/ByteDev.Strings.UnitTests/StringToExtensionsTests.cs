@@ -8,6 +8,9 @@ namespace ByteDev.Strings.UnitTests
     [TestFixture]
     public class StringToExtensionsTests
     {
+        private const string NewLineWin = "\r\n";
+        private const string NewLineUnix = "\n";
+
         [TestFixture]
         public class ToEnum
         {
@@ -107,7 +110,7 @@ namespace ByteDev.Strings.UnitTests
             }
 
             [Test]
-            public void WhenHasOneLine_ThenReturnOneElement()
+            public void WhenHasOneLine_ThenReturnOneLine()
             {
                 const string sut = "Hello World";
 
@@ -117,10 +120,10 @@ namespace ByteDev.Strings.UnitTests
             }
 
             [Test]
-            public void WhenHasThreeLines_ThenReturnThreeElements()
+            public void WhenHasThreeLines_ThenReturnThreeLines()
             {
-                const string sut = "Hello World\r\n" + 
-                                   "my name\r\n" +
+                const string sut = "Hello World" + NewLineWin +
+                                   "my name" + NewLineWin +
                                    "is John";
 
                 var result = sut.ToLines().ToList();
@@ -135,10 +138,10 @@ namespace ByteDev.Strings.UnitTests
             public void WhenIgnoreEmptyLines_ThenReturnNonEmptyLines()
             {
                 const string sut = "Hello World\r\n" + 
-                                   "\r\n" +
-                                   " \r\n" +
-                                   "  \r\n" +
-                                   "    \r\n" +
+                                   NewLineWin +
+                                   " " + NewLineWin +
+                                   "  " + NewLineWin +
+                                   "    " + NewLineWin +
                                    "is John";
 
                 var result = sut.ToLines(true).ToList();
@@ -146,6 +149,125 @@ namespace ByteDev.Strings.UnitTests
                 Assert.That(result.Count, Is.EqualTo(2));
                 Assert.That(result.First(), Is.EqualTo("Hello World"));
                 Assert.That(result.Second(), Is.EqualTo("is John"));
+            }
+
+            [Test]
+            public void WhenNewLinesAreUnix_ThenReturnLines()
+            {
+                const string sut =
+                    "Hello" + NewLineUnix +
+                    "World" + NewLineUnix +
+                    "Everyone";
+
+                var result = sut.ToLines().ToList();
+
+                Assert.That(result.Count, Is.EqualTo(3));
+                Assert.That(result.First(), Is.EqualTo("Hello"));
+                Assert.That(result.Second(), Is.EqualTo("World"));
+                Assert.That(result.Third(), Is.EqualTo("Everyone"));
+            }
+
+            [Test]
+            public void WhenNewLinesAreMix_ThenReturnLines()
+            {
+                const string sut =
+                    "Hello" + NewLineWin +
+                    "World" + NewLineUnix +
+                    "Everyone";
+
+                var result = sut.ToLines().ToList();
+
+                Assert.That(result.Count, Is.EqualTo(3));
+                Assert.That(result.First(), Is.EqualTo("Hello"));
+                Assert.That(result.Second(), Is.EqualTo("World"));
+                Assert.That(result.Third(), Is.EqualTo("Everyone"));
+            }
+        }
+
+        [TestFixture]
+        public class ToLinesList
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenIsNullOrEmpty_ThenReturnEmpty(string sut)
+            {
+                var result = sut.ToLinesList();
+
+                Assert.That(result, Is.Empty);
+            }
+
+            [Test]
+            public void WhenHasOneLine_ThenReturnOneLine()
+            {
+                const string sut = "Hello World";
+
+                var result = sut.ToLinesList();
+
+                Assert.That(result.Single(), Is.EqualTo(sut));
+            }
+
+            [Test]
+            public void WhenHasThreeLines_ThenReturnThreeLines()
+            {
+                const string sut = "Hello World" + NewLineWin +
+                                   "my name" + NewLineWin +
+                                   "is John";
+
+                var result = sut.ToLinesList();
+
+                Assert.That(result.Count, Is.EqualTo(3));
+                Assert.That(result.First(), Is.EqualTo("Hello World"));
+                Assert.That(result.Second(), Is.EqualTo("my name"));
+                Assert.That(result.Third(), Is.EqualTo("is John"));
+            }
+
+            [Test]
+            public void WhenIgnoreEmptyLines_ThenReturnNonEmptyLines()
+            {
+                const string sut = "Hello World\r\n" + 
+                                   NewLineWin +
+                                   " " + NewLineWin +
+                                   "  " + NewLineWin +
+                                   "    " + NewLineWin +
+                                   "is John";
+
+                var result = sut.ToLinesList(true).ToList();
+
+                Assert.That(result.Count, Is.EqualTo(2));
+                Assert.That(result.First(), Is.EqualTo("Hello World"));
+                Assert.That(result.Second(), Is.EqualTo("is John"));
+            }
+
+            [Test]
+            public void WhenNewLinesAreUnix_ThenReturnLines()
+            {
+                const string sut =
+                    "Hello" + NewLineUnix +
+                    "World" + NewLineUnix +
+                    "Everyone";
+
+                var result = sut.ToLinesList().ToList();
+
+                Assert.That(result.Count, Is.EqualTo(3));
+                Assert.That(result.First(), Is.EqualTo("Hello"));
+                Assert.That(result.Second(), Is.EqualTo("World"));
+                Assert.That(result.Third(), Is.EqualTo("Everyone"));
+            }
+
+            [Test]
+            public void WhenNewLinesAreMix_ThenReturnLines()
+            {
+                const string sut =
+                    "Hello" + NewLineWin +
+                    "World" + NewLineUnix +
+                    "Everyone";
+
+                var result = sut.ToLinesList().ToList();
+
+                Assert.That(result.Count, Is.EqualTo(3));
+                Assert.That(result.First(), Is.EqualTo("Hello"));
+                Assert.That(result.Second(), Is.EqualTo("World"));
+                Assert.That(result.Third(), Is.EqualTo("Everyone"));
             }
         }
 
