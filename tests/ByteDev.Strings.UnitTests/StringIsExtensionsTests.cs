@@ -521,6 +521,32 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
+        public class IsAscii : StringIsExtensionsTests
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            [TestCase("£")]
+            [TestCase("\x80")]
+            public void WhenIsNotAscii_ThenReturnFalse(string sut)
+            {
+                var result = sut.IsAscii();
+
+                Assert.That(result, Is.False);
+            }
+
+            [TestCase("\0")]
+            [TestCase("09AZaz")]
+            [TestCase("~")]
+            [TestCase("\x7F")]
+            public void WhenIsAscii_ThenReturnTrue(string sut)
+            {
+                var result = sut.IsAscii();
+
+                Assert.That(result, Is.True);
+            }
+        }
+
+        [TestFixture]
         public class IsTime
         {
             [TestCase(null)]

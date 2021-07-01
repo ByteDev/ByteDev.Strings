@@ -317,6 +317,20 @@ namespace ByteDev.Strings
         }
 
         /// <summary>
+        /// Indicates whether string contains characters only from the ASCII
+        /// character set.
+        /// </summary>
+        /// <param name="source">The string to perform this operation on.</param>
+        /// <returns>True if string contains only ASCII characters; otherwise returns false.</returns>
+        public static bool IsAscii(this string source)
+        {
+            if (string.IsNullOrEmpty(source))
+                return false;
+
+            return source.All(ch => ch <= 127);
+        }
+
+        /// <summary>
         /// Indicates whether string appears to be a time in any of the formats:
         /// hh:mm:ss, hh-mm-ss, hhmmss, hh:mm, hh-mm or hhmm.
         /// </summary>

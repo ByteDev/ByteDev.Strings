@@ -1,5 +1,16 @@
 # Release Notes
 
+## 9.3.0 - ?
+
+Breaking changes:
+- (None)
+
+New features:
+- Added `StringIsExtensions.IsAscii`.
+
+Bug fixes / internal changes:
+- (None)
+
 ## 9.2.0 - 27 May 2021
 
 Breaking changes:

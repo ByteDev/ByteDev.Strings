@@ -40,6 +40,7 @@ String extension methods:
 - EnsureEndsWith
 - FormatWith
 - GetEndNewLine
+- IsAscii
 - IsDigit
 - IsDigits
 - IsEmpty
