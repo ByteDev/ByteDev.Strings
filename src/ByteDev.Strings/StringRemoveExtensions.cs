@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace ByteDev.Strings
@@ -98,11 +99,26 @@ namespace ByteDev.Strings
         /// <returns>String without white space characters.</returns>
         public static string RemoveWhiteSpace(this string source)
         {
-            if (string.IsNullOrEmpty(source))
-                return source;
+            if (source == null)
+                return null;
 
             return new string(source
                 .Where(c => !char.IsWhiteSpace(c))
+                .ToArray());
+        }
+
+        /// <summary>
+        /// Removes all non-digit (0-9) characters from the string.
+        /// </summary>
+        /// <param name="source">String to perform the operation on.</param>
+        /// <returns>String without non-digit characters.</returns>
+        public static string RemoveNonDigits(this string source)
+        {
+            if (source == null)
+                return null;
+
+            return new string(source
+                .Where(char.IsDigit)
                 .ToArray());
         }
 

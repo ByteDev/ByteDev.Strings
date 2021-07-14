@@ -113,29 +113,6 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class RemoveWhiteSpace
-        {
-            [TestCase(null)]
-            [TestCase("")]
-            [TestCase("Something")]
-            public void WhenIsHasNoWhiteSpace_ThenReturnSame(string sut)
-            {
-                var result = sut.RemoveWhiteSpace();
-
-                Assert.That(result, Is.EqualTo(sut));
-            }
-
-            [TestCase(" something    and  something else   \n\r")]
-            [TestCase("  something       and something   else    ")]
-            public void WhenHasWhiteSpace_ThenRemove(string sut)
-            {
-                var result = sut.RemoveWhiteSpace();
-
-                Assert.That(result, Is.EqualTo("somethingandsomethingelse"));
-            }
-        }
-
-        [TestFixture]
         public class RemoveBracketedText
         {
             [Test]
@@ -200,6 +177,55 @@ namespace ByteDev.Strings.UnitTests
                 var result = StringRemoveExtensions.RemoveBracketedText(null);
 
                 Assert.That(result, Is.Null);
+            }
+        }
+
+        [TestFixture]
+        public class RemoveWhiteSpace
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            [TestCase("Something")]
+            public void WhenIsHasNoWhiteSpace_ThenReturnSame(string sut)
+            {
+                var result = sut.RemoveWhiteSpace();
+
+                Assert.That(result, Is.EqualTo(sut));
+            }
+
+            [TestCase(" something    and  something else   \n\r")]
+            [TestCase("  something       and something   else    ")]
+            public void WhenHasWhiteSpace_ThenRemove(string sut)
+            {
+                var result = sut.RemoveWhiteSpace();
+
+                Assert.That(result, Is.EqualTo("somethingandsomethingelse"));
+            }
+        }
+
+        [TestFixture]
+        public class RemoveNonDigits : StringRemoveExtensionsTests
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            [TestCase("0")]
+            [TestCase("01")]
+            public void WhenIsNullOrEmptyOrHasDigits_ThenReturnEqualString(string sut)
+            {
+                var result = sut.RemoveNonDigits();
+                
+                Assert.That(result, Is.EqualTo(sut));
+            }
+
+            [TestCase("A", "")]
+            [TestCase("B0", "0")]
+            [TestCase("a0b1", "01")]
+            [TestCase(" 0 1 2 3 4 5 6 7 8 9 ", "0123456789")]
+            public void WhenHasNonDigits_ThenReturnOnlyDigits(string sut, string expected)
+            {
+                var result = sut.RemoveNonDigits();
+
+                Assert.That(result, Is.EqualTo(expected));
             }
         }
 

@@ -72,6 +72,7 @@ String extension methods:
 - RemoveStartsWith
 - RemoveEndsWith
 - RemoveBracketedText
+- RemoveNonDigits
 - RemoveWhiteSpace
 - Repeat
 - ReplaceFirst

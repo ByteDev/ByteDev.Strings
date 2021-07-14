@@ -7,6 +7,7 @@ Breaking changes:
 
 New features:
 - Added `StringIsExtensions.IsAscii`.
+- Added `StringRemoveExtensions.RemoveNonDigits`.
 
 Bug fixes / internal changes:
 - (None)
