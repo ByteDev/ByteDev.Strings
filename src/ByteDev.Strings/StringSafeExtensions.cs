@@ -60,5 +60,24 @@ namespace ByteDev.Strings
 
             return source.Substring(startIndex);
         }
+
+        /// <summary>
+        /// Safely gets the character at provided index. If the index is out of bounds or the string is null then the default
+        /// character will be returned. No exceptions will be thrown.
+        /// </summary>
+        /// <param name="source">String to perform the operation on.</param>
+        /// <param name="index">Index position to retrieve the character from.</param>
+        /// <param name="defaultChar">Character to return if the string is null or index is out of bounds. If no character is provided then the NUL character ('\0') will be used as the default.</param>
+        /// <returns>Character at the index position.</returns>
+        public static char SafeGetChar(this string source, int index, char defaultChar = '\0')
+        {
+            if (source == null)
+                return defaultChar;
+
+            if (index < 0 || index >= source.Length)
+                return defaultChar;
+
+            return source[index];
+        }
     }
 }

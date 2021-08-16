@@ -80,6 +80,7 @@ String extension methods:
 - ReplaceToken
 - Reverse
 - Right
+- SafeGetChar
 - SafeLength
 - SafeSubstring
 - ToBool

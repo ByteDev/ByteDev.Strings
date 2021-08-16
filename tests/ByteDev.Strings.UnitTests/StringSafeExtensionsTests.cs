@@ -6,7 +6,7 @@ namespace ByteDev.Strings.UnitTests
     public class StringSafeExtensionsTests
     {
         [TestFixture]
-        public class SafeLength : StringExtensionsTests
+        public class SafeLength
         {
             [TestCase(null, 0)]
             [TestCase("", 0)]
@@ -113,6 +113,58 @@ namespace ByteDev.Strings.UnitTests
             public void WhenStartIndexIsInbounds_ThenReturnString(int startIndex, string expected)
             {
                 var result = Sut.SafeSubstring(startIndex);
+
+                Assert.That(result, Is.EqualTo(expected));
+            }
+        }
+
+        [TestFixture]
+        public class SafeGetChar
+        {
+            private const char Default = '\0';
+
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenIsNullOrEmpty_ThenReturnDefault(string sut)
+            {
+                var result = sut.SafeGetChar(10);
+
+                Assert.That(result, Is.EqualTo(Default));
+            }
+
+            [Test]
+            public void WhenIndexIsLessThanZero_ThenReturnDefault()
+            {
+                var result = "A1Z".SafeGetChar(-1);
+
+                Assert.That(result, Is.EqualTo(Default));
+            }
+
+            [Test]
+            public void WhenIndexIsLessThanZero_AndDefaultCharProvided_ThenReturnDefault()
+            {
+                const char newDefault = '?';
+
+                var result = "A1Z".SafeGetChar(-1, newDefault);
+
+                Assert.That(result, Is.EqualTo(newDefault));
+            }
+
+            [TestCase(3)]
+            [TestCase(4)]
+            public void WhenIndexIsEqualOrGreaterThanStringLength_ThenReturnDefault(int index)
+            {
+                var result = "A1Z".SafeGetChar(index);
+
+                Assert.That(result, Is.EqualTo(Default));
+            }
+            
+            [TestCase(0, 'A')]
+            [TestCase(1, '1')]
+            [TestCase(2, 'Z')]
+            public void WhenIndexExists_ThenReturnChar(int index, char expected)
+            {
+                var result = "A1Z".SafeGetChar(index);
 
                 Assert.That(result, Is.EqualTo(expected));
             }
