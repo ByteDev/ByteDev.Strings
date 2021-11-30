@@ -8,6 +8,7 @@ Breaking changes:
 New features:
 - Added `RemoveLeadingZeros` method.
 - Added `ToMemoryStream` method.
+- Added `InsertBeforeUpperCase` method.
 
 Bug fixes / internal changes:
 - Minor bug fix in `EnsureStartsWith`.

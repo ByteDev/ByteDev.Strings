@@ -194,6 +194,35 @@ namespace ByteDev.Strings
         {
             return wrapper + source + wrapper;
         }
+
+        /// <summary>
+        /// Returns a new string with a delimiter inserted before every upper case character (except the first).
+        /// For example: "NotFoundHere" will be returned as "Not Found Here".
+        /// </summary>
+        /// <param name="source">String to perform the operation on.</param>
+        /// <param name="delimiter">Delimiter value to insert.</param>
+        /// <returns>String with delimiter inserted before upper case characters.</returns>
+        public static string InsertBeforeUpperCase(this string source, string delimiter)
+        {
+            if (string.IsNullOrEmpty(source))
+                return source;
+
+            var sb = new StringBuilder();
+            var isUpperCaseAppended = false;
+            
+            foreach (char ch in source)
+            {
+                if (ch.IsUpperCase() && isUpperCaseAppended)
+                    sb.Append(delimiter);
+
+                sb.Append(ch);
+
+                if (ch.IsUpperCase())
+                    isUpperCaseAppended = true;
+            }
+
+            return sb.ToString();
+        }
     }
 }
 

@@ -519,5 +519,46 @@ namespace ByteDev.Strings.UnitTests
                 Assert.That(result, Is.EqualTo("*a*"));
             }
         }
+
+        [TestFixture]
+        public class InsertBeforeUpperCase
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenDelimiterIsNullOrEmpty_ThenReturnSource(string delimiter)
+            {
+                const string sut = "NotFound";
+
+                var result = sut.InsertBeforeUpperCase(delimiter);
+
+                Assert.That(result, Is.EqualTo(sut));
+            }
+
+            [TestCase(null)]
+            [TestCase("")]
+            [TestCase("a")]
+            [TestCase("a1")]
+            [TestCase("a1 b2")]
+            public void WhenHasNoUpperCase_ThenReturnSource(string sut)
+            {
+                var result = sut.InsertBeforeUpperCase(" ");
+
+                Assert.That(result, Is.EqualTo(sut));
+            }
+
+            [TestCase("A", "A")]
+            [TestCase("AB", "A B")]
+            [TestCase("ABaC", "A Ba C")]
+            [TestCase("NotFound", "Not Found")]
+            [TestCase("NotFoundHere", "Not Found Here")]
+            [TestCase(" NotFound ", " Not Found ")]
+            [TestCase("aNotFound ", "aNot Found ")]
+            public void WhenHasUpperCase_ThenReturnString(string sut, string expected)
+            {
+                var result = sut.InsertBeforeUpperCase(" ");
+
+                Assert.That(result, Is.EqualTo(expected));
+            }
+        }
     }
 }
