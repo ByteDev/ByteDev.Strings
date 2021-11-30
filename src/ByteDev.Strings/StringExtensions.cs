@@ -159,40 +159,6 @@ namespace ByteDev.Strings
         }
 
         /// <summary>
-        /// Returns a string with a prefix appended if the prefix does not already exist.
-        /// </summary>
-        /// <param name="source">String to perform the operation on.</param>
-        /// <param name="prefix">Prefix to check for and add if not present.</param>
-        /// <returns>String with the prefix.</returns>
-        public static string EnsureStartsWith(this string source, string prefix)
-        {
-            if (source == null)
-                return prefix;
-
-            if (!source.StartsWith(prefix))
-                source = prefix + source;
-            
-            return source;
-        }
-
-        /// <summary>
-        /// Returns a string with a suffix appended if the suffix does not already exist.
-        /// </summary>
-        /// <param name="source">String to perform the operation on.</param>
-        /// <param name="suffix">Suffix to check for and add if not present.</param>
-        /// <returns>String with the suffix.</returns>
-        public static string EnsureEndsWith(this string source, string suffix)
-        {
-            if (source == null)
-                return suffix;
-
-            if (!source.EndsWith(suffix))
-                source += suffix;
-            
-            return source;
-        }
-
-        /// <summary>
         /// Returns a string with characters reversed.
         /// </summary>
         /// <param name="source">String to perform the operation on.</param>

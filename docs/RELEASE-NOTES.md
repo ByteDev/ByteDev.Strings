@@ -1,5 +1,17 @@
 # Release Notes
 
+## 9.4.1 - 30 November 2021
+
+Breaking changes:
+- (None)
+
+New features:
+- (None)
+
+Bug fixes / internal changes:
+- Minor bug fix in `EnsureStartsWith`.
+- Minor bug fix in `EnsureEndsWith`.
+
 ## 9.4.0 - 16 August 2021
 
 Breaking changes:
