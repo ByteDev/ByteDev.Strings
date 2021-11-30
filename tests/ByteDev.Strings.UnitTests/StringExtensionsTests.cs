@@ -549,6 +549,7 @@ namespace ByteDev.Strings.UnitTests
             [TestCase("A", "A")]
             [TestCase("AB", "A B")]
             [TestCase("ABaC", "A Ba C")]
+            [TestCase("Not", "Not")]
             [TestCase("NotFound", "Not Found")]
             [TestCase("NotFoundHere", "Not Found Here")]
             [TestCase(" NotFound ", " Not Found ")]
