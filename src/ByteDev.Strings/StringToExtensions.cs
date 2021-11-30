@@ -297,5 +297,28 @@ namespace ByteDev.Strings
 
             return new KeyValuePair<string, string>(key, value);
         }
+        
+        /// <summary>
+        /// Returns the string as a MemoryStream using UTF-8 encoding.
+        /// </summary>
+        /// <param name="source">The string to perform this operation on.</param>
+        /// <returns>New MemoryStream instance.</returns>
+        public static MemoryStream ToMemoryStream(this string source)
+        {
+            return ToMemoryStream(source, Encoding.UTF8);
+        }
+
+        /// <summary>
+        /// Returns the string as a MemoryStream.
+        /// </summary>
+        /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="encoding">Encoding to use.</param>
+        /// <returns>New MemoryStream instance.</returns>
+        public static MemoryStream ToMemoryStream(this string source, Encoding encoding)
+        {
+            byte[] bytes = encoding.GetBytes(source ?? string.Empty);
+
+            return new MemoryStream(bytes);
+        }
     }
 }

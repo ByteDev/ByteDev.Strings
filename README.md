@@ -94,6 +94,7 @@ String extension methods:
 - ToKeyValuePair
 - ToLines
 - ToLinesList
+- ToMemoryStream
 - ToInt
 - ToIntOrDefault
 - ToLong

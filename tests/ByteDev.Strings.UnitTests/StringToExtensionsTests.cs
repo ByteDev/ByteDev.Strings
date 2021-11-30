@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using ByteDev.Collections;
+using ByteDev.Io;
 using NUnit.Framework;
 
 namespace ByteDev.Strings.UnitTests
@@ -698,6 +699,29 @@ namespace ByteDev.Strings.UnitTests
 
                 Assert.That(result.Key, Is.EqualTo(key));
                 Assert.That(result.Value, Is.EqualTo(value));
+            }
+        }
+
+        [TestFixture]
+        public class ToMemoryStream
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenIsNullOrEmpty_ThenReturnEmptyStream(string sut)
+            {
+                var result = sut.ToMemoryStream();
+
+                Assert.That(result.Length, Is.EqualTo(0));
+            }
+
+            [Test]
+            public void WhenNotEmpty_ThenReturnStream()
+            {
+                const string sut = "Some text";
+
+                var result = sut.ToMemoryStream();
+
+                Assert.That(result.ReadAsString(), Is.EqualTo(sut));
             }
         }
     }

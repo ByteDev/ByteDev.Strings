@@ -7,6 +7,7 @@ Breaking changes:
 
 New features:
 - Added `RemoveLeadingZeros` method.
+- Added `ToMemoryStream` method.
 
 Bug fixes / internal changes:
 - Minor bug fix in `EnsureStartsWith`.
