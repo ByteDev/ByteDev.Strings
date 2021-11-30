@@ -7,7 +7,36 @@ namespace ByteDev.Strings.UnitTests
     public class StringRemoveExtensionsTests
     {
         [TestFixture]
-        public class RemoveStartsWith : StringExtensionsTests
+        public class RemoveLeadingZeros
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            [TestCase("A")]
+            [TestCase("A01")]
+            [TestCase("1")]
+            [TestCase("10")]
+            public void WhenNoLeadingZero_ThenReturnSource(string sut)
+            {
+                var result = sut.RemoveLeadingZeros();
+
+                Assert.That(result, Is.EqualTo(sut));
+            }
+
+            [TestCase("0", "")]
+            [TestCase("00", "")]
+            [TestCase("07", "7")]
+            [TestCase("007", "7")]
+            [TestCase("00A0", "A0")]
+            public void WhenHasLeadingZero_ThenReturnWithoutLeadingZeros(string sut, string expected)
+            {
+                var result = sut.RemoveLeadingZeros();
+
+                Assert.That(result, Is.EqualTo(expected));
+            }
+        }
+ 
+        [TestFixture]
+        public class RemoveStartsWith
         {
             private const string Sut = "My name is John";
 
@@ -60,7 +89,7 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class RemoveEndsWith : StringExtensionsTests
+        public class RemoveEndsWith
         {
             private const string Sut = "My name is John";
 
@@ -204,7 +233,7 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class RemoveNonDigits : StringRemoveExtensionsTests
+        public class RemoveNonDigits
         {
             [TestCase(null)]
             [TestCase("")]

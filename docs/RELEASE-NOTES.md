@@ -1,12 +1,12 @@
 # Release Notes
 
-## 9.4.1 - 30 November 2021
+## 9.5.0 - 30 November 2021
 
 Breaking changes:
 - (None)
 
 New features:
-- (None)
+- Added `RemoveLeadingZeros` method.
 
 Bug fixes / internal changes:
 - Minor bug fix in `EnsureStartsWith`.

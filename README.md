@@ -74,6 +74,7 @@ String extension methods:
 - RemoveBracketedText
 - RemoveNonDigits
 - RemoveWhiteSpace
+- RemoveLeadingZeros
 - Repeat
 - ReplaceFirst
 - ReplaceLast

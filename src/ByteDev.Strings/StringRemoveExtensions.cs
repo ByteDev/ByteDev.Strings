@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace ByteDev.Strings
@@ -12,6 +11,16 @@ namespace ByteDev.Strings
     public static class StringRemoveExtensions
     {
         /// <summary>
+        /// Removes any leading zeros from the string.
+        /// </summary>
+        /// <param name="source">String to perform the operation on.</param>
+        /// <returns>String with any leading zeros removed.</returns>
+        public static string RemoveLeadingZeros(this string source)
+        {
+            return source?.TrimStart('0');
+        }
+
+        /// <summary>
         /// Removes starting string <paramref name="value" /> if this string starts with it.
         /// </summary>
         /// <param name="source">String to perform the operation on.</param>
@@ -20,7 +29,7 @@ namespace ByteDev.Strings
         /// <exception cref="T:System.ArgumentNullException"><paramref name="value" /> is null.</exception>
         public static string RemoveStartsWith(this string source, string value)
         {
-            if(value == null)
+            if (value == null)
                 throw new ArgumentNullException(nameof(value));
             
             if (string.IsNullOrEmpty(source))
