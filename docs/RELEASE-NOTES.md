@@ -1,6 +1,6 @@
 # Release Notes
 
-## 9.6.0 - 12 January 2022
+## 9.6.0 - ?
 
 Breaking changes:
 - (None)
