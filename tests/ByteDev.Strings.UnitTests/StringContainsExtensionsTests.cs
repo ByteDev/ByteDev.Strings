@@ -1,6 +1,5 @@
-﻿using System;
-using System.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using NUnit.Framework.Internal;
 
 namespace ByteDev.Strings.UnitTests
 {
@@ -52,7 +51,7 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class ContainsOnly : StringContainsExtensionsTests
+        public class ContainsOnly
         {
             [Test]
             public void WhenSourceIsNull_ThenReturnFalse()
@@ -96,28 +95,22 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class ContainsAny : StringContainsExtensionsTests
+        public class ContainsAny
         {
-            [Test]
-            public void WhenSourceIsNull_ThenReturnFalse()
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenSourceIsNullOrEmpty_ThenReturnFalse(string sut)
             {
-                var result = StringContainsExtensions.ContainsAny(null, "ABC");
+                var result = sut.ContainsAny("ABC");
 
                 Assert.That(result, Is.False);
             }
 
-            [Test]
-            public void WhenAllowedCharsIsNull_ThenReturnFalse()
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenCharsIsNullOrEmpty_ThenReturnFalse(string chars)
             {
-                var result = "ABC".ContainsAny(null as string);
-
-                Assert.That(result, Is.False);
-            }
-
-            [Test]
-            public void WhenAllowedCharsEmpty_ThenReturnFalse()
-            {
-                var result = "ABC".ContainsOnly(string.Empty);
+                var result = "ABC".ContainsAny(chars);
 
                 Assert.That(result, Is.False);
             }
@@ -134,6 +127,48 @@ namespace ByteDev.Strings.UnitTests
             public void WhenStringContainsChars_ThenReturnTrue()
             {
                 var result = "ABC".ContainsAny("DEA");
+
+                Assert.That(result, Is.True);
+            }
+        }
+
+        [TestFixture]
+        public class ContainsAll
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenSourceIsNullOrEmpty_ThenReturnFalse(string sut)
+            {
+                var result = sut.ContainsAll("ABC");
+
+                Assert.That(result, Is.False);
+            }
+
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenCharsIsNullOrEmpty_ThenReturnTrue(string chars)
+            {
+                var result = "ABC".ContainsAll(chars);
+
+                Assert.That(result, Is.True);
+            }
+
+            [TestCase("D")]
+            [TestCase("ABCD")]
+            public void WhenStringContainsNotAllChars_ThenReturnFalse(string chars)
+            {
+                var result = "ABC".ContainsAll(chars);
+
+                Assert.That(result, Is.False);
+            }
+
+            [TestCase("A")]
+            [TestCase("AB")]
+            [TestCase("ABC")]
+            [TestCase("BCA")]
+            public void WhenStringContainsAllChars_ThenReturnTrue(string chars)
+            {
+                var result = "ABC".ContainsAll(chars);
 
                 Assert.That(result, Is.True);
             }

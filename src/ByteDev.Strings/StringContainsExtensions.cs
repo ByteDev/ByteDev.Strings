@@ -24,19 +24,32 @@ namespace ByteDev.Strings
         }
 
         /// <summary>
+        /// Determine if the string contains only the supplied allowed characters.
+        /// </summary>
+        /// <param name="source">String to perform the operation on.</param>
+        /// <param name="chars">String of allowed characters.</param>
+        /// <returns>True if the string contains only the allowed characters; otherwise false.</returns>
+        public static bool ContainsOnly(this string source, string chars)
+        {
+            return chars == null ? 
+                ContainsOnly(source, new List<char>()) : 
+                ContainsOnly(source, chars.ToCharArray());
+        }
+
+        /// <summary>
         /// Determine if the string contains only the given allowed characters.
         /// </summary>
         /// <param name="source">String to perform the operation on.</param>
-        /// <param name="allowedChars">Collection of allowed characters.</param>
+        /// <param name="chars">Collection of allowed characters.</param>
         /// <returns>True if the string contains only the allowed characters; otherwise false.</returns>
-        public static bool ContainsOnly(this string source, ICollection<char> allowedChars)
+        public static bool ContainsOnly(this string source, ICollection<char> chars)
         {
-            if (source == null || allowedChars == null || allowedChars.Count == 0)
+            if (source == null || chars == null || chars.Count == 0)
                 return false;
 
             foreach (char ch in source)
             {
-                if (!allowedChars.Contains(ch))
+                if (!chars.Contains(ch))
                     return false;
             }
 
@@ -44,17 +57,16 @@ namespace ByteDev.Strings
         }
 
         /// <summary>
-        /// Determine if the string contains only the supplied allowed characters.
+        /// Determine if the string contains any of the supplied characters.
         /// </summary>
         /// <param name="source">String to perform the operation on.</param>
-        /// <param name="allowedChars">String of allowed characters.</param>
-        /// <returns>True if the string contains only the allowed characters; otherwise false.</returns>
-        public static bool ContainsOnly(this string source, string allowedChars)
+        /// <param name="chars">String of characters.</param>
+        /// <returns>True if the string contains any of the supplied characters; otherwise false.</returns>
+        public static bool ContainsAny(this string source, string chars)
         {
-            if (allowedChars == null)
-                return false;
-
-            return ContainsOnly(source, allowedChars.ToCharArray());
+            return chars == null ? 
+                ContainsAny(source, new List<char>()) : 
+                ContainsAny(source, chars.ToCharArray());
         }
 
         /// <summary>
@@ -78,17 +90,39 @@ namespace ByteDev.Strings
         }
 
         /// <summary>
-        /// Determine if the string contains any of the supplied characters.
+        /// Determine if the string contains all of the supplied characters.
         /// </summary>
         /// <param name="source">String to perform the operation on.</param>
         /// <param name="chars">String of characters.</param>
-        /// <returns>True if the string contains any of the supplied characters; otherwise false.</returns>
-        public static bool ContainsAny(this string source, string chars)
+        /// <returns>True if the string contains all of the supplied characters; otherwise false.</returns>
+        public static bool ContainsAll(this string source, string chars)
         {
-            if (chars == null)
+            return chars == null ? 
+                ContainsAll(source, new List<char>()) : 
+                ContainsAll(source, chars.ToCharArray());
+        }
+
+        /// <summary>
+        /// Determine if the string contains all of the supplied characters.
+        /// </summary>
+        /// <param name="source">String to perform the operation on.</param>
+        /// <param name="chars">String of characters.</param>
+        /// <returns>True if the string contains all of the supplied characters; otherwise false.</returns>
+        public static bool ContainsAll(this string source, ICollection<char> chars)
+        {
+            if (source == null)
                 return false;
-            
-            return ContainsAny(source, chars.ToCharArray());
+
+            if (chars == null || chars.Count == 0)
+                return true;
+
+            foreach (var ch in chars)
+            {
+                if (!source.Contains(ch.ToString()))
+                    return false;
+            }
+
+            return true;
         }
     }
 }

@@ -1,5 +1,16 @@
 # Release Notes
 
+## 9.6.0 - 12 January 2022
+
+Breaking changes:
+- (None)
+
+New features:
+- Added `StringContainsExtensions.ContainsAll` method.
+
+Bug fixes / internal changes:
+- (None)
+
 ## 9.5.0 - 30 November 2021
 
 Breaking changes:
