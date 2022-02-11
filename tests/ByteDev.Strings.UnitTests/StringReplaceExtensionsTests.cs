@@ -6,7 +6,7 @@ namespace ByteDev.Strings.UnitTests
     public class StringReplaceExtensionsTests
     {
         [TestFixture]
-        public class ReplaceToken : StringExtensionsTests
+        public class ReplaceToken
         {
             [Test]
             public void WhenSourceIsNull_ThenReturnNull()

@@ -11,7 +11,7 @@ namespace ByteDev.Strings.UnitTests
     public class StringBuilderExtensionsTests
     {
         [TestFixture]
-        public class IsEmpty : StringBuilderExtensionsTests
+        public class IsEmpty
         {
             [Test]
             public void WhenIsNull_ThenThrowException()
@@ -43,7 +43,7 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class AppendValues_Params : StringBuilderExtensionsTests
+        public class AppendValues_Params
         {
             [Test]
             public void WhenIsNull_ThenThrowException()
@@ -77,7 +77,7 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class AppendValues_Enumerable : StringBuilderExtensionsTests
+        public class AppendValues_Enumerable
         {
             [Test]
             public void WhenIsNull_ThenThrowException()
@@ -125,7 +125,7 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class AppendLines_Params : StringBuilderExtensionsTests
+        public class AppendLines_Params
         {
             [Test]
             public void WhenIsNull_ThenThrowException()
@@ -162,7 +162,7 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class AppendLines_Enumerable : StringBuilderExtensionsTests
+        public class AppendLines_Enumerable
         {
             [Test]
             public void WhenSourceIsNull_ThenThrowException()
@@ -213,7 +213,7 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class AppendIfNotEmpty : StringBuilderExtensionsTests
+        public class AppendIfNotEmpty
         {
             [Test]
             public void WhenSourceIsNull_ThenThrowException()
@@ -253,7 +253,7 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class AppendIfEmpty : StringBuilderExtensionsTests
+        public class AppendIfEmpty
         {
             [Test]
             public void WhenSourceIsNull_ThenThrowException()

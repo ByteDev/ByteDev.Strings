@@ -6,7 +6,7 @@ namespace ByteDev.Strings.UnitTests
     public class StringNewLineExtensionsTests
     {
         [TestFixture]
-        public class GetEndNewLine : StringExtensionsTests
+        public class GetEndNewLine
         {
             [TestCase(null)]
             [TestCase("")]
@@ -54,7 +54,7 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class RemoveEndNewLine : StringExtensionsTests
+        public class RemoveEndNewLine
         {
             [TestCase(null)]
             [TestCase("")]
@@ -105,7 +105,7 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class DetectNewLineType : StringNewLineExtensionsTests
+        public class DetectNewLineType
         {
             [TestCase(null)]
             [TestCase("")]
@@ -152,7 +152,7 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class NormalizeNewLinesToUnix : StringNewLineExtensionsTests
+        public class NormalizeNewLinesToUnix
         {
             [TestCase(null)]
             [TestCase("")]
@@ -179,7 +179,7 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class NormalizeNewLinesToWindows : StringNewLineExtensionsTests
+        public class NormalizeNewLinesToWindows
         {
             [TestCase(null)]
             [TestCase("")]
