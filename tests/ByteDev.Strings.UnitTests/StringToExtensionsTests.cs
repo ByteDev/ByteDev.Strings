@@ -9,9 +9,6 @@ namespace ByteDev.Strings.UnitTests
     [TestFixture]
     public class StringToExtensionsTests
     {
-        private const string NewLineWin = "\r\n";
-        private const string NewLineUnix = "\n";
-
         [TestFixture]
         public class ToEnum
         {
@@ -123,8 +120,8 @@ namespace ByteDev.Strings.UnitTests
             [Test]
             public void WhenHasThreeLines_ThenReturnThreeLines()
             {
-                const string sut = "Hello World" + NewLineWin +
-                                   "my name" + NewLineWin +
+                const string sut = "Hello World" + NewLineStrings.Windows +
+                                   "my name" + NewLineStrings.Windows +
                                    "is John";
 
                 var result = sut.ToLines().ToList();
@@ -139,10 +136,10 @@ namespace ByteDev.Strings.UnitTests
             public void WhenIgnoreEmptyLines_ThenReturnNonEmptyLines()
             {
                 const string sut = "Hello World\r\n" + 
-                                   NewLineWin +
-                                   " " + NewLineWin +
-                                   "  " + NewLineWin +
-                                   "    " + NewLineWin +
+                                   NewLineStrings.Windows +
+                                   " " + NewLineStrings.Windows +
+                                   "  " + NewLineStrings.Windows +
+                                   "    " + NewLineStrings.Windows +
                                    "is John";
 
                 var result = sut.ToLines(true).ToList();
@@ -156,8 +153,8 @@ namespace ByteDev.Strings.UnitTests
             public void WhenNewLinesAreUnix_ThenReturnLines()
             {
                 const string sut =
-                    "Hello" + NewLineUnix +
-                    "World" + NewLineUnix +
+                    "Hello" + NewLineStrings.Unix +
+                    "World" + NewLineStrings.Unix +
                     "Everyone";
 
                 var result = sut.ToLines().ToList();
@@ -172,8 +169,8 @@ namespace ByteDev.Strings.UnitTests
             public void WhenNewLinesAreMix_ThenReturnLines()
             {
                 const string sut =
-                    "Hello" + NewLineWin +
-                    "World" + NewLineUnix +
+                    "Hello" + NewLineStrings.Windows +
+                    "World" + NewLineStrings.Unix +
                     "Everyone";
 
                 var result = sut.ToLines().ToList();
@@ -210,8 +207,8 @@ namespace ByteDev.Strings.UnitTests
             [Test]
             public void WhenHasThreeLines_ThenReturnThreeLines()
             {
-                const string sut = "Hello World" + NewLineWin +
-                                   "my name" + NewLineWin +
+                const string sut = "Hello World" + NewLineStrings.Windows +
+                                   "my name" + NewLineStrings.Windows +
                                    "is John";
 
                 var result = sut.ToLinesList();
@@ -226,10 +223,10 @@ namespace ByteDev.Strings.UnitTests
             public void WhenIgnoreEmptyLines_ThenReturnNonEmptyLines()
             {
                 const string sut = "Hello World\r\n" + 
-                                   NewLineWin +
-                                   " " + NewLineWin +
-                                   "  " + NewLineWin +
-                                   "    " + NewLineWin +
+                                   NewLineStrings.Windows +
+                                   " " + NewLineStrings.Windows +
+                                   "  " + NewLineStrings.Windows +
+                                   "    " + NewLineStrings.Windows +
                                    "is John";
 
                 var result = sut.ToLinesList(true).ToList();
@@ -243,8 +240,8 @@ namespace ByteDev.Strings.UnitTests
             public void WhenNewLinesAreUnix_ThenReturnLines()
             {
                 const string sut =
-                    "Hello" + NewLineUnix +
-                    "World" + NewLineUnix +
+                    "Hello" + NewLineStrings.Unix +
+                    "World" + NewLineStrings.Unix +
                     "Everyone";
 
                 var result = sut.ToLinesList().ToList();
@@ -259,8 +256,8 @@ namespace ByteDev.Strings.UnitTests
             public void WhenNewLinesAreMix_ThenReturnLines()
             {
                 const string sut =
-                    "Hello" + NewLineWin +
-                    "World" + NewLineUnix +
+                    "Hello" + NewLineStrings.Windows +
+                    "World" + NewLineStrings.Unix +
                     "Everyone";
 
                 var result = sut.ToLinesList().ToList();
