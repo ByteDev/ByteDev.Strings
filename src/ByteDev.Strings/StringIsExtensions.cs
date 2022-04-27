@@ -126,7 +126,9 @@ namespace ByteDev.Strings
             {
                 try
                 {
-                    while (reader.Read()) { }
+                    while (reader.Read())
+                    {
+                    }
                     return true;
                 }
                 catch (XmlException)

@@ -41,7 +41,7 @@ namespace ByteDev.Strings.UnitTests
         [Test]
         public void WhenWithObjectCollection_ThenReturnString()
         {
-            var list = new object[] { "Something1", 50, new Dummy()  };
+            var list = new object[] { "Something1", 50, new Dummy() };
 
             var result = _sut
                 .With("Name", "John")
@@ -54,7 +54,7 @@ namespace ByteDev.Strings.UnitTests
         [Test]
         public void WhenWithDummyCollection_ThenReturnString()
         {
-            var list = new List<Dummy> {new Dummy(), new Dummy()};
+            var list = new List<Dummy> {new Dummy(), new Dummy() };
 
             var result = _sut
                 .With("Dummies", list)
@@ -66,7 +66,7 @@ namespace ByteDev.Strings.UnitTests
         [Test]
         public void WhenWithStringQuoteChar_ThenReturnString()
         {
-            var list = new[] { "Something1", "Something2"  };
+            var list = new[] { "Something1", "Something2" };
 
             var result = _sut
                 .WithStringQuoteChar('\'')

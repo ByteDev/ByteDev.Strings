@@ -19,7 +19,7 @@ namespace ByteDev.Strings
         /// <exception cref="T:System.ArgumentNullException"><paramref name="source" /> is null.</exception>
         public static string FormatWith(this string source, params object[] args)
         {
-            if(source == null)
+            if (source == null)
                 throw new ArgumentNullException(nameof(source));
             
             return string.Format(source, args);
@@ -54,7 +54,7 @@ namespace ByteDev.Strings
             
             const string ellipsis = "...";
 
-            if(maxLength <= ellipsis.Length)
+            if (maxLength <= ellipsis.Length)
                 throw new ArgumentOutOfRangeException(nameof(maxLength), $"Max length cannot be between 1 and {ellipsis.Length} (ellipsis length).");
 
             if (maxLength < source.Length)
@@ -225,4 +225,3 @@ namespace ByteDev.Strings
         }
     }
 }
-

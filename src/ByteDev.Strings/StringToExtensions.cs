@@ -282,7 +282,7 @@ namespace ByteDev.Strings
         public static KeyValuePair<string, string> ToKeyValuePair(this string source, string delimiter)
         {
             if (source == null)
-                return new KeyValuePair<string, string>();
+                return default;
 
             if (string.IsNullOrEmpty(delimiter))
                 return new KeyValuePair<string, string>(source, string.Empty);

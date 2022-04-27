@@ -296,7 +296,7 @@ namespace ByteDev.Strings.UnitTests
             [Test]
             public void WhenValuesExists_ThenReturnRemoved()
             {
-                var result = "some ABC thing 123".Remove(new []{ "ABC", "123" });
+                var result = "some ABC thing 123".Remove(new[] { "ABC", "123" });
 
                 Assert.That(result, Is.EqualTo("some  thing "));
             }
@@ -304,7 +304,7 @@ namespace ByteDev.Strings.UnitTests
             [Test]
             public void WhenValuesExists_AndCaseInsensitive_ThenReturnRemoved()
             {
-                var result = "some abc thing 123".Remove(new []{ "ABC", "123" }, true);
+                var result = "some abc thing 123".Remove(new[] { "ABC", "123" }, true);
 
                 Assert.That(result, Is.EqualTo("some  thing "));
             }

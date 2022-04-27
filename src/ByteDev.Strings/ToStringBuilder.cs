@@ -8,10 +8,10 @@ namespace ByteDev.Strings
     /// </summary>
     public class ToStringBuilder
     {
-        private string _nullValue = "";
-        private char _stringQuoteChar = '\0';
-
         private readonly IDictionary<string, object> _nameValuePairs;
+
+        private string _nullValue = string.Empty;
+        private char _stringQuoteChar = '\0';
         
         public ToStringBuilder()
         {

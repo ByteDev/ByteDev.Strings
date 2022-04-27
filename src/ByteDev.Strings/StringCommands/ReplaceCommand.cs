@@ -32,10 +32,9 @@
         /// </summary>
         public override void Execute()
         {
-			if(string.IsNullOrEmpty(Value) ||
-               string.IsNullOrEmpty(OldValue))
-			{
-				SetResult(Value);
+            if (string.IsNullOrEmpty(Value) || string.IsNullOrEmpty(OldValue))
+            {
+                SetResult(Value);
                 return;
             }
 

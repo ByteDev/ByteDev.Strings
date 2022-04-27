@@ -13,7 +13,7 @@ namespace ByteDev.Strings.UnitTests
             public void WhenStringIsNull_ThenThrowException()
             {
                 const string sut = null;
-                Assert.Throws<ArgumentNullException>(() => sut.FormatWith(""));
+                Assert.Throws<ArgumentNullException>(() => sut.FormatWith(string.Empty));
             }
 
             [Test]

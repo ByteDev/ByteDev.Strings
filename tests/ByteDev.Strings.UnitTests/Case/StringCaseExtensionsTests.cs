@@ -29,7 +29,6 @@ namespace ByteDev.Strings.UnitTests
 
             Assert.That(result, Is.False);
         }   
-        
 
         [TestCase("s")]
         [TestCase("snake")]
@@ -55,8 +54,7 @@ namespace ByteDev.Strings.UnitTests
 
             Assert.That(result, Is.False);
         }   
-
-
+        
         [TestCase("k")]
         [TestCase("kebab")]
         [TestCase("kebab-case")]
@@ -82,7 +80,6 @@ namespace ByteDev.Strings.UnitTests
             Assert.That(result, Is.False);
         } 
 
-
         [TestCase("P")]
         [TestCase("Pascal")]
         [TestCase("PascalCase")]
@@ -106,8 +103,7 @@ namespace ByteDev.Strings.UnitTests
 
             Assert.That(result, Is.False);
         }
-
-
+        
         [TestCase("S")]
         [TestCase("SNAKE")]
         [TestCase("SNAKE_UPPER")]

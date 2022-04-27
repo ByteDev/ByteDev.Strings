@@ -8,7 +8,7 @@ namespace ByteDev.Strings.Case
         {
             var sb = new StringBuilder();
 
-            for (var i=0; i < value.Length; i++)
+            for (var i = 0; i < value.Length; i++)
             {
                 var ch = value[i];
 
@@ -36,7 +36,7 @@ namespace ByteDev.Strings.Case
         {
             var sb = new StringBuilder();
 
-            for (var i=0; i < value.Length; i++)
+            for (var i = 0; i < value.Length; i++)
             {
                 var ch = value[i];
 
@@ -64,7 +64,7 @@ namespace ByteDev.Strings.Case
         {
             var sb = new StringBuilder();
 
-            for (var i=0; i < value.Length; i++)
+            for (var i = 0; i < value.Length; i++)
             {
                 var ch = value[i];
 

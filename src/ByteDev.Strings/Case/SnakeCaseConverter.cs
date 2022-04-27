@@ -20,7 +20,7 @@
             var parts = value.Split('_');
             string s = string.Empty;
 
-            for (var i=0; i < parts.Length; i++)
+            for (var i = 0; i < parts.Length; i++)
             {
                 if (i == 0)
                 {

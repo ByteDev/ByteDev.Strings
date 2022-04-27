@@ -22,7 +22,7 @@ namespace ByteDev.Strings
 
             return source.Length == 0;
         }
-	
+
         /// <summary>
         /// Appends a copy of each given string.
         /// </summary>

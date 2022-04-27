@@ -7,7 +7,7 @@
             var parts = value.Split('-');
             string s = string.Empty;
 
-            for (var i=0; i < parts.Length; i++)
+            for (var i = 0; i < parts.Length; i++)
             {
                 if (i == 0)
                 {

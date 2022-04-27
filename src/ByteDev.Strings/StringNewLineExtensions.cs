@@ -62,7 +62,6 @@
             return NewLineType.None;
         }
 
-
         /// <summary>
         /// Normalize all new line strings to Unix platform style.
         /// </summary>
