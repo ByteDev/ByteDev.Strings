@@ -392,6 +392,11 @@ namespace ByteDev.Strings.UnitTests
             [TestCase("On")]
             [TestCase("ON")]
             [TestCase("1")]
+            [TestCase("Y")]
+            [TestCase("y")]
+            [TestCase("Yes")]
+            [TestCase("YES")]
+            [TestCase("yes")]
             public void WhenIsTrue_ThenReturnTrue(string sut)
             {
                 var result = sut.IsTrue();
@@ -422,6 +427,11 @@ namespace ByteDev.Strings.UnitTests
             [TestCase("Off")]
             [TestCase("OFF")]
             [TestCase("0")]
+            [TestCase("N")]
+            [TestCase("n")]
+            [TestCase("No")]
+            [TestCase("NO")]
+            [TestCase("no")]
             public void WhenIsFalse_ThenReturnTrue(string sut)
             {
                 var result = sut.IsFalse();
@@ -640,6 +650,47 @@ namespace ByteDev.Strings.UnitTests
                 var result = sut.IsUri();
 
                 Assert.That(result, Is.False);
+            }
+        }
+
+        [TestFixture]
+        public class IsDateTime
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenFormatIsNullOrEmpty_ThenReturnFalse(string format)
+            {
+                var result = "2020-12-25".IsDateTime(format);
+
+                Assert.That(result, Is.False);
+            }
+
+            [Test]
+            public void WhenFormatIsInvalid_ThenThrowException()
+            {
+                Assert.Throws<FormatException>(() => "2020-12-25".IsDateTime("A"));
+            }
+
+            [TestCase(null)]
+            [TestCase("")]
+            [TestCase("2020-12-25")]
+            [TestCase("2020-12-32T12:15:30")]
+            [TestCase("2020-12-25T24:15:30")]
+            public void WhenIsNotInFormat_ThenReturnFalse(string value)
+            {
+                var result = value.IsDateTime("yyyy-MM-ddThh:mm:ss");
+
+                Assert.That(result, Is.False);
+            }
+
+            [TestCase("2020-12-25", "yyyy-MM-dd")]
+            [TestCase("2020-12-25T12:15:30", "yyyy-MM-ddThh:mm:ss")]
+            [TestCase("2020-12-25T12:15:30", "s")]
+            public void WhenIsInFormat_ThenReturnTrue(string value, string format)
+            {
+                var result = value.IsDateTime(format);
+
+                Assert.That(result, Is.True);
             }
         }
     }

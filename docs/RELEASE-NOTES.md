@@ -7,9 +7,11 @@ Breaking changes:
 
 New features:
 - Added `StringContainsExtensions.ContainsAll` method.
+- Added `StringIsExtensions.IsDateTime` method.
 
 Bug fixes / internal changes:
-- (None)
+- `StringIsExtensions.IsTrue` now checks for "Y" and "Yes".
+- `StringIsExtensions.IsFalse` now checks for "N" and "No".
 
 ## 9.5.0 - 30 November 2021
 

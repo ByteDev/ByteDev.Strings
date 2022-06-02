@@ -42,6 +42,7 @@ String extension methods:
 - GetEndNewLine
 - InsertBeforeUpperCase
 - IsAscii
+- IsDateTime
 - IsDigit
 - IsDigits
 - IsEmpty

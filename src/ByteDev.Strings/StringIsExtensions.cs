@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -228,7 +229,7 @@ namespace ByteDev.Strings
 
         /// <summary>
         /// Indicates whether string looks like it is a true value
-        /// (case insensitive "true" or "on" or "1").
+        /// (case insensitive "true", "on", "y", "yes", "1").
         /// </summary>
         /// <param name="source">String to perform the operation on.</param>
         /// <returns>True if it appears the string is true; otherwise returns false.</returns>
@@ -243,12 +244,18 @@ namespace ByteDev.Strings
             if (source.Equals("on", StringComparison.OrdinalIgnoreCase))
                 return true;
 
+            if (source.Equals("y", StringComparison.OrdinalIgnoreCase))
+                return true;
+
+            if (source.Equals("yes", StringComparison.OrdinalIgnoreCase))
+                return true;
+
             return source == "1";
         }
 
         /// <summary>
         /// Indicates whether string looks like it is a false value
-        /// (case insensitive "false" or "off" or "0").
+        /// (case insensitive "false", "off", "n", "no", "0").
         /// </summary>
         /// <param name="source">String to perform the operation on.</param>
         /// <returns>True if it appears the string is false; otherwise returns false.</returns>
@@ -261,6 +268,12 @@ namespace ByteDev.Strings
                 return true;
 
             if (source.Equals("off", StringComparison.OrdinalIgnoreCase))
+                return true;
+
+            if (source.Equals("n", StringComparison.OrdinalIgnoreCase))
+                return true;
+
+            if (source.Equals("no", StringComparison.OrdinalIgnoreCase))
                 return true;
 
             return source == "0";
@@ -393,6 +406,17 @@ namespace ByteDev.Strings
         public static bool IsUri(this string source)
         {
             return source.ToUri() != null;
+        }
+
+        /// <summary>
+        /// Indicates whether this string is in the provided date time format.
+        /// </summary>
+        /// <param name="source">String to perform the operation on.</param>
+        /// <param name="format">Date time format the string should be in.</param>
+        /// <returns>True if the string is in the format; otherwise false.</returns>
+        public static bool IsDateTime(this string source, string format)
+        {
+            return DateTime.TryParseExact(source, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out _);
         }
     }
 }
