@@ -182,27 +182,6 @@ namespace ByteDev.Strings
         }
 
         /// <summary>
-        /// Returns string as a nullable DateTime.
-        /// </summary>
-        /// <param name="source">The string to perform this operation on.</param>
-        /// <param name="defaultValue">Default value to return if unable to convert to nullable DateTime.</param>
-        /// <returns>New nullable DateTime instance if the string is valid; otherwise default value.</returns>
-        public static DateTime? ToDateTimeOrDefault(this string source, DateTime? defaultValue = null)
-        {
-            return DateTime.TryParse(source, out var result) ? result : defaultValue;
-        }
-
-        /// <summary>
-        /// Returns string as a DateTime.
-        /// </summary>
-        /// <param name="source">The string to perform this operation on.</param>
-        /// <returns>New DateTime instance if the string is valid; otherwise DateTime.MinValue.</returns>
-        public static DateTime ToDateTime(this string source)
-        {
-            return DateTime.TryParse(source, out var result) ? result : DateTime.MinValue;
-        }
-
-        /// <summary>
         /// Returns the string as a collection with each value determined by a comma delimiter.
         /// </summary>
         /// <param name="source">The string to perform this operation on.</param>

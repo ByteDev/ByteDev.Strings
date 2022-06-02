@@ -464,59 +464,6 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class ToDateTime
-        {
-            [TestCase(null)]
-            [TestCase("")]
-            [TestCase("A")]
-            public void WhenIsNotDateTime_ThenReturnMin(string sut)
-            {
-                var result = sut.ToDateTime();
-
-                Assert.That(result, Is.EqualTo(DateTime.MinValue));
-            }
-
-            [Test]
-            public void WhenIsDateTimeFormat_ThenReturnDateTime()
-            {
-                var expected = new DateTime(2000, 12, 12, 12, 0, 0);
-
-                var result = "12/12/2000 12:00".ToDateTime();
-
-                Assert.That(result, Is.EqualTo(expected));
-            }
-        }
-
-        [TestFixture]
-        public class ToDateTimeOrDefault
-        {
-            [Test]
-            public void WhenHasValidFormat_ThenReturnValueAsDateTime()
-            {
-                const string sut = "09/12/2000 12:00";
-
-                var defaultDateTime = DateTime.Now;
-                var expected = new DateTime(2000, 12, 9, 12, 0, 0);
-
-                var result = sut.ToDateTimeOrDefault(defaultDateTime);
-
-                Assert.That(result.Value.Year, Is.EqualTo(expected.Year));
-            }
-
-            [Test]
-            public void WhenHasInvalidFormat_ThenReturnDefaultValue()
-            {
-                const string sut = "13/13/2000 12:00";
-
-                var defaultDateTime = DateTime.Now;
-
-                var result = sut.ToDateTimeOrDefault(defaultDateTime);
-
-                Assert.That(result, Is.EqualTo(defaultDateTime));
-            }
-        }
-
-        [TestFixture]
         public class ToCsv
         {
             [TestCase(null)]

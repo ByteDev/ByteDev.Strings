@@ -1,9 +1,10 @@
 # Release Notes
 
-## 9.6.0 - ?
+## 10.0.0 - 02 June 2022
 
 Breaking changes:
-- (None)
+- Removed `StringToExtensions.ToDateTimeOrDefault` method.
+- Removed `StringToExtensions.ToDateTime` method.
 
 New features:
 - Added `StringContainsExtensions.ContainsAll` method.

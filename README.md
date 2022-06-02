@@ -90,9 +90,8 @@ String extension methods:
 - ToBoolOrDefault
 - ToByteArray
 - ToCsv
-- ToDateTime
-- ToDateTimeOrDefault
 - ToEnum
+- ToGuid
 - ToInt
 - ToIntOrDefault
 - ToKeyValuePair
