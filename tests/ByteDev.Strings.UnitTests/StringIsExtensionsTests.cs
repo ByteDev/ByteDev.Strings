@@ -678,13 +678,14 @@ namespace ByteDev.Strings.UnitTests
             [TestCase("2020-12-25T24:15:30")]
             public void WhenIsNotInFormat_ThenReturnFalse(string value)
             {
-                var result = value.IsDateTime("yyyy-MM-ddThh:mm:ss");
+                var result = value.IsDateTime("yyyy-MM-ddTHH:mm:ss");
 
                 Assert.That(result, Is.False);
             }
 
             [TestCase("2020-12-25", "yyyy-MM-dd")]
-            [TestCase("2020-12-25T12:15:30", "yyyy-MM-ddThh:mm:ss")]
+            [TestCase("2020-12-25T12:15:30", "yyyy-MM-ddTHH:mm:ss")]
+            [TestCase("2020-12-25T13:15:30", "yyyy-MM-ddTHH:mm:ss")]
             [TestCase("2020-12-25T12:15:30", "s")]
             public void WhenIsInFormat_ThenReturnTrue(string value, string format)
             {
