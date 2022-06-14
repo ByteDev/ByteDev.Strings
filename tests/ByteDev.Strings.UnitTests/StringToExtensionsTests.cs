@@ -360,14 +360,14 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class ToInt
+        public class ToInt32
         {
             [TestCase(null)]
             [TestCase("")]
             [TestCase("A")]
             public void WhenIsNotInt_ThenReturnZero(string sut)
             {
-                var result = sut.ToInt();
+                var result = sut.ToInt32();
 
                 Assert.That(result, Is.EqualTo(0));
             }
@@ -377,19 +377,19 @@ namespace ByteDev.Strings.UnitTests
             [TestCase("1", 1)]
             public void WhenIsInt_ThenReturnInt(string sut, int expected)
             {
-                var result = sut.ToInt();
+                var result = sut.ToInt32();
 
                 Assert.That(result, Is.EqualTo(expected));
             }
         }
 
         [TestFixture]
-        public class ToIntOrDefault
+        public class ToInt32OrDefault
         {
             [Test]
             public void WhenIsNull_ThenReturnDefault()
             {
-                var result = StringToExtensions.ToIntOrDefault(null, 1);
+                var result = StringToExtensions.ToInt32OrDefault(null, 1);
 
                 Assert.That(result, Is.EqualTo(1));
             }
@@ -397,7 +397,7 @@ namespace ByteDev.Strings.UnitTests
             [Test]
             public void WhenIsInvalid_ThenReturnDefault()
             {
-                var result = "A123".ToIntOrDefault(1);
+                var result = "A123".ToInt32OrDefault(1);
 
                 Assert.That(result, Is.EqualTo(1));
             }
@@ -405,21 +405,21 @@ namespace ByteDev.Strings.UnitTests
             [Test]
             public void WhenIsValid_ThenReturnAsInt()
             {
-                var result = "123".ToIntOrDefault();
+                var result = "123".ToInt32OrDefault();
 
                 Assert.That(result, Is.EqualTo(123));
             }
         }
 
         [TestFixture]
-        public class ToLong
+        public class ToInt64
         {
             [TestCase(null)]
             [TestCase("")]
             [TestCase("A")]
             public void WhenIsNotLong_ThenReturnZero(string sut)
             {
-                var result = sut.ToLong();
+                var result = sut.ToInt64();
 
                 Assert.That(result, Is.EqualTo(0));
             }
@@ -429,19 +429,19 @@ namespace ByteDev.Strings.UnitTests
             [TestCase("1", 1)]
             public void WhenIsLong_ThenReturnLong(string sut, int expected)
             {
-                var result = sut.ToLong();
+                var result = sut.ToInt64();
 
                 Assert.That(result, Is.EqualTo(expected));
             }
         }
 
         [TestFixture]
-        public class ToLongOrDefault
+        public class ToInt64OrDefault
         {
             [Test]
             public void WhenIsNull_ThenReturnDefault()
             {
-                var result = StringToExtensions.ToLongOrDefault(null, 1);
+                var result = StringToExtensions.ToInt64OrDefault(null, 1);
 
                 Assert.That(result, Is.EqualTo(1));
             }
@@ -449,7 +449,7 @@ namespace ByteDev.Strings.UnitTests
             [Test]
             public void WhenIsInvalid_ThenReturnDefault()
             {
-                var result = "A123".ToLongOrDefault(1);
+                var result = "A123".ToInt64OrDefault(1);
 
                 Assert.That(result, Is.EqualTo(1));
             }
@@ -457,7 +457,7 @@ namespace ByteDev.Strings.UnitTests
             [Test]
             public void WhenIsValid_ThenReturnAsLong()
             {
-                var result = "123".ToLongOrDefault();
+                var result = "123".ToInt64OrDefault();
 
                 Assert.That(result, Is.EqualTo(123));
             }

@@ -92,13 +92,13 @@ String extension methods:
 - ToSequence
 - ToEnum
 - ToGuid
-- ToInt
-- ToIntOrDefault
+- ToInt32
+- ToInt32OrDefault
+- ToInt64
+- ToInt64OrDefault
 - ToKeyValuePair
 - ToLines
 - ToLinesList
-- ToLong
-- ToLongOrDefault
 - ToMemoryStream
 - ToUri
 - ToTitleCase

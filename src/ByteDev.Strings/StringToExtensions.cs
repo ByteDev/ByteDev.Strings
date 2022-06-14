@@ -140,43 +140,43 @@ namespace ByteDev.Strings
         }
 
         /// <summary>
-        /// Returns string as an int.
+        /// Returns string as an Int32.
         /// </summary>
         /// <param name="source">The string to perform this operation on.</param>
-        /// <returns>The string as a int if valid; otherwise zero.</returns>
-        public static int ToInt(this string source)
+        /// <returns>The string as a Int32 if valid; otherwise zero.</returns>
+        public static int ToInt32(this string source)
         {
             return int.TryParse(source, out var result) ? result : 0;
         }
 
         /// <summary>
-        /// Returns this string as a nullable int.
+        /// Returns this string as a nullable Int32.
         /// </summary>
         /// <param name="source">The string to perform this operation on.</param>
         /// <param name="defaultValue">Default value to return if unable to convert to nullable int.</param>
-        /// <returns>The string as a nullable int if valid; otherwise default value.</returns>
-        public static int? ToIntOrDefault(this string source, int? defaultValue = null)
+        /// <returns>The string as a nullable Int32 if valid; otherwise default value.</returns>
+        public static int? ToInt32OrDefault(this string source, int? defaultValue = null)
         {
             return int.TryParse(source, out var result) ? result : defaultValue;
         }
 
         /// <summary>
-        /// Returns string as a long.
+        /// Returns string as a Int64.
         /// </summary>
         /// <param name="source">The string to perform this operation on.</param>
-        /// <returns>The string as a long if valid; otherwise zero.</returns>
-        public static long ToLong(this string source)
+        /// <returns>The string as a Int64 if valid; otherwise zero.</returns>
+        public static long ToInt64(this string source)
         {
             return long.TryParse(source, out var result) ? result : 0;
         }
 
         /// <summary>
-        /// Returns string as a nullable long.
+        /// Returns string as a nullable Int64.
         /// </summary>
         /// <param name="source">The string to perform this operation on.</param>
         /// <param name="defaultValue">Default value to return if unable to convert to nullable long.</param>
         /// <returns>The string as a nullable long if valid; otherwise default value.</returns>
-        public static long? ToLongOrDefault(this string source, long? defaultValue = null)
+        public static long? ToInt64OrDefault(this string source, long? defaultValue = null)
         {
             return long.TryParse(source, out var result) ? result : defaultValue;
         }

@@ -4,6 +4,10 @@
 
 Breaking changes:
 - Renamed `StringToExtensions.ToCsv` method to `ToSequence`.
+- Renamed `StringToExtensions.ToInt` method to `ToInt32`.
+- Renamed `StringToExtensions.ToIntOrDefault` method to `ToInt32OrDefault`.
+- Renamed `StringToExtensions.ToLong` method to `ToInt64`.
+- Renamed `StringToExtensions.ToLongOrDefault` method to `ToInt64OrDefault`.
 
 New features:
 - (None)
