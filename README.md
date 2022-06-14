@@ -89,7 +89,7 @@ String extension methods:
 - ToBool
 - ToBoolOrDefault
 - ToByteArray
-- ToCsv
+- ToSequence
 - ToEnum
 - ToGuid
 - ToInt

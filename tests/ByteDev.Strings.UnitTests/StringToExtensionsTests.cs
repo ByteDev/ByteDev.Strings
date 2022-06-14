@@ -464,13 +464,13 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class ToCsv
+        public class ToSequence_CharDelimiter
         {
             [TestCase(null)]
             [TestCase("")]
             public void WhenIsNullOrEmpty_ThenReturnEmpty(string sut)
             {
-                var result = sut.ToCsv();
+                var result = sut.ToSequence(',');
 
                 Assert.That(result, Is.Empty);
             }
@@ -478,7 +478,7 @@ namespace ByteDev.Strings.UnitTests
             [Test]
             public void WhenDelimiterIsNotPresent_ThenReturnSingle()
             {
-                var result = "John Smith".ToCsv();
+                var result = "John Smith".ToSequence(',');
 
                 Assert.That(result.Single(), Is.EqualTo("John Smith"));
             }
@@ -486,7 +486,7 @@ namespace ByteDev.Strings.UnitTests
             [Test]
             public void WhenDelimiterPresent_ThenReturnMultiple()
             {
-                var result = "John:Smith".ToCsv(':');
+                var result = "John:Smith".ToSequence(':');
 
                 Assert.That(result.Count(), Is.EqualTo(2));
                 Assert.That(result.First(), Is.EqualTo("John"));
@@ -496,12 +496,65 @@ namespace ByteDev.Strings.UnitTests
             [Test]
             public void WhenTrimValues_ThenReturnTrimedValues()
             {
-                var result = "John : Smith:Peter: ".ToCsv(':', true);
+                var result = "John : Smith:Peter: ".ToSequence(':', true);
 
                 Assert.That(result.Count(), Is.EqualTo(3));
                 Assert.That(result.First(), Is.EqualTo("John"));
                 Assert.That(result.Second(), Is.EqualTo("Smith"));
                 Assert.That(result.Third(), Is.EqualTo("Peter"));
+            }
+        }
+
+        [TestFixture]
+        public class ToSequence_StringDelimiter
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenIsNullOrEmpty_ThenReturnEmpty(string sut)
+            {
+                var result = sut.ToSequence(",");
+
+                Assert.That(result, Is.Empty);
+            }
+
+            [Test]
+            public void WhenDelimiterIsNotPresent_ThenReturnSingle()
+            {
+                var result = "John Smith".ToSequence(",");
+
+                Assert.That(result.Single(), Is.EqualTo("John Smith"));
+            }
+
+            [Test]
+            public void WhenDelimiterPresent_ThenReturnMultiple()
+            {
+                var result = "John:Smith".ToSequence(":");
+
+                Assert.That(result.Count(), Is.EqualTo(2));
+                Assert.That(result.First(), Is.EqualTo("John"));
+                Assert.That(result.Second(), Is.EqualTo("Smith"));
+            }
+
+            [Test]
+            public void WhenTrimValues_ThenReturnTrimedValues()
+            {
+                var result = "John : Smith:Peter: ".ToSequence(":", true);
+
+                Assert.That(result.Count(), Is.EqualTo(3));
+                Assert.That(result.First(), Is.EqualTo("John"));
+                Assert.That(result.Second(), Is.EqualTo("Smith"));
+                Assert.That(result.Third(), Is.EqualTo("Peter"));
+            }
+
+            [Test]
+            public void WhenMultipleDelimitersPresent_ThenReturnMultiple()
+            {
+                var result = "John :Smith,50 ".ToSequence(new[] { ":", "," }, true);
+
+                Assert.That(result.Count(), Is.EqualTo(3));
+                Assert.That(result.First(), Is.EqualTo("John"));
+                Assert.That(result.Second(), Is.EqualTo("Smith"));
+                Assert.That(result.Third(), Is.EqualTo("50"));
             }
         }
 

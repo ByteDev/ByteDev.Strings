@@ -182,29 +182,50 @@ namespace ByteDev.Strings
         }
 
         /// <summary>
-        /// Returns the string as a collection with each value determined by a comma delimiter.
-        /// </summary>
-        /// <param name="source">The string to perform this operation on.</param>
-        /// <param name="trimValues">True trim each value; false do nothing.</param>
-        /// <returns>Collection of values; otherwise empty.</returns>
-        public static IEnumerable<string> ToCsv(this string source, bool trimValues = false)
-        {
-            return ToCsv(source, ',', trimValues);
-        }
-
-        /// <summary>
-        /// Returns the string as a collection with each value determined by the specified delimiter.
+        /// Returns the string as a sequence with each value determined by the specified char delimiter.
         /// </summary>
         /// <param name="source">The string to perform this operation on.</param>
         /// <param name="delimiter">Value delimiter.</param>
         /// <param name="trimValues">True trim each value; false do nothing.</param>
         /// <returns>Collection of values; otherwise empty.</returns>
-        public static IEnumerable<string> ToCsv(this string source, char delimiter, bool trimValues = false)
+        public static IEnumerable<string> ToSequence(this string source, char delimiter, bool trimValues = false)
         {
             if (string.IsNullOrEmpty(source))
                 return Enumerable.Empty<string>();
 
             string[] parts = source.Split(delimiter);
+
+            if (!trimValues) 
+                return parts;
+
+            return parts.Select(a => a.Trim()).Where(s => s != string.Empty);
+        }
+
+        /// <summary>
+        /// Returns the string as a sequence with each value determined by the specified string delimiter.
+        /// </summary>
+        /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="delimiter">Value delimiter.</param>
+        /// <param name="trimValues">True trim each value; false do nothing.</param>
+        /// <returns>Collection of values; otherwise empty.</returns>
+        public static IEnumerable<string> ToSequence(this string source, string delimiter, bool trimValues = false)
+        {
+            return ToSequence(source, new[] {delimiter}, trimValues);
+        }
+
+        /// <summary>
+        /// Returns the string as a sequence with each value determined by the specified array of string delimiters.
+        /// </summary>
+        /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="delimiters">Value delimiter.</param>
+        /// <param name="trimValues">True trim each value; false do nothing.</param>
+        /// <returns>Collection of values; otherwise empty.</returns>
+        public static IEnumerable<string> ToSequence(this string source, string[] delimiters, bool trimValues = false)
+        {
+            if (string.IsNullOrEmpty(source))
+                return Enumerable.Empty<string>();
+
+            string[] parts = source.Split(delimiters, StringSplitOptions.None);
 
             if (!trimValues) 
                 return parts;
