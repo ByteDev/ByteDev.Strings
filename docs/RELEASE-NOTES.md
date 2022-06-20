@@ -1,6 +1,6 @@
 # Release Notes
 
-## 11.0.0 - ?
+## 11.0.0 - 20 June 2022
 
 Breaking changes:
 - Renamed `StringToExtensions.ToCsv` method to `ToSequence`.
