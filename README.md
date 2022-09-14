@@ -108,6 +108,8 @@ StringBuilder extension methods:
 
 - AppendIfEmpty
 - AppendIfNotEmpty
+- AppendLineIfEmpty
+- AppendLineIfNotEmpty
 - AppendLines
 - AppendValues
 - IsEmpty
