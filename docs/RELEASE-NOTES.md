@@ -1,5 +1,17 @@
 # Release Notes
 
+## 11.1.0 - ?
+
+Breaking changes:
+- (None)
+
+New features:
+- Added `StringBuilderExtensions.AppendLineIfEmpty` method.
+- Added `StringBuilderExtensions.AppendLineIfNotEmpty` method.
+
+Bug fixes / internal changes:
+- (None)
+
 ## 11.0.0 - 20 June 2022
 
 Breaking changes:

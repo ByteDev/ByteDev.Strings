@@ -128,5 +128,37 @@ namespace ByteDev.Strings
             if (source.Length > 0)
                 source.Append(value);
         }
+
+        /// <summary>
+        /// Appends a copy of the string and the default line terminator to this instance if the instance
+        /// is currently empty.
+        /// </summary>
+        /// <param name="source">StringBuilder to perform the operation on.</param>
+        /// <param name="value">Value to append.</param>
+        /// <exception cref="T:System.ArgumentNullException"><paramref name="source" /> is null.</exception>
+        public static void AppendLineIfEmpty(this StringBuilder source, string value)
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            if (source.Length == 0)
+                source.AppendLine(value);
+        }
+
+        /// <summary>
+        /// Appends a copy of the string and the default line terminator to this instance if the instance is
+        /// currently not empty.
+        /// </summary>
+        /// <param name="source">StringBuilder to perform the operation on.</param>
+        /// <param name="value">Value to append.</param>
+        /// <exception cref="T:System.ArgumentNullException"><paramref name="source" /> is null.</exception>
+        public static void AppendLineIfNotEmpty(this StringBuilder source, string value)
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            if (source.Length > 0)
+                source.AppendLine(value);
+        }
     }
 }

@@ -213,6 +213,46 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
+        public class AppendIfEmpty
+        {
+            [Test]
+            public void WhenSourceIsNull_ThenThrowException()
+            {
+                Assert.Throws<ArgumentNullException>(() => StringBuilderExtensions.AppendIfEmpty(null, "value"));
+            }
+
+            [Test]
+            public void WhenValueIsNull_ThenDoNothing()
+            {
+                var sut = new StringBuilder();
+
+                sut.AppendIfEmpty(null);
+
+                Assert.That(sut.ToString(), Is.Empty);
+            }
+
+            [Test]
+            public void WhenEmpty_ThenAppend()
+            {
+                var sut = new StringBuilder();
+
+                sut.AppendIfEmpty("value");
+
+                Assert.That(sut.ToString(), Is.EqualTo("value"));
+            }
+
+            [Test]
+            public void WhenNotEmpty_ThenDoNothing()
+            {
+                var sut = new StringBuilder("something");
+
+                sut.AppendIfEmpty("value");
+
+                Assert.That(sut.ToString(), Is.EqualTo("something"));
+            }
+        }
+
+        [TestFixture]
         public class AppendIfNotEmpty
         {
             [Test]
@@ -253,22 +293,22 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class AppendIfEmpty
+        public class AppendLineIfEmpty
         {
             [Test]
             public void WhenSourceIsNull_ThenThrowException()
             {
-                Assert.Throws<ArgumentNullException>(() => StringBuilderExtensions.AppendIfEmpty(null, "value"));
+                Assert.Throws<ArgumentNullException>(() => StringBuilderExtensions.AppendLineIfEmpty(null, "value"));
             }
 
             [Test]
-            public void WhenValueIsNull_ThenDoNothing()
+            public void WhenValueIsNull_ThenAppendNewLine()
             {
                 var sut = new StringBuilder();
 
-                sut.AppendIfEmpty(null);
+                sut.AppendLineIfEmpty(null);
 
-                Assert.That(sut.ToString(), Is.Empty);
+                Assert.That(sut.ToString(), Is.EqualTo(Environment.NewLine));
             }
 
             [Test]
@@ -276,9 +316,9 @@ namespace ByteDev.Strings.UnitTests
             {
                 var sut = new StringBuilder();
 
-                sut.AppendIfEmpty("value");
+                sut.AppendLineIfEmpty("value");
 
-                Assert.That(sut.ToString(), Is.EqualTo("value"));
+                Assert.That(sut.ToString(), Is.EqualTo("value" + Environment.NewLine));
             }
 
             [Test]
@@ -286,9 +326,49 @@ namespace ByteDev.Strings.UnitTests
             {
                 var sut = new StringBuilder("something");
 
-                sut.AppendIfEmpty("value");
+                sut.AppendLineIfEmpty("value");
 
                 Assert.That(sut.ToString(), Is.EqualTo("something"));
+            }
+        }
+
+        [TestFixture]
+        public class AppendLineIfNotEmpty
+        {
+            [Test]
+            public void WhenSourceIsNull_ThenThrowException()
+            {
+                Assert.Throws<ArgumentNullException>(() => StringBuilderExtensions.AppendLineIfNotEmpty(null, "value"));
+            }
+
+            [Test]
+            public void WhenValueIsNull_ThenAppendNewLine()
+            {
+                var sut = new StringBuilder("something");
+
+                sut.AppendLineIfNotEmpty(null);
+
+                Assert.That(sut.ToString(), Is.EqualTo("something" + Environment.NewLine));
+            }
+
+            [Test]
+            public void WhenEmpty_ThenDoNothing()
+            {
+                var sut = new StringBuilder();
+
+                sut.AppendLineIfNotEmpty("value");
+
+                Assert.That(sut.ToString(), Is.Empty);
+            }
+
+            [Test]
+            public void WhenNotEmpty_ThenAppend()
+            {
+                var sut = new StringBuilder("something");
+
+                sut.AppendLineIfNotEmpty("value");
+
+                Assert.That(sut.ToString(), Is.EqualTo("somethingvalue" + Environment.NewLine));
             }
         }
     }
