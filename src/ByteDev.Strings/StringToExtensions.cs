@@ -320,5 +320,37 @@ namespace ByteDev.Strings
 
             return new MemoryStream(bytes);
         }
+
+        /// <summary>
+        /// Encodes the string to Base64 using the passed encoding (defaults to UTF8 if not passed)
+        /// </summary>
+        /// <param name="source">The string to perform this operation on.</param>
+        /// <param name="encoding">Encoding to use.</param>
+        /// <returns>Base64 encoded string</returns>
+        public static string ToBase64String(this string source, Encoding encoding = null)
+        {
+            if (string.IsNullOrEmpty(source))
+              return source;
+
+            var encodingToUse = encoding ?? Encoding.UTF8;
+            var bytes = source.ToByteArray(encodingToUse);
+            return bytes.Any() ? Convert.ToBase64String(bytes) : source;
+        }
+
+        /// <summary>
+        /// Decodes the string from Base64 using the passed encoding (defaults to UTF8 if not passed)
+        /// </summary>
+        /// <param name="source">The encoded string to perform this operation on.</param>
+        /// <param name="encoding">Encoding to use.</param>
+        /// <returns>The original string decoded from Base64</returns>
+        public static string ToDecodedBase64String(this string source, Encoding encoding = null)
+        {
+           if (string.IsNullOrEmpty(source))
+              return source;
+
+           var encodingToUse = encoding ?? Encoding.UTF8;
+           var decodedBytes = Convert.FromBase64String(source);
+           return decodedBytes.Any() ? encodingToUse.GetString(decodedBytes) : source;
+        }
     }
 }

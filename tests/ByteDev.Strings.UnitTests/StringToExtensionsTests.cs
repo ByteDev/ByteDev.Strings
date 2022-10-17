@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using ByteDev.Collections;
 using ByteDev.Io;
 using NUnit.Framework;
@@ -719,6 +720,82 @@ namespace ByteDev.Strings.UnitTests
                 var result = sut.ToMemoryStream();
 
                 Assert.That(result.ReadAsString(), Is.EqualTo(sut));
+            }
+        }
+
+        [TestFixture]
+        public class ToBase64String
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenIsNullOrEmpty_DefaultEncoding_ThenReturnNullOrEmpty(string sut)
+            {
+                var result = sut.ToBase64String();
+                Assert.AreEqual(sut, result);
+            }
+
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenIsNullOrEmpty_AsciiEncoding_ThenReturnNullOrEmpty(string sut)
+            {
+                var result = sut.ToBase64String(Encoding.ASCII);
+                Assert.AreEqual(sut, result);
+            }
+
+            [TestCase("M", "TQ==")]
+            [TestCase("My test string", "TXkgdGVzdCBzdHJpbmc=")]
+            [TestCase("My tè$t, 5trīng!", "TXkgdMOoJHQsIDV0csSrbmch")]
+            public void WhenIsNotEmpty_DefaultEncoding_ThenReturnExpectedEncodedString(string sut, string expected)
+            {
+                var result = sut.ToBase64String();
+                Assert.AreEqual(expected, result);
+            }
+
+            [TestCase("M", "AE0=")]
+            [TestCase("My test string", "AE0AeQAgAHQAZQBzAHQAIABzAHQAcgBpAG4AZw==")]
+            [TestCase("My tè$t, 5trīng!", "AE0AeQAgAHQA6AAkAHQALAAgADUAdAByASsAbgBnACE=")]
+            public void WhenIsNotEmpty_Utf16Encoding_ThenReturnExpectedEncodedString(string sut, string expected)
+            {
+                var result = sut.ToBase64String(Encoding.BigEndianUnicode);
+                Assert.AreEqual(expected, result);
+            }
+        }
+
+        [TestFixture]
+        public class ToDecodedBase64String
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenIsNullOrEmpty_DefaultEncoding_ThenReturnNullOrEmpty(string sut)
+            {
+                var result = sut.ToDecodedBase64String();
+                Assert.AreEqual(sut, result);
+            }
+
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenIsNullOrEmpty_AsciiEncoding_ThenReturnNullOrEmpty(string sut)
+            {
+                var result = sut.ToDecodedBase64String(Encoding.ASCII);
+                Assert.AreEqual(sut, result);
+            }
+
+            [TestCase("TQ==", "M")]
+            [TestCase("TXkgdGVzdCBzdHJpbmc=", "My test string")]
+            [TestCase("TXkgdMOoJHQsIDV0csSrbmch", "My tè$t, 5trīng!")]
+            public void WhenIsNotEmpty_DefaultEncoding_ThenReturnExpectedEncodedString(string sut, string expected)
+            {
+                var result = sut.ToDecodedBase64String();
+                Assert.AreEqual(expected, result);
+            }
+
+            [TestCase("AE0=", "M")]
+            [TestCase("AE0AeQAgAHQAZQBzAHQAIABzAHQAcgBpAG4AZw==", "My test string")]
+            [TestCase("AE0AeQAgAHQA6AAkAHQALAAgADUAdAByASsAbgBnACE=", "My tè$t, 5trīng!")]
+            public void WhenIsNotEmpty_Utf16Encoding_ThenReturnExpectedEncodedString(string sut, string expected)
+            {
+                var result = sut.ToDecodedBase64String(Encoding.BigEndianUnicode);
+                Assert.AreEqual(expected, result);
             }
         }
     }
