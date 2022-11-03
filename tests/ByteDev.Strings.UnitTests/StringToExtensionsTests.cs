@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Text;
 using ByteDev.Collections;
 using ByteDev.Io;
 using NUnit.Framework;
