@@ -223,5 +223,35 @@ namespace ByteDev.Strings
 
             return sb.ToString();
         }
+
+        /// <summary>
+        /// Extracts the string between the specified start and end string.
+        /// e.g. for "The quick brown fox jumps over the lazy dog", the string between "quick" and "jumps" is " brown fox ".
+        /// If there are multiple instances of a start or end string, it will use the first instance.
+        /// An empty string will be returned if no matches were found.
+        /// </summary>
+        /// <param name="source">String to perform the operation on.</param>
+        /// <param name="startString">The start string to find</param>
+        /// <param name="endString">The end string to find after the startString</param>
+        /// <param name="stringComparison">The string comparison to use (defaults to StringComparison.OrdinalIgnoreCase)</param>
+        /// <returns>The string in between startString and endString, or empty string if not found</returns>
+        public static string ExtractStringBetween(this string source, string startString, string endString, StringComparison stringComparison = StringComparison.OrdinalIgnoreCase)
+        {
+            if (string.IsNullOrEmpty(source) || string.IsNullOrEmpty(startString) || string.IsNullOrEmpty(endString))
+                return string.Empty;
+
+            var extractedString = string.Empty;
+            var startIndex = source.IndexOf(startString, stringComparison);
+
+            if (startIndex > -1)
+            {
+                startIndex += startString.Length;
+                var endIndex = source.IndexOf(endString, startIndex, stringComparison);
+                if (endIndex > -1)
+                    extractedString = source.SafeSubstring(startIndex, endIndex - startIndex);
+            }
+
+            return extractedString;
+        }
     }
 }
