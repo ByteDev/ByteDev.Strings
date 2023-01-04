@@ -1,6 +1,6 @@
 # Release Notes
 
-## 11.1.0 - ?
+## 11.1.0 - 13 December 2022
 
 Breaking changes:
 - (None)
