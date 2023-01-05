@@ -35,7 +35,7 @@ namespace ByteDev.Strings
         {
             if (source == null)
                 return null;
-            
+
             return CultureInfo.InvariantCulture.TextInfo.ToTitleCase(source.ToLower());
         }
 
@@ -49,7 +49,7 @@ namespace ByteDev.Strings
         {
             if (source == null)
                 source = string.Empty;
-            
+
             using (var reader = new StringReader(source))
             {
                 string line;
@@ -111,7 +111,7 @@ namespace ByteDev.Strings
         {
             if (string.IsNullOrEmpty(source))
                 return new byte[0];
-            
+
             return encoding.GetBytes(source);
         }
 
@@ -195,7 +195,7 @@ namespace ByteDev.Strings
 
             string[] parts = source.Split(delimiter);
 
-            if (!trimValues) 
+            if (!trimValues)
                 return parts;
 
             return parts.Select(a => a.Trim()).Where(s => s != string.Empty);
@@ -210,7 +210,7 @@ namespace ByteDev.Strings
         /// <returns>Collection of values; otherwise empty.</returns>
         public static IEnumerable<string> ToSequence(this string source, string delimiter, bool trimValues = false)
         {
-            return ToSequence(source, new[] {delimiter}, trimValues);
+            return ToSequence(source, new[] { delimiter }, trimValues);
         }
 
         /// <summary>
@@ -227,7 +227,7 @@ namespace ByteDev.Strings
 
             string[] parts = source.Split(delimiters, StringSplitOptions.None);
 
-            if (!trimValues) 
+            if (!trimValues)
                 return parts;
 
             return parts.Select(a => a.Trim()).Where(s => s != string.Empty);
@@ -297,7 +297,7 @@ namespace ByteDev.Strings
 
             return new KeyValuePair<string, string>(key, value);
         }
-        
+
         /// <summary>
         /// Returns the string as a MemoryStream using UTF-8 encoding.
         /// </summary>
@@ -319,6 +319,32 @@ namespace ByteDev.Strings
             byte[] bytes = encoding.GetBytes(source ?? string.Empty);
 
             return new MemoryStream(bytes);
+        }
+
+        /// <summary>
+        /// Returns the string as a sequence with each value determined by the specified char delimiter, and converted to the specified type.
+        /// </summary>
+        /// <typeparam name="T">The type to convert each item into.</typeparam>
+        /// <param name="sourceString">The string to perform this operation on.</param>
+        /// <param name="delimiter">Value delimiter.</param>
+        /// <param name="trimValues">True trim each value; false do nothing.</param>
+        /// <returns>Collection of values; otherwise empty. Throws exception if values cannot be converted.</returns>
+        public static IEnumerable<T> ToConvertedSequence<T>(this string sourceString, char delimiter = ',', bool trimValues = false)
+            where T : struct, IConvertible
+        {
+            if (string.IsNullOrEmpty(sourceString))
+                return Enumerable.Empty<T>();
+
+            try
+            {
+                IEnumerable<string> stringValues = sourceString.ToSequence(delimiter, trimValues);
+
+                return stringValues.Select(stringValue => (T)Convert.ChangeType(stringValue, typeof(T)));
+            }
+            catch (Exception)
+            {
+                return Enumerable.Empty<T>();
+            }
         }
     }
 }

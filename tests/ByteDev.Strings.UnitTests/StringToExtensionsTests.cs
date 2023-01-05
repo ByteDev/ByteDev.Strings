@@ -135,7 +135,7 @@ namespace ByteDev.Strings.UnitTests
             [Test]
             public void WhenIgnoreEmptyLines_ThenReturnNonEmptyLines()
             {
-                const string sut = "Hello World\r\n" + 
+                const string sut = "Hello World\r\n" +
                                    NewLineStrings.Windows +
                                    " " + NewLineStrings.Windows +
                                    "  " + NewLineStrings.Windows +
@@ -222,7 +222,7 @@ namespace ByteDev.Strings.UnitTests
             [Test]
             public void WhenIgnoreEmptyLines_ThenReturnNonEmptyLines()
             {
-                const string sut = "Hello World\r\n" + 
+                const string sut = "Hello World\r\n" +
                                    NewLineStrings.Windows +
                                    " " + NewLineStrings.Windows +
                                    "  " + NewLineStrings.Windows +
@@ -719,6 +719,54 @@ namespace ByteDev.Strings.UnitTests
                 var result = sut.ToMemoryStream();
 
                 Assert.That(result.ReadAsString(), Is.EqualTo(sut));
+            }
+        }
+
+        [TestFixture]
+        public class ToConvertedSequence
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenIsNullOrEmpty_ThenReturnEmptyList(string sut)
+            {
+                var result = sut.ToConvertedSequence<byte>();
+
+                Assert.IsNotNull(result);
+                Assert.That(result.Count(), Is.EqualTo(0));
+            }
+
+            [TestCase("1")]
+            [TestCase("489")]
+            [TestCase("2147483647")]
+            public void WhenDoesNotContainDelimiter_ThenReturnListWithOneValue(string sut)
+            {
+                var result = sut.ToConvertedSequence<int>();
+
+                Assert.IsNotNull(result);
+                var resultAsList = result.ToList();
+                Assert.That(resultAsList.Count, Is.EqualTo(1));
+                Assert.That(resultAsList[0], Is.EqualTo(Convert.ToInt32(sut)));
+            }
+
+            [TestCase("1,444,44", ',')]
+            [TestCase("89,092,7,9", ',')]
+            [TestCase("0:7", ':')]
+            [TestCase("8?99?5432?900", '?')]
+            public void WhenContainsDelimiter_ThenReturnListWithValues(string sut, char delimiter)
+            {
+                var expected = sut.Split(delimiter).Select(s => Convert.ToInt64(s));
+                var result = sut.ToConvertedSequence<long>(delimiter);
+
+                Assert.IsNotNull(result);
+                Assert.That(result, Is.EqualTo(expected));
+            }
+
+            [TestCase("abc", ',')]
+            [TestCase("1,444,44", ':')]
+            [TestCase("0:7", ',')]
+            public void WhenInvalidValues_ThenThrowException(string sut, char delimiter)
+            {
+                Assert.Throws<FormatException>(() => sut.ToConvertedSequence<short>(delimiter).ToList(), "Input string was not in a correct format.");
             }
         }
     }
