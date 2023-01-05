@@ -135,7 +135,7 @@ namespace ByteDev.Strings.UnitTests
             [Test]
             public void WhenIgnoreEmptyLines_ThenReturnNonEmptyLines()
             {
-                const string sut = "Hello World\r\n" +
+                const string sut = "Hello World\r\n" + 
                                    NewLineStrings.Windows +
                                    " " + NewLineStrings.Windows +
                                    "  " + NewLineStrings.Windows +
@@ -222,7 +222,7 @@ namespace ByteDev.Strings.UnitTests
             [Test]
             public void WhenIgnoreEmptyLines_ThenReturnNonEmptyLines()
             {
-                const string sut = "Hello World\r\n" +
+                const string sut = "Hello World\r\n" + 
                                    NewLineStrings.Windows +
                                    " " + NewLineStrings.Windows +
                                    "  " + NewLineStrings.Windows +
