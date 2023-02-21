@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29709.97
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E0485F4D-842B-4F43-A33D-7E3CBA45D310}"
 EndProject
@@ -13,6 +13,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{3F9A73C8-62AF-4AFB-9508-C56E35AF62BF}"
 	ProjectSection(SolutionItems) = preProject
 		build\build.cake = build\build.cake
+		ByteDev.Custom.ruleset = ByteDev.Custom.ruleset
 		build\ByteDev.Strings.nuspec = build\ByteDev.Strings.nuspec
 		build\ByteDev.Utilities.cake = build\ByteDev.Utilities.cake
 	EndProjectSection
