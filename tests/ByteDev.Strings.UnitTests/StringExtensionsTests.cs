@@ -483,7 +483,7 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
-        public class Wrap : StringExtensionsTests
+        public class Wrap
         {
             [TestCase(null)]
             [TestCase("")]

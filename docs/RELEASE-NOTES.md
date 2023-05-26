@@ -1,5 +1,16 @@
 # Release Notes
 
+## 11.2.0 - ?
+
+Breaking changes:
+- (None)
+
+New features:
+- Added `StringReplaceExtensions.ReplaceMultiOccurrences` method.
+
+Bug fixes / internal changes:
+- (None)
+
 ## 11.1.0 - 13 December 2022
 
 Breaking changes:

@@ -164,5 +164,49 @@ namespace ByteDev.Strings.UnitTests
                 Assert.That(result, Is.EqualTo("John Smith and Peter Jones"));
             }
         }
+
+        [TestFixture]
+        public class ReplaceMultiOccurrences
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenIsNullOrEmpty_ThenReturnSame(string sut)
+            {
+                var result = sut.ReplaceMultiOccurrences(' ');
+
+                Assert.That(result, Is.EqualTo(sut));
+            }
+
+            [Test]
+            public void WhenZeroCharOccurrence_ThenReturnSame()
+            {
+                const string sut = "JohnSmith";
+
+                var result = sut.ReplaceMultiOccurrences(' ');
+
+                Assert.That(result, Is.EqualTo(sut));
+            }
+
+            [Test]
+            public void WhenSingleCharOccurrence_ThenReturnSame()
+            {
+                const string sut = "John Smith";
+
+                var result = sut.ReplaceMultiOccurrences(' ');
+
+                Assert.That(result, Is.EqualTo(sut));
+            }
+
+            [TestCase("John  Smith", "John Smith")]
+            [TestCase("  John  Smith  ", " John Smith ")]
+            [TestCase("John   Smith", "John Smith")]
+            [TestCase("John  G   Smith", "John G Smith")]
+            public void WhenMultiCharOccurrences_ThenRemoveMultiOccurrences(string sut, string expected)
+            {
+                var result = sut.ReplaceMultiOccurrences(' ');
+                
+                Assert.That(result, Is.EqualTo(expected));
+            }
+        }
     }
 }

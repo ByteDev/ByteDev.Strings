@@ -56,5 +56,27 @@ namespace ByteDev.Strings
 
             return pos <= 0 ? source : source.Remove(pos, oldValue.Length).Insert(pos, newValue);
         }
+
+        /// <summary>
+        /// Replaces multiple occurrences of char <paramref name="value" /> with a single occurrence.
+        /// </summary>
+        /// <param name="source">String to perform the operation on.</param>
+        /// <param name="value">Char to check for multiple occurrences.</param>
+        /// <returns>String with an multiple occurrence of <paramref name="value" /> replaced with a single occurrence.</returns>
+        public static string ReplaceMultiOccurrences(this string source, char value)
+        {
+            if (string.IsNullOrEmpty(source))
+                return source;
+
+            var chString = value.ToString();
+            var twoChString = chString + chString;
+
+            while (source.Contains(twoChString))
+            {
+                source = source.Replace(twoChString, chString);
+            }
+            
+            return source;
+        }
     }
 }
