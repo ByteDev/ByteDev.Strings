@@ -7,6 +7,7 @@ Breaking changes:
 
 New features:
 - Added `StringReplaceExtensions.ReplaceMultiOccurrences` method.
+- Added `RemoveToEndCommand` class.
 
 Bug fixes / internal changes:
 - (None)

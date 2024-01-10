@@ -1,8 +1,7 @@
 ﻿namespace ByteDev.Strings.StringCommands
 {
     /// <summary>
-    /// Represents a command that removes value from a start position
-    /// to length.
+    /// Represents a command that removes a length of a string from a start position.
     /// </summary>
     public class RemovePositionCommand : StringCommand
     {
