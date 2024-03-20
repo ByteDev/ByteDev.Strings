@@ -1,6 +1,6 @@
 # Release Notes
 
-## 11.2.0 - ?
+## 11.2.0 - 20 March 2024
 
 Breaking changes:
 - (None)
