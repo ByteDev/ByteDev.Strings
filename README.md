@@ -34,6 +34,7 @@ String extension methods:
 - ContainsAny
 - ContainsOnly
 - ContainsIgnoreCase
+- ContainsWhiteSpace
 - CountOccurrences
 - DetectNewLineType
 - EnsureStartsWith

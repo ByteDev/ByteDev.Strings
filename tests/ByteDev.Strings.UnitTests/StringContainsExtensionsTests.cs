@@ -6,10 +6,45 @@ namespace ByteDev.Strings.UnitTests
     public class StringContainsExtensionsTests
     {
         [TestFixture]
+        public class ContainsWhiteSpace
+        {
+            [Test]
+            public void WhenSourceIsNull_ThenReturnFalse()
+            {
+                var result = StringContainsExtensions.ContainsWhiteSpace(null);
+
+                Assert.That(result, Is.False);
+            }
+
+            [TestCase("")]
+            [TestCase("a")]
+            [TestCase("ab")]
+            public void WhenDoesNotContainWhiteSpace_ThenReturnFalse(string sut)
+            {
+                var result = sut.ContainsWhiteSpace();
+
+                Assert.That(result, Is.False);
+            }
+
+            [TestCase(" ")]
+            [TestCase(" ")]
+            [TestCase("a ")]
+            [TestCase(" a")]
+            [TestCase("a b")]
+            [TestCase("a ")]
+            public void WhenContainsWhiteSpace_ThenReturnTrue(string sut)
+            {
+                var result = sut.ContainsWhiteSpace();
+
+                Assert.That(result, Is.True);
+            }
+        }
+
+        [TestFixture]
         public class ContainsIgnoreCase
         {
             [Test]
-            public void WhenSourceIsNull_ThenReturnsFalse()
+            public void WhenSourceIsNull_ThenReturnFalse()
             {
                 var result = StringContainsExtensions.ContainsIgnoreCase(null, "A");
 
@@ -17,7 +52,7 @@ namespace ByteDev.Strings.UnitTests
             }
 
             [Test]
-            public void WhenSourceIsEmpty_ThenReturnsFalse()
+            public void WhenSourceIsEmpty_ThenReturnFalse()
             {
                 var result = string.Empty.ContainsIgnoreCase("A");
 

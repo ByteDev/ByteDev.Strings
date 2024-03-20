@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ByteDev.Strings
 {
@@ -123,6 +124,19 @@ namespace ByteDev.Strings
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Determine if the string contains any white space characters.
+        /// </summary>
+        /// <param name="source">String to perform the operation on.</param>
+        /// <returns>True if the string contains any white space characters; otherwise false.</returns>
+        public static bool ContainsWhiteSpace(this string source)
+        {
+            if (source == null)
+                return false;
+
+            return source.Any(char.IsWhiteSpace);
         }
     }
 }
