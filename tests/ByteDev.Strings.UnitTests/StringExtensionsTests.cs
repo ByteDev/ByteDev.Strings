@@ -561,5 +561,49 @@ namespace ByteDev.Strings.UnitTests
                 Assert.That(result, Is.EqualTo(expected));
             }
         }
+
+        [TestFixture]
+        public class ExtractStringBetween
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenSourceIsNullOrEmpty_ThenReturnEmptyString(string source)
+            {
+                var result = source.ExtractStringBetween("test1", "test2");
+
+                Assert.That(result, Is.EqualTo(string.Empty));
+            }
+
+            [TestCase("The quick brown fox jumps over the lazy dog", "quick1", "jumps")]
+            [TestCase("The quick brown fox jumps over the lazy dog", "the", "not found")]
+            public void WhenIsNotAMatchingSearch_ThenReturnEmptyString(string source, string startString, string endString)
+            {
+                var result = source.ExtractStringBetween(startString, endString);
+
+                Assert.That(result, Is.EqualTo(string.Empty));
+            }
+
+            [TestCase("The quick brown fox jumps over the lazy dog", "quick", "jumps", " brown fox ")]
+            [TestCase("The quick brown fox jumps over the lazy dog", "the", "dog", " quick brown fox jumps over the lazy ")]
+            [TestCase("The quick brown fox jumps over the lazy dog", "lazy", "dog", " ")]
+            [TestCase("<html><body><span id=\"test\">My test string</span></body></html>", "<span id=\"test\">", "</span>", "My test string")]
+            [TestCase("<html><body><span id=\"test-id\">My test string</span></body></html>", "<span id=\"", "\"", "test-id")]
+            public void WhenIsAMatchingSearch_ThenReturnExpectedValue(string source, string startString, string endString, string expected)
+            {
+                var result = source.ExtractStringBetween(startString, endString);
+
+                Assert.That(result, Is.EqualTo(expected));
+            }
+
+            [TestCase("The quick brown fox jumps over the lazy dog", "Quick", "jumps", "")]
+            [TestCase("The quick brown fox jumps over the lazy dog", "the", "dog", " lazy ")]
+            [TestCase("The quick brown fox jumps over the lazy dog", "lazy", "Dog", "")]
+            public void WhenIsACaseSensitiveMatchingSearch_ThenReturnExpectedValue(string source, string startString, string endString, string expected)
+            {
+                var result = source.ExtractStringBetween(startString, endString, StringComparison.Ordinal);
+
+                Assert.That(result, Is.EqualTo(expected));
+            }
+        }
     }
 }

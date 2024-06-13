@@ -320,5 +320,31 @@ namespace ByteDev.Strings
 
             return new MemoryStream(bytes);
         }
+
+        /// <summary>
+        /// Returns the string as a sequence with each value determined by the specified char delimiter, and converted to the specified type.
+        /// </summary>
+        /// <typeparam name="T">The type to convert each item into.</typeparam>
+        /// <param name="sourceString">The string to perform this operation on.</param>
+        /// <param name="delimiter">Value delimiter.</param>
+        /// <param name="trimValues">True trim each value; false do nothing.</param>
+        /// <returns>Collection of values; otherwise empty. Throws exception if values cannot be converted.</returns>
+        public static IEnumerable<T> ToConvertedSequence<T>(this string sourceString, char delimiter = ',', bool trimValues = false)
+            where T : struct, IConvertible
+        {
+            if (string.IsNullOrEmpty(sourceString))
+                return Enumerable.Empty<T>();
+
+            try
+            {
+                IEnumerable<string> stringValues = sourceString.ToSequence(delimiter, trimValues);
+
+                return stringValues.Select(stringValue => (T)Convert.ChangeType(stringValue, typeof(T)));
+            }
+            catch (Exception)
+            {
+                return Enumerable.Empty<T>();
+            }
+        }
     }
 }
