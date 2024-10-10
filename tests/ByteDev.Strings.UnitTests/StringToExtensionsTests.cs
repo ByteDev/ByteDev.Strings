@@ -303,6 +303,67 @@ namespace ByteDev.Strings.UnitTests
         }
 
         [TestFixture]
+        public class ToBoolExtended
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            public void WhenIsNullOrEmpty_ThenReturnFalse(string sut)
+            {
+                var result = sut.ToBoolExtended();
+
+                Assert.That(result, Is.False);
+            }
+
+            [Test]
+            public void WhenIsNotBool_ThenReturnFalse()
+            {
+                var result = "A".ToBoolExtended();
+
+                Assert.That(result, Is.False);
+            }
+
+            [TestCase("false")]
+            [TestCase("False")]
+            [TestCase("FALSE")]
+            public void WhenIsBoolFalse_ThenReturnFalse(string sut)
+            {
+                var result = sut.ToBool();
+
+                Assert.That(result, Is.False);
+            }
+
+            [TestCase("true")]
+            [TestCase("True")]
+            [TestCase("TRue")]
+            [TestCase("TRUE")]
+            [TestCase("1")]
+            [TestCase("Y")]
+            [TestCase("y")]
+            [TestCase("on")]
+            [TestCase("On")]
+            [TestCase("ON")]
+            [TestCase("oN")]
+            [TestCase("yes")]
+            [TestCase("Yes")]
+            [TestCase("YEs")]
+            [TestCase("YES")]
+            [TestCase("enable")]
+            [TestCase("enAble")]
+            [TestCase("Enable")]
+            [TestCase("ENABLE")]
+            [TestCase("enabled")]
+            [TestCase("enAbled")]
+            [TestCase("Enabled")]
+            [TestCase("ENABLED")]
+            public void WhenUseExtendedValueSet_AndValueIsTrue_ThenReturnTrue(string sut)
+            {
+                var result = sut.ToBoolExtended();
+
+                Assert.That(result, Is.True);
+            }
+        }
+
+        [TestFixture]
         public class ToBool
         {
             [TestCase(null)]
@@ -322,10 +383,22 @@ namespace ByteDev.Strings.UnitTests
                 Assert.That(result, Is.False);
             }
 
-            [Test]
-            public void WhenIsBool_ThenReturnValue()
+            [TestCase("false")]
+            [TestCase("False")]
+            [TestCase("FALSE")]
+            public void WhenIsBoolFalse_ThenReturnFalse(string sut)
             {
-                var result = "true".ToBool();
+                var result = sut.ToBool();
+
+                Assert.That(result, Is.False);
+            }
+
+            [TestCase("true")]
+            [TestCase("True")]
+            [TestCase("TRUE")]
+            public void WhenIsBoolTrue_ThenReturnTrue(string sut)
+            {
+                var result = sut.ToBool();
 
                 Assert.That(result, Is.True);
             }
@@ -343,17 +416,37 @@ namespace ByteDev.Strings.UnitTests
             }
 
             [Test]
-            public void WhenInvalidString_ThenReturnDefault()
+            public void WhenIsNotBool_ThenReturnDefault()
+            {
+                var result = "A".ToBoolOrDefault(true);
+
+                Assert.That(result, Is.True);
+            }
+
+            [Test]
+            public void WhenIsNotBool_AndNoDefaultProvided_ThenReturnNull()
             {
                 var result = "A".ToBoolOrDefault();
 
                 Assert.That(result, Is.Null);
             }
 
-            [Test]
-            public void WhenValidString_ThenReturnAsLong()
+            [TestCase("false")]
+            [TestCase("False")]
+            [TestCase("FALSE")]
+            public void WhenIsBoolFalse_ThenReturnFalse(string sut)
             {
-                var result = "true".ToBoolOrDefault();
+                var result = sut.ToBoolOrDefault();
+
+                Assert.That(result, Is.False);
+            }
+
+            [TestCase("true")]
+            [TestCase("True")]
+            [TestCase("TRUE")]
+            public void WhenValidString_ThenReturnAsLong(string sut)
+            {
+                var result = sut.ToBoolOrDefault();
 
                 Assert.That(result, Is.True);
             }

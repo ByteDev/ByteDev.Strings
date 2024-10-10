@@ -89,6 +89,7 @@ String extension methods:
 - SafeLength
 - SafeSubstring
 - ToBool
+- ToBoolExtended
 - ToBoolOrDefault
 - ToByteArray
 - ToSequence

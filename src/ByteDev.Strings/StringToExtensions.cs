@@ -12,6 +12,11 @@ namespace ByteDev.Strings
     /// </summary>
     public static class StringToExtensions
     {
+        private static readonly HashSet<string> ExtendedTrueSet = new HashSet<string>
+        {
+            "1", "Y", "y", "on", "On", "ON", "oN"
+        };
+
         /// <summary>
         /// Returns the string as a <typeparamref name="TEnum" />.
         /// </summary>
@@ -110,19 +115,49 @@ namespace ByteDev.Strings
         public static byte[] ToByteArray(this string source, Encoding encoding)
         {
             if (string.IsNullOrEmpty(source))
-                return new byte[0];
+                return Array.Empty<byte>();
             
             return encoding.GetBytes(source);
+        }
+
+        /// <summary>
+        /// Returns the string as a bool. Will attempt to determine if the string represents true
+        /// based on an extended set of case insensitive invariant possible values:
+        /// { true, 1, y, on, yes, enable, enabled }
+        /// </summary>
+        /// <param name="source">The string to perform this operation on.</param>
+        /// <returns>The string as a bool if valid true; otherwise false.</returns>
+        public static bool ToBoolExtended(this string source)
+        {
+            if (source == null)
+                return false;
+
+            if (bool.TryParse(source, out var result))
+                return result;
+
+            if (ExtendedTrueSet.Contains(source))
+                return true;
+
+            if (source.Equals("yes", StringComparison.InvariantCultureIgnoreCase))
+                return true;
+
+            if (source.Equals("enable", StringComparison.InvariantCultureIgnoreCase))
+                return true;
+
+            if (source.Equals("enabled", StringComparison.InvariantCultureIgnoreCase))
+                return true;
+
+            return false;
         }
 
         /// <summary>
         /// Returns the string as a bool.
         /// </summary>
         /// <param name="source">The string to perform this operation on.</param>
-        /// <returns>The string as a bool if valid; otherwise false.</returns>
+        /// <returns>The string as a bool if valid true; otherwise false.</returns>
         public static bool ToBool(this string source)
         {
-            if (bool.TryParse(source, out bool result))
+            if (bool.TryParse(source, out var result))
                 return result;
 
             return false;
@@ -133,10 +168,10 @@ namespace ByteDev.Strings
         /// </summary>
         /// <param name="source">The string to perform this operation on.</param>
         /// <param name="defaultValue">Default value to return if unable to convert to nullable bool.</param>
-        /// <returns>The string as a nullable bool if valid; otherwise default value.</returns>
+        /// <returns>The string as a nullable bool if valid true; otherwise default value.</returns>
         public static bool? ToBoolOrDefault(this string source, bool? defaultValue = null)
         {
-            return bool.TryParse(source, out bool result) ? result : defaultValue;
+            return bool.TryParse(source, out var result) ? result : defaultValue;
         }
 
         /// <summary>

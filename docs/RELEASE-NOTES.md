@@ -1,5 +1,16 @@
 # Release Notes
 
+## 11.3.0 - ?
+
+Breaking changes:
+- (None)
+
+New features:
+- Added `StringToExtensions.ToBoolExtended` method
+
+Bug fixes / internal changes:
+- (None)
+
 ## 11.2.0 - 20 March 2024
 
 Breaking changes:
